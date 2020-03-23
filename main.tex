@@ -194,7 +194,8 @@ High aleatory/epistemic uncertainty is consistent with both high and low uncerta
 
 \begin{itemize}
 	\item \textbf{An aleatory Opinion} applies to a variable governed by a frequentist process, and that represents the (uncertain) likelihood of values of the variable in any unknown past or future instance of the process. An aleatory opinion can naturaly have an arbitrary uncertainty mass.
-	\item \textbf{An epistemic Opinion} applies to a variable that is assumed to be non-frequentist,and that represents the (uncertain) likelihood of values of the variable in a specific unknown past or future instance.
+	\item \textbf{An epistemic Opinion} applies to a variable that is assumed to be non-frequentist,
+and that represents the (uncertain) likelihood of values of the variable in a specific unknown past or future instance.
 \end{itemize}
 
 \subsection{Binomial Opinions}
@@ -228,6 +229,44 @@ where $W$ denotes non-informative prior weight, which must be set to $W = 2$ as 
 
 \subsubsection{The Beta Binomial Model}
 
+\begin{definition}
+	\emph{(Beta Probability Density Function)} Assume a binaru domain $\mathbb{X} = \left\{x,\overline{x}\right\}$ and a random variable $X \in \mathbb{X}$. Let $p$ denote the continuous probability function $p\ :\ X \rightarrow \left[0,1\right]$ where $p(x) + p(\overline{x}) = 1$. For compactness of notation e define $p_x \equiv p\left(x\right)$ and $p_{\overline{x}} \equiv p\left(\overline{x}\right)$.
+	
+	The parameter $\alpha$ represents evidence/observations of $X = x$, and the parameter $\beta$ represents evidence/observations of $X = \overline{x}$. With $p_x$ as variable, the Beta probability density function $\mathrm{Beta}(p_x, \alpha, \beta)$ is the function expressed as
+	\begin{equation}
+		\mathrm{Beta}(p_x, \alpha, \beta)\ :\ [0, 1] \rightarrow \mathbb{R}_{\leq0}\text{, where}
+	\end{equation}
+	\begin{equation}
+		\mathrm{Beta}(p_x, \alpha, \beta) = \dfrac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}(p_x)^{\alpha - 1}(1 - p_x)^{\beta - 1},\ \alpha > 0,\ \beta > 0,
+	\end{equation}
+	with the restrictions that $p_(x) \neq 0$ if $\alpha < 1$, and $p(x) \neq 1$ if $\beta \leq 1$.
+\end{definition}
 
+Assume that $x$ represents a frequentist event. Let $r_x$ (or $r_s$) denote the number of observations of $x$ (or $\overline{x}$). With the evidence observations, the base rate $a_x$ and the non-informative prior weight $W$, the $\alpha$ and $\beta$ parameters can be expressed as:
+\begin{equation}
+	\begin{cases}
+		\alpha = r_x + a_x W\text{,} \\
+		\beta = s_x + (1 - a_x)\text{.}
+	\end{cases}
+\end{equation}
 
+\begin{question}
+	What does W mean? 
+\end{question}
+
+The non-informative prior weight is set to $W = 2$, which ensures that the prior Beta PDF (i.e. when $r_x = s_x = 0$) with default base rate $a_x = 0.5$ id the uniform PDF.
+
+\begin{question}
+	Why?
+\end{question} 
+
+Expected probability:
+\begin{equation}
+	\mathrm{E}(x) = \frac{r_x + a_x W}{r_x + s_x + W}
+\end{equation}
+
+Variance:
+\begin{equation}
+	\mathrm{Var}(x) = \frac{\mathrm{P}(x)(1 - \mathrm{P}(x))u_x}{W + u_x}
+\end{equation}
 \end{document}
