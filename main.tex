@@ -254,6 +254,8 @@ Assume that $x$ represents a frequentist event. Let $r_x$ (or $r_s$) denote the 
 	What does W mean? 
 \end{question}
 
+The evidence notation of the Beta PDF is denoted by $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$.
+
 The non-informative prior weight is set to $W = 2$, which ensures that the prior Beta PDF (i.e. when $r_x = s_x = 0$) with default base rate $a_x = 0.5$ id the uniform PDF.
 
 \begin{question}
@@ -269,4 +271,32 @@ Variance:
 \begin{equation}
 	\mathrm{Var}(x) = \frac{\mathrm{P}(x)(1 - \mathrm{P}(x))u_x}{W + u_x}
 \end{equation}
+
+\subsubsection{Mapping Between a Binomial Opinion and a Beta PDF}
+
+\begin{definition}
+	\emph{(Mapping: Binomial Opinion $\leftrightarrow)$ Beta PDF)} Let $\omega_x = (b_x, d_x, u_x, a_x)$ be a binomial opinion, and let $p(x)$ be a probability distribution, both over the same binomial random variable $X$. Let $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$ a Beta PDF over the probability variable $p_x$ defined as a function of $r_x$, $s_x$ and$a_x$ according. The opinion $\omega_x$ and the Beta PDF $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$ are equivalent through the following mapping:
+	\begin{equation}
+		\begin{cases}
+			b_x = \dfrac{r_x}{W + r_x + s_x}\text{,}\\
+			d_x = \dfrac{s_x}{W + r_x + s_x}\text{,}\\
+			u_x = \dfrac{W}{W + r_x + s_x}
+		\end{cases} \Leftrightarrow
+		\begin{cases}
+			\begin{cases}
+				r_x = \dfrac{b_x W}{u_x}\text{,}\\
+				s_x = \dfrac{d_x W}{u_x}\text{,}\\
+				1 = b_x + d_x + u_x
+			\end{cases} & \text{if } u \neq 0 \\
+			\begin{cases}
+				r_x = b_x \cdot \infty \text{,}\\
+				s_x = d_x \cdot \infty \text{,}\\
+				1 = b_x + d_x \text{.}
+			\end{cases} & \text{if } u \neq 0
+		\end{cases}
+	\end{equation}
+\end{definition}
+
+The equivalence between binomial opinions and Beta PDFs is very powerful, because subjective-logic operators (SL operators) can then be applied to Beta PDFs, and statistics operations for Beta PDFs can be applied to opinions. In addiction, it makes it possible to determine binomial opinions from statistical observations.
+
 \end{document}
