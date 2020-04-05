@@ -33,7 +33,9 @@
 
 \maketitle
 
-\tableofcontents
+%\tableofcontents
+%
+%\addtocontents{toc}{\protect\newpage}
 
 \section{Introduction}
 
@@ -87,7 +89,7 @@ There can be multiple equivalent formal representations of subjective opinions.
 
 \begin{definition}
 	\emph{(Belief Mass Distribution)} Let $\mathbb{X}$ be a domain with corresponding hyperdomain $\mathcal{R}(\mathbb{X})$, and let $X$ be a variable over those domains. A belief mass distribution denote $\mathbf{b}_X$ assigns belief mass to possible values of the variable $X$. In the case of a random variable $X \in \mathbb{X}$, the belief mass distribution applies to domain $\mathbb{X}$, and in the case of a hypervariable $X \in \mathcal{R}(\mathbb{X})$ the belief mass distribution applies to hyperdomain $\mathcal{R}(\mathbb{X})$. This is formally defined as follows.
-	\begin{equation}
+	\begin{equation}\label{eq:multinomial-belief-mass-dristribution}
 		\begin{matrix*}[l]
 			\text{Multinomial belief mass distribution:}\ \mathbf{b}_X : \mathbb{X} \rightarrow [0,\ 1], \\
 			\text{with the additivity requirement:}\ u_X + \sum_{x \in \mathbb{X}} \mathbf{b}_X(x) = 1\text{.}
@@ -107,7 +109,7 @@ The sub-additivity of belief mass distributions is complemented by \emph{uncerta
 
 \begin{definition}\label{def:base_rate_distribution}
 	\emph{(Base Rate Distribution)} Let $\mathbb{X}$ be a domain, and let $X$ be a random variable in $\mathbb{X}$. The base rate distribution $\mathbf{a}_X$ assigns base rate probability to possible values of $X \in \mathbb{X}$, and is an additive probability distribution, formally expressed as:
-	\begin{equation}
+	\begin{equation}\label{eq:base_rate_distribution}
 		\begin{matrix*}[l]
 			\text{Base rate distribution:}\ \mathbf{a}_X : \mathbb{X} \rightarrow [0,\ 1], \\
 			\text{with the additivity requirement:}\ \sum_{x \in \mathbb{X}} \mathbf{a}_X(x) = 1\text{.}
@@ -203,7 +205,7 @@ and that represents the (uncertain) likelihood of values of the variable in a sp
 \subsubsection{Binomial Opinion Representation}
 
 \begin{definition}
-	\emph{Binomial Opinion} Let $\mathbb{X} = \{x, \overline{x}\}$ be a binary domain with binomial random variable $X \in \mathbf{X}$. A binomial opinion about the truth/presence of value $x$ is the ordered quadruplet $\omega_x = \left(b_x, d_x, u_x, a_x\right)$, where the additivity requirement
+	\emph{Binomial Opinion} Let $\mathbb{X} = \{x, \overline{x}\}$ be a binary domain with binomial random variable $X \in \mathbb{X}$. A binomial opinion about the truth/presence of value $x$ is the ordered quadruplet $\omega_x = \left(b_x, d_x, u_x, a_x\right)$, where the additivity requirement
 	\begin{equation}
 		b_x + d_x + u_x = 1
 	\end{equation}
@@ -275,7 +277,9 @@ Variance:
 \subsubsection{Mapping Between a Binomial Opinion and a Beta PDF}
 
 \begin{definition}
-	\emph{(Mapping: Binomial Opinion $\leftrightarrow)$ Beta PDF)} Let $\omega_x = (b_x, d_x, u_x, a_x)$ be a binomial opinion, and let $p(x)$ be a probability distribution, both over the same binomial random variable $X$. Let $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$ a Beta PDF over the probability variable $p_x$ defined as a function of $r_x$, $s_x$ and$a_x$ according. The opinion $\omega_x$ and the Beta PDF $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$ are equivalent through the following mapping:
+	\emph{(Mapping: Binomial Opinion $\leftrightarrow)$ Beta PDF)} Let $\omega_x = (b_x, d_x, u_x, a_x)$ be a binomial opinion, and let $p(x)$ be a probability distribution, both over the same binomial random variable $X$. Let $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$ a Beta PDF over the probability variable $p_x$ defined as a function of $r_x$, $s_x$ and
+$a_x$ according. The opinion $\omega_x$ and the Beta PDF $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$ are
+ equivalent through the following mapping:
 	\begin{equation}
 		\begin{cases}
 			b_x = \dfrac{r_x}{W + r_x + s_x}\text{,}\\
@@ -298,5 +302,36 @@ Variance:
 \end{definition}
 
 The equivalence between binomial opinions and Beta PDFs is very powerful, because subjective-logic operators (SL operators) can then be applied to Beta PDFs, and statistics operations for Beta PDFs can be applied to opinions. In addiction, it makes it possible to determine binomial opinions from statistical observations.
+
+\subsection{Multinomial Opinions}
+
+\subsubsection{The Multinomial Opinion Representation}
+
+\begin{definition}
+	\emph{(Multinomial Opinion)} Let $\mathbb{X}$ be a domain larger than binary, i.e.so that $k = |X| > 2$. Let $X$ be a random variable in $\mathbb{X}$. A multinomial opinion overthe random variable $X$ is the ordered triplet $\omega_X = (\mathbf{b}_X, u_X , \mathbf{a}_X)$ where
+	\begin{itemize}
+		\item $\mathbf{b}_X$ is a belief mass distribution over $X$,
+		\item $u_X$ is the uncertainty mass which represents the vacuity of evidence,
+		\item $\mathbf{a}_X$ is a base rate distribution over $\mathbb{X}$,
+	\end{itemize}
+	and the multinomial additivity requirement of Eq.(\ref{eq:multinomial-belief-mass-dristribution}) is satisfied.
+\end{definition}
+
+A multinomial opinion contains $(2k + 1)$ parameters. However, given the belief and uncertainty mass additivity of Eq.(\ref{eq:multinomial-belief-mass-dristribution}), and the base rate additivity of Eq.(\ref{eq:base_rate_distribution}), multinomial opinions only have $(2k - 1)$ degrees of freedom.
+
+\begin{question}
+	What is degrees of freedom?
+\end{question}
+
+The projected probability distribution of multinomial opinions is defined by:
+\begin{equation}
+	\mathbf{P}_X(x) = \mathbf{b}_X(x) + \mathbf{a}_X(x) u_X,\ \forall x \in \mathbb{X}\text{.}
+\end{equation}
+
+The variance of multinomial opinions is expressed as
+\begin{equation}
+	\mathrm{Var}_X = \dfrac{\mathbf{P}_X(x)(1 - \mathbf{P}_X(x)u_X)}{W + u_X},
+\end{equation}
+where $W$ denotes non-informative prior weight, which must be set to $W = 2$.
 
 \end{document}
