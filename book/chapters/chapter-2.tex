@@ -1,0 +1,109 @@
+% !TeX root = ../main.tex
+
+\section{Elements of Subjective Opinions}
+
+\subsection{Motivation for the Opinion Representation}
+
+For decision makers it can make a big difference whether probabilities are confident or uncertain. Decision makers should instead request additional evidence so the analysts can produce more confident conclusion probabilities
+about hypotheses of interest.
+
+\subsection{Flexibility of Representation}
+
+There can be multiple equivalent formal representations of subjective opinions.
+
+\subsection{Domains and Hyperdomains}
+
+\begin{definition}
+	 \emph{(Hyperdomain)} Let $\mathbb{X}$ be a domain, and let $\mathcal{P}(\mathbb{X})$ denote the powerset of $\mathbb{X}$. The powerset contains all subsets of $\mathbb{X}$, including the empty set $\{\varnothing\}$, and the domain $\mathbb{X}$ itself. The \emph{hyperdomain} denoted $\mathcal{R}(\mathbb{X})$ is the reduced powerset of $\mathbb{X}$, i.e. the powerset excluding the empty-set $\{\varnothing\}$ and the domain value $\{\mathbb{X}\}$. The hyperdomain is expressed as
+	\begin{equation}
+		\text{Hyperdomain:}\ \mathcal{R}(\mathbb{X}) = \mathcal{P} \setminus \{\{\mathbb{X}\}, \{\varnothing\}\}
+	\end{equation}
+\end{definition}
+
+\begin{question}
+	I don't know if this is important, but I don't understand exactly how indexing works by the way that is explained in the book.
+\end{question}
+
+\begin{definition}
+	\emph{(Composite set)} Let $\mathbb{X}$ be a domain of cardinality $k$, where $\mathcal{R}(\mathbb{X})$ is its hyperdomain of cardinality $\kappa$. Every proper subset $x \subset \mathbb{X}$ of cardinality $\left|x\right| \geq 2$ is a \emph{composite value}. The set of composite values is the \emph{composite set}, denoted $\mathcal{C}(\mathbb{X})$ and defined as:
+	\begin{equation}
+		\text{Composite set:}\ \mathcal{C}(\mathbb{X}) = \left\{x \subset \mathbb{X}\ \text{where}\ \left|x\right| \geq 2\right\}
+	\end{equation}
+\end{definition}
+
+\subsection{Random Variables and Hypervariables}
+
+\begin{definition}
+	\emph{(Hypervariable)} Let $\mathbb{X}$ be a domain with coresponding hyperdomain $\mathcal{R}(\mathbb{X})$ A variable $X$ takes its value from $\mathcal{R}(\mathbb{X})$ is a hypervariable.
+\end{definition}
+
+\subsection{Belief Mass Distribution and Uncertainty Mass}
+
+\begin{definition}
+	\emph{(Belief Mass Distribution)} Let $\mathbb{X}$ be a domain with corresponding hyperdomain $\mathcal{R}(\mathbb{X})$, and let $X$ be a variable over those domains. A belief mass distribution denote $\mathbf{b}_X$ assigns belief mass to possible values of the variable $X$. In the case of a random variable $X \in \mathbb{X}$, the belief mass distribution applies to domain $\mathbb{X}$, and in the case of a hypervariable $X \in \mathcal{R}(\mathbb{X})$ the belief mass distribution applies to hyperdomain $\mathcal{R}(\mathbb{X})$. This is formally defined as follows.
+	\begin{equation}\label{eq:multinomial-belief-mass-dristribution}
+		\begin{matrix*}[l]
+			\text{Multinomial belief mass distribution:}\ \mathbf{b}_X : \mathbb{X} \rightarrow [0,\ 1], \\
+			\text{with the additivity requirement:}\ u_X + \sum_{x \in \mathbb{X}} \mathbf{b}_X(x) = 1\text{.}
+		\end{matrix*}
+	\end{equation}
+	\begin{equation}
+		\begin{matrix*}[l]
+			\text{Hypernominal belief mass distribution:}\ \mathbf{b}_X : \mathcal{R}(\mathbb{X}) \rightarrow [0,\ 1], \\
+			\text{with the additivity requirement:}\ u_X + \sum_{x \in \mathcal{R}(\mathbb{X})} \mathbf{b}_X(x) = 1\text{.}
+		\end{matrix*}
+	\end{equation}
+\end{definition}
+
+The sub-additivity of belief mass distributions is complemented by \emph{uncertainty mass} denoted $u_X$.
+
+\subsection{Base Rate Distributions}
+
+\begin{definition}\label{def:base_rate_distribution}
+	\emph{(Base Rate Distribution)} Let $\mathbb{X}$ be a domain, and let $X$ be a random variable in $\mathbb{X}$. The base rate distribution $\mathbf{a}_X$ assigns base rate probability to possible values of $X \in \mathbb{X}$, and is an additive probability distribution, formally expressed as:
+	\begin{equation}\label{eq:base_rate_distribution}
+		\begin{matrix*}[l]
+			\text{Base rate distribution:}\ \mathbf{a}_X : \mathbb{X} \rightarrow [0,\ 1], \\
+			\text{with the additivity requirement:}\ \sum_{x \in \mathbb{X}} \mathbf{a}_X(x) = 1\text{.}
+		\end{matrix*}
+	\end{equation}
+\end{definition}
+
+\begin{definition}\label{def:base_rate_distribution_over_values_in_a_hyperdomain}
+	\emph{(Base Rate Distribution over Values in a Hyperdomain)} Let $\mathbb{X}$ be a domain with corresponding hyperdomain $\mathcal{R}(\mathbb{X})$, and let $X$ be a variable over those domains. Assume the base rate distribution $\mathbf{a}_X$ over the domain $\mathbb{X}$ according to Definition~\ref{def:base_rate_distribution}. The base rate $\mathbf{a}_X$ for a composite value $x \in \mathcal{R}(\mathbb{X})$ can be computed as follows:
+	\begin{equation}
+		\text{Base rate over composite values:}\ \mathbf{a}_X(x_i) = \sum_{\substack{x_j \in \mathbb{X} \\ x_j \subseteq x_i}} \mathbf{a}_X(x_j),\ \forall x_i \in \mathcal{R}(\mathbb{X})\text{.}
+	\end{equation}
+\end{definition}
+
+\begin{definition}
+	\emph{(Relative Base Rate)} Assume a domain $\mathbb{X}$ of cardinality $k$, and the corresponding hyperdomain $\mathcal{R}(\mathbb{X})$. Let $X$ be a hypervariable over $\mathcal{R}(\mathbb{X})$. Assume that a base rate distribution $\mathbf{a}_X$ is defined over $\mathbb{X}$ according to Definition~\ref{def:base_rate_distribution_over_values_in_a_hyperdomain}. Then the base rate of a value $x$ relative to a value $v_i$ is expressed as the relative base rate $\mathbf{a}_X(x|x_i)$ defined below.
+	\begin{equation}
+		\mathbf{a}_X(x|x_i) = \dfrac{\mathbf{a}_X(x \cap x_i)}{\mathbf{a}_X(x_i)}\text{, } \forall x, x_i \in \mathcal{R}(\mathbb{X}) \text{, where}\ \mathbf{a}_X(x_i) \neq 0\text{.}
+	\end{equation}
+
+	In the case when $\mathbf{a}_X(x_i) = 0$, then $\mathbf{a}_X(x|x_i) = 0$. Alternatively it can simply be assumed that $a_X(x_i) > 0$, for every $x_i \in \mathbb{X}$, meaning that everything we include in the domain has a non-zero base rate of occurrence in general.
+\end{definition}
+
+\subsection{Probability Distributions}
+
+\begin{definition}
+	\emph{(Probability Distribution)} Let $\mathbb{X}$ be a domain with corresponding
+hyperdomain $\mathcal{R}(\mathbb{X})$, and let $X$ denote a variable in $\mathbb{X}$ or in $\mathcal{R}(\mathbb{X})$. The standard probability distribution $\mathbf{p}_X$ assigns probabilities to possible values of $X \in \mathbb{X}$. The hyper-probability distribution $\mathbf{p}_X^\mathrm{H}$ assigns probabilities to possible values of $X \in \mathcal{R}(\mathbb{X})$. These distributions are formally defined below:
+	\begin{equation}
+		\begin{matrix*}[l]
+			\text{Probability distribution:}\ \mathbf{p}_X : \mathbb{X} \rightarrow [0,\ 1], \\
+			\text{with the additivity requirement:}\ \sum_{x \in \mathbb{X}} \mathbf{p}_X(x) = 1\text{.}
+		\end{matrix*}
+	\end{equation}
+	\begin{equation}
+		\begin{matrix*}[l]
+			\text{Hyper-probability distribution:}\ \mathbf{p}_X^\mathrm{H} : \mathcal{R}(\mathbb{X}) \rightarrow [0,\ 1], \\
+			\text{with the additivity requirement:}\ \sum_{x \in \mathcal{R}(\mathbb{X})} \mathbf{p}_X^\mathrm{H}(x) = 1\text{.}
+		\end{matrix*}
+	\end{equation}
+\end{definition}
+
+\begin{question}
+	What is the difference between base rate and probability?
+\end{question}

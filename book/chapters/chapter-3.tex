@@ -1,0 +1,210 @@
+% !TeX root = ../main.tex
+
+\section{Opinion Representations}
+
+\subsection{Opinion Classes}
+
+The opinion itself is a composite function $\omega^A_ X = \left(\mathbf{b}_X, u_X, \mathbf{a}_X\right)$, consisting of the belief mass distribution $\mathbf{b}_X$, the uncertainty mass $u_X$, and the base rate distribution $\mathbf{a}_X$.
+
+Classes:
+\begin{itemize}
+	\item \emph{Binomial}: Domain $\mathbb{X}$ and variable $X$ are binary.
+	\item \emph{Multinomial}: Domain larger than binary and the variable is a random variable $X \in \mathbb{X}$.
+	\item \emph{Hypernomial}: Domain larger than binary and the variable is a hypervariable $X \in \mathcal{R}(\mathbb{X})$.
+\end{itemize}
+
+Levels of confidence of a opinion:
+\begin{itemize}
+	\item \emph{Vacuous}: $u_X = 1$.
+	\item \emph{Uncertain}: $0 < u_X < 1$.
+	\item \emph{Dogmatic}: $u_X = 0$.
+	\item \emph{Absolute}: One single value is TRUE by assigning belief mass $1$ to that value.
+\end{itemize}
+
+\subsection{Aleatory and Epistemic Opinions}
+
+\begin{itemize}
+	\item \emph{Aleatory Uncertainty}, which is the same as statistical uncertainty, express that we do not know the outcome each time we run the same experiment, we only know the long-term relative frequency of outcomes. E.g.: Flip a coin.
+	\item \emph{Epistemic Uncertainty}, aka systematic uncertainty, express that we could in principle know the outcome of a specific or future or past event, but that we do not have enough evidence to know it exactly. E.g.: Assassination of President Kennedy.
+\end{itemize}
+
+\begin{question}
+	First-order and second-order opinions?
+\end{question}
+
+\begin{question}
+	Projected probability?
+\end{question}
+
+High aleatory/epistemic uncertainty is consistent with both high and low uncertainty mass.
+
+\begin{itemize}
+	\item \textbf{An aleatory Opinion} applies to a variable governed by a frequentist process, and that represents the (uncertain) likelihood of values of the variable in any unknown past or future instance of the process. An aleatory opinion can naturaly have an arbitrary uncertainty mass.
+	\item \textbf{An epistemic Opinion} applies to a variable that is assumed to be non-frequentist,
+and that represents the (uncertain) likelihood of values of the variable in a specific unknown past or future instance.
+\end{itemize}
+
+\subsection{Binomial Opinions}
+
+\subsubsection{Binomial Opinion Representation}
+
+\begin{definition}
+	\emph{Binomial Opinion} Let $\mathbb{X} = \{x, \overline{x}\}$ be a binary domain with binomial random variable $X \in \mathbb{X}$. A binomial opinion about the truth/presence of value $x$ is the ordered quadruplet $\omega_x = \left(b_x, d_x, u_x, a_x\right)$, where the additivity requirement
+	\begin{equation}
+		b_x + d_x + u_x = 1
+	\end{equation}
+	is satisfied, and where the respective parameters are defined as
+	\begin{itemize}
+		\item $b_x$: \emph{belief mass} in support of $x$ being TRUE (i.e. $X = x$),
+		\item $d_x$: \emph{disbelief mass} in support of $x$ being FALSE (i.e. $X = \overline{x}$)
+		\item $u_x$: \emph{uncertainty mass} representing the vacuity of evidence,
+		\item $a_x$: \emph{base rate}, i.e. prior probability of $x$ without any evidence.
+	\end{itemize}
+\end{definition}
+
+The projected probability of a binomial opinion about value $x$ is defined by the following equation.
+\begin{equation}
+	\mathrm{P}(x) = b_x + a_x u_x\text{.}
+\end{equation}
+
+The variance of binomial options is expressed as
+\begin{equation}
+	\mathrm{Var}(x) = \dfrac{\mathrm{P}(x)(1 - \mathrm{P}(x))u_x}{W + u_x}\text{,}
+\end{equation}
+where $W$ denotes non-informative prior weight, which must be set to $W = 2$ as explained in Section 3.5.2. Binomial opinion variance is derived from the variance of the Beta PDF.
+
+\subsubsection{The Beta Binomial Model}
+
+\begin{definition}
+	\emph{(Beta Probability Density Function)} Assume a binaru domain $\mathbb{X} = \left\{x,\overline{x}\right\}$ and a random variable $X \in \mathbb{X}$. Let $p$ denote the continuous probability function $p\ :\ X \rightarrow \left[0,1\right]$ where $p(x) + p(\overline{x}) = 1$. For compactness of notation e define $p_x \equiv p\left(x\right)$ and $p_{\overline{x}} \equiv p\left(\overline{x}\right)$.
+
+	The parameter $\alpha$ represents evidence/observations of $X = x$, and the parameter $\beta$ represents evidence/observations of $X = \overline{x}$. With $p_x$ as variable, the Beta probability density function $\mathrm{Beta}(p_x, \alpha, \beta)$ is the function expressed as
+	\begin{equation}
+		\mathrm{Beta}(p_x, \alpha, \beta)\ :\ [0, 1] \rightarrow \mathbb{R}_{\leq0}\text{, where}
+	\end{equation}
+	\begin{equation}
+		\mathrm{Beta}(p_x, \alpha, \beta) = \dfrac{\Gamma(\alpha + \beta)}{\Gamma(\alpha)\Gamma(\beta)}(p_x)^{\alpha - 1}(1 - p_x)^{\beta - 1},\ \alpha > 0,\ \beta > 0,
+	\end{equation}
+	with the restrictions that $p_(x) \neq 0$ if $\alpha < 1$, and $p(x) \neq 1$ if $\beta \leq 1$.
+\end{definition}
+
+Assume that $x$ represents a frequentist event. Let $r_x$ (or $r_s$) denote the number of observations of $x$ (or $\overline{x}$). With the evidence observations, the base rate $a_x$ and the non-informative prior weight $W$, the $\alpha$ and $\beta$ parameters can be expressed as:
+\begin{equation}
+	\begin{cases}
+		\alpha = r_x + a_x W\text{,} \\
+		\beta = s_x + (1 - a_x)\text{.}
+	\end{cases}
+\end{equation}
+
+\begin{question}
+	What does W mean?
+\end{question}
+
+The evidence notation of the Beta PDF is denoted by $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$.
+
+The non-informative prior weight is set to $W = 2$, which ensures that the prior Beta PDF (i.e. when $r_x = s_x = 0$) with default base rate $a_x = 0.5$ id the uniform PDF.
+
+\begin{question}
+	Why?
+\end{question}
+
+Expected probability:
+\begin{equation}
+	\mathrm{E}(x) = \frac{r_x + a_x W}{r_x + s_x + W}
+\end{equation}
+
+Variance:
+\begin{equation}
+	\mathrm{Var}(x) = \frac{\mathrm{P}(x)(1 - \mathrm{P}(x))u_x}{W + u_x}
+\end{equation}
+
+\subsubsection{Mapping Between a Binomial Opinion and a Beta PDF}
+
+\begin{definition}
+	\emph{(Mapping: Binomial Opinion $\leftrightarrow)$ Beta PDF)} Let $\omega_x = (b_x, d_x, u_x, a_x)$ be a binomial opinion, and let $p(x)$ be a probability distribution, both over the same binomial random variable $X$. Let $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$ a Beta PDF over the probability variable $p_x$ defined as a function of $r_x$, $s_x$ and
+$a_x$ according. The opinion $\omega_x$ and the Beta PDF $\mathrm{Beta^e}(p_x, r_x, s_x, a_x)$ are
+ equivalent through the following mapping:
+	\begin{equation}
+		\begin{cases}
+			b_x = \dfrac{r_x}{W + r_x + s_x}\text{,}\\
+			d_x = \dfrac{s_x}{W + r_x + s_x}\text{,}\\
+			u_x = \dfrac{W}{W + r_x + s_x}
+		\end{cases} \Leftrightarrow
+		\begin{cases}
+			\begin{cases}
+				r_x = \dfrac{b_x W}{u_x}\text{,}\\
+				s_x = \dfrac{d_x W}{u_x}\text{,}\\
+				1 = b_x + d_x + u_x
+			\end{cases} & \text{if } u \neq 0 \\
+			\begin{cases}
+				r_x = b_x \cdot \infty \text{,}\\
+				s_x = d_x \cdot \infty \text{,}\\
+				1 = b_x + d_x \text{.}
+			\end{cases} & \text{if } u \neq 0
+		\end{cases}
+	\end{equation}
+\end{definition}
+
+The equivalence between binomial opinions and Beta PDFs is very powerful, because subjective-logic operators (SL operators) can then be applied to Beta PDFs, and statistics operations for Beta PDFs can be applied to opinions. In addiction, it makes it possible to determine binomial opinions from statistical observations.
+
+\subsection{Multinomial Opinions}
+
+\subsubsection{The Multinomial Opinion Representation}
+
+\begin{definition}
+	\emph{(Multinomial Opinion)} Let $\mathbb{X}$ be a domain larger than binary, i.e.
+so that $k = |X| > 2$. Let $X$ be a random variable in $\mathbb{X}$. A multinomial opinion over
+the random variable $X$ is the ordered triplet $\omega_X = (\mathbf{b}_X, u_X , \mathbf{a}_X)$ where
+	\begin{itemize}
+		\item $\mathbf{b}_X$ is a belief mass distribution over $X$,
+		\item $u_X$ is the uncertainty mass which represents the vacuity of evidence,
+		\item $\mathbf{a}_X$ is a base rate distribution over $\mathbb{X}$,
+	\end{itemize}
+	and the multinomial additivity requirement of Eq.(\ref{eq:multinomial-belief-mass-dristribution}) is satisfied.
+\end{definition}
+
+A multinomial opinion contains $(2k + 1)$ parameters. However, given the belief and uncertainty mass additivity of Eq.(\ref{eq:multinomial-belief-mass-dristribution}), and the base rate additivity of Eq.(\ref{eq:base_rate_distribution}), multinomial opinions only have $(2k - 1)$ degrees of freedom.
+
+\begin{question}
+	What is degrees of freedom?
+\end{question}
+
+The projected probability distribution of multinomial opinions is defined by:
+\begin{equation}
+	\mathbf{P}_X(x) = \mathbf{b}_X(x) + \mathbf{a}_X(x) u_X,\ \forall x \in \mathbb{X}\text{.}
+\end{equation}
+
+The variance of multinomial opinions is expressed as
+\begin{equation}
+	\mathrm{Var}_X = \dfrac{\mathbf{P}_X(x)(1 - \mathbf{P}_X(x)u_X)}{W + u_X},
+\end{equation}
+where $W$ denotes non-informative prior weight, which must be set to $W = 2$.
+
+\subsubsection{The Dirichlet Multinomial Model}
+
+\begin{definition}
+	\emph{(Dirichlet Probability Density Function)} Let $\mathbb{X}$ be a domain consisting of $k$ mutually disjoint values. Let $\alpha_X$ represent the strength vector over the
+values of $\mathbb{X}$, and let $\mathbf{p}_X$ denote the probability distribution over $\mathbb{X}$. With $\mathbf{p}_X$ as a
+$k$-dimensional variable, the Dirichlet PDF denoted $\mathrm{Dir}(\mathbf{p}_X, \alpha_{X})$ is expressed as:
+	\begin{equation}
+		\mathrm{Dir}(\mathbf{p}_X, \alpha_X) = \dfrac{\Gamma\left(\sum\limits_{x \in \mathbb{X}} \alpha_X(x)\right)}{\prod\limits_{x \in \mathbb{X}} \Gamma(\alpha_X(x))} = \prod\limits_{x \in \mathbb{X}} \mathbf{p}_X(x)^{(\alpha_X(x)-1)} \text{, where } \alpha_X(x) \geq 0\text{,}
+	\end{equation}
+	with the restrictions that $\mathbf{p}_X(x) \neq 0$ if $\alpha_X(x)	< 1$.
+\end{definition}
+
+The evidence representation of the Dirichlet PDF is denoted by $\mathrm{Dir}^{\mathrm{e}}_X(\mathbf{p}_X, \mathbf{r}_X, \mathbf{a}_X)$, where the total strength $\alpha_X(x)$ for each value $x \in \mathbb{x}$ can be expressed as
+\begin{equation}
+    \alpha_X(x) = \mathbf{r}_X(x) + \mathbf{a}_X(x)W\text{, where }\mathbf{r}_X(x) \geq 0\ \forall x \in \mathbb{X}\text{.}
+\end{equation}
+The evidence-Dirichlet PDF is expressed in terms of the evidence vector $\mathbf{r}_X$, where $\mathbf{r}_X(x)$ is the evidence for outcome $x \in \mathbb{X}$. In addition, the base rate distribution $\mathbf{a}_X$ and the non-informative prior weight $W$ are parameters in the expression forthe evidence-Dirichlet PDF.
+
+The expected distribution over $\mathbb{X}$ can be written as
+\begin{equation}
+    \mathbf{E}_X(x) = \dfrac{\mathbf{r}_X(x) + \mathbf{a}_X(x)W}{W + \sum\limits_{x_j \in \mathbb{X}} \mathbf{r}_X(x_j)}\ \forall x \in \mathbb{X}.
+\end{equation}
+
+The variance of the Dirichlet is defined by
+\begin{equation}
+    \mathrm{Var}_X(x) = \dfrac{\mathbf{P}_X(x)(1 - \mathbf{P}_X(x))}{W + u_X}\text{.}
+\end{equation}
+

@@ -1,0 +1,44 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, margin=2cm]{geometry}
+\usepackage{hyperref}
+
+\theoremstyle{definition}
+\newtheorem{question}{Question}[section]
+\newtheorem{definition}{Definition}[section]
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+}
+
+\numberwithin{equation}{section}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.15}
+
+%opening
+\title{Subjective Logic}
+\author{José C. Oliveira}
+
+\begin{document}
+
+\maketitle
+
+%\tableofcontents
+%
+%\addtocontents{toc}{\protect\newpage}
+
+\input{chapters/chapter-1}
+\input{chapters/chapter-2}
+\input{chapters/chapter-3}
+
+\end{document}
