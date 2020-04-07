@@ -2,6 +2,12 @@
 
 \section{Opinion Representations}
 
+\subsection{Belief and Trust Relationships}
+
+The notation $\omega_X^A$ is used to denote opinions in subjective logic, where e.g. the $X$ indicates the target variable or proposition to which the opinion applies, and e.g. the superscript $A$ indicates the subject agent who holds the opinion, i.e. belief owner.
+
+The believe and trust are similar concepts, the main difference being that trust assumes dependence and risk, which belief does not necessarily assume.
+
 \subsection{Opinion Classes}
 
 The opinion itself is a composite function $\omega^A_ X = \left(\mathbf{b}_X, u_X, \mathbf{a}_X\right)$, consisting of the belief mass distribution $\mathbf{b}_X$, the uncertainty mass $u_X$, and the base rate distribution $\mathbf{a}_X$.
@@ -40,8 +46,7 @@ High aleatory/epistemic uncertainty is consistent with both high and low uncerta
 
 \begin{itemize}
 	\item \textbf{An aleatory Opinion} applies to a variable governed by a frequentist process, and that represents the (uncertain) likelihood of values of the variable in any unknown past or future instance of the process. An aleatory opinion can naturaly have an arbitrary uncertainty mass.
-	\item \textbf{An epistemic Opinion} applies to a variable that is assumed to be non-frequentist,
-and that represents the (uncertain) likelihood of values of the variable in a specific unknown past or future instance.
+	\item \textbf{An epistemic Opinion} applies to a variable that is assumed to be non-frequentist, and that represents the (uncertain) likelihood of values of the variable in a specific unknown past or future instance.
 \end{itemize}
 
 \subsection{Binomial Opinions}
@@ -74,6 +79,7 @@ The variance of binomial options is expressed as
 where $W$ denotes non-informative prior weight, which must be set to $W = 2$ as explained in Section 3.5.2. Binomial opinion variance is derived from the variance of the Beta PDF.
 
 \subsubsection{The Beta Binomial Model}
+\label{sss:the-beta-binomal-model}
 
 \begin{definition}
 	\emph{(Beta Probability Density Function)} Assume a binaru domain $\mathbb{X} = \left\{x,\overline{x}\right\}$ and a random variable $X \in \mathbb{X}$. Let $p$ denote the continuous probability function $p\ :\ X \rightarrow \left[0,1\right]$ where $p(x) + p(\overline{x}) = 1$. For compactness of notation e define $p_x \equiv p\left(x\right)$ and $p_{\overline{x}} \equiv p\left(\overline{x}\right)$.
@@ -109,7 +115,7 @@ The non-informative prior weight is set to $W = 2$, which ensures that the prior
 \end{question}
 
 Expected probability:
-\begin{equation}
+\begin{equation}\label{eq:beta_expected_probability}
 	\mathrm{E}(x) = \frac{r_x + a_x W}{r_x + s_x + W}
 \end{equation}
 
@@ -196,10 +202,11 @@ The evidence representation of the Dirichlet PDF is denoted by $\mathrm{Dir}^{\m
 \begin{equation}
     \alpha_X(x) = \mathbf{r}_X(x) + \mathbf{a}_X(x)W\text{, where }\mathbf{r}_X(x) \geq 0\ \forall x \in \mathbb{X}\text{.}
 \end{equation}
-The evidence-Dirichlet PDF is expressed in terms of the evidence vector $\mathbf{r}_X$, where $\mathbf{r}_X(x)$ is the evidence for outcome $x \in \mathbb{X}$. In addition, the base rate distribution $\mathbf{a}_X$ and the non-informative prior weight $W$ are parameters in the expression forthe evidence-Dirichlet PDF.
+The evidence-Dirichlet PDF is expressed in terms of the evidence vector $\mathbf{r}_X$, where $\mathbf{r}_X(x)$ is the evidence for outcome $x \in \mathbb{X}$. In addition, the base rate distribution $\mathbf{a}_X$ and the non-informative prior weight $W$ are parameters in the expression for
+the evidence-Dirichlet PDF.
 
 The expected distribution over $\mathbb{X}$ can be written as
-\begin{equation}
+\begin{equation}\label{eq:dirithlet_expected_probability}
     \mathbf{E}_X(x) = \dfrac{\mathbf{r}_X(x) + \mathbf{a}_X(x)W}{W + \sum\limits_{x_j \in \mathbb{X}} \mathbf{r}_X(x_j)}\ \forall x \in \mathbb{X}.
 \end{equation}
 
@@ -207,4 +214,17 @@ The variance of the Dirichlet is defined by
 \begin{equation}
     \mathrm{Var}_X(x) = \dfrac{\mathbf{P}_X(x)(1 - \mathbf{P}_X(x))}{W + u_X}\text{.}
 \end{equation}
+
+\subsubsection{Visualising Dirichlet Probability Density Functions}
+
+Dirichlet PDFs over ternary domains are the largest that can be practically visualized.
+
+The Figure 3.4 from the book shows graphical representations with non-informative prior Dirichlet PDF, and posterior Dirichlet PDF. At the second case, $\mathbf{r}_X$ is not constant on $0$.
+
+\subsubsection{Coarsening Example: From Ternary to Binary}
+
+This subsubsection shows a ternary domain $\{x_1, x_2, x_3\}$ and it reduces to binary domain making $\overline{x}_1 = \{x_2, x_3\}$. This way makes it possible to visualize prior and posteriori Beta PDFs for $p(x_1)$. Here I realize that didn't understand at section \ref{sss:the-beta-binomal-model} that a Beta (and Dirithlet here) is a function from probability to probability. The PDF I saw most so far was from Normal Distribution and was a function from a random variable to probability. The take-way here (actually from subsubsection \ref{sss:the-beta-binomal-model}) is that the expected probability (\ref{eq:beta_expected_probability} and \ref{eq:dirithlet_expected_probability}) is the posteriori probability, i.e. with the new evidences.
+
+\subsubsection{Mapping Between Multinomial Opinion and Dirichlet PDF}
+
 
