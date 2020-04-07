@@ -152,7 +152,7 @@ $a_x$ according. The opinion $\omega_x$ and the Beta PDF $\mathrm{Beta^e}(p_x, r
 \end{definition}
 
 The equivalence between binomial opinions and Beta PDFs is very powerful, because subjective-logic operators (SL operators) can then be applied to Beta PDFs, and statistics operations for Beta PDFs can be applied to opinions. In addiction, it makes it possible to determine binomial opinions from statistical observations.
-
+x
 \subsection{Multinomial Opinions}
 
 \subsubsection{The Multinomial Opinion Representation}
@@ -193,12 +193,12 @@ where $W$ denotes non-informative prior weight, which must be set to $W = 2$.
 values of $\mathbb{X}$, and let $\mathbf{p}_X$ denote the probability distribution over $\mathbb{X}$. With $\mathbf{p}_X$ as a
 $k$-dimensional variable, the Dirichlet PDF denoted $\mathrm{Dir}(\mathbf{p}_X, \alpha_{X})$ is expressed as:
 	\begin{equation}
-		\mathrm{Dir}(\mathbf{p}_X, \alpha_X) = \dfrac{\Gamma\left(\sum\limits_{x \in \mathbb{X}} \alpha_X(x)\right)}{\prod\limits_{x \in \mathbb{X}} \Gamma(\alpha_X(x))} = \prod\limits_{x \in \mathbb{X}} \mathbf{p}_X(x)^{(\alpha_X(x)-1)} \text{, where } \alpha_X(x) \geq 0\text{,}
+		\mathrm{Dir}(\mathbf{p}_X, \alpha_X) = \dfrac{\Gamma\left(\sum\limits_{x \in \mathbb{X}} \alpha_X(x)\right)}{\prod\limits_{x \in \mathbb{X}} \Gamma(\alpha_X(x))} \prod\limits_{x \in \mathbb{X}} \mathbf{p}_X(x)^{(\alpha_X(x)-1)} \text{, where } \alpha_X(x) \geq 0\text{,}
 	\end{equation}
 	with the restrictions that $\mathbf{p}_X(x) \neq 0$ if $\alpha_X(x)	< 1$.
 \end{definition}
 
-The evidence representation of the Dirichlet PDF is denoted by $\mathrm{Dir}^{\mathrm{e}}_X(\mathbf{p}_X, \mathbf{r}_X, \mathbf{a}_X)$, where the total strength $\alpha_X(x)$ for each value $x \in \mathbb{x}$ can be expressed as
+The evidence representation of the Dirichlet PDF is denoted by $\mathrm{Dir}^{\mathrm{e}}_X(\mathbf{p}_X, \mathbf{r}_X, \mathbf{a}_X)$, where the total strength $\alpha_X(x)$ for each value $x \in \mathbb{X}$ can be expressed as
 \begin{equation}
     \alpha_X(x) = \mathbf{r}_X(x) + \mathbf{a}_X(x)W\text{, where }\mathbf{r}_X(x) \geq 0\ \forall x \in \mathbb{X}\text{.}
 \end{equation}
@@ -223,8 +223,31 @@ The Figure 3.4 from the book shows graphical representations with non-informativ
 
 \subsubsection{Coarsening Example: From Ternary to Binary}
 
-This subsubsection shows a ternary domain $\{x_1, x_2, x_3\}$ and it reduces to binary domain making $\overline{x}_1 = \{x_2, x_3\}$. This way makes it possible to visualize prior and posteriori Beta PDFs for $p(x_1)$. Here I realize that didn't understand at section \ref{sss:the-beta-binomal-model} that a Beta (and Dirithlet here) is a function from probability to probability. The PDF I saw most so far was from Normal Distribution and was a function from a random variable to probability. The take-way here (actually from subsubsection \ref{sss:the-beta-binomal-model}) is that the expected probability (\ref{eq:beta_expected_probability} and \ref{eq:dirithlet_expected_probability}) is the posteriori probability, i.e. with the new evidences.
+This subsubsection shows a ternary domain $\{x_1, x_2, x_3\}$ and it reduces to binary domain making $\overline{x}_1 = \{x_2, x_3\}$. This way makes it possible to visualize prior and posterior Beta PDFs for $p(x_1)$. Here I realize that didn't understand at section \ref{sss:the-beta-binomal-model} that a Beta (and Dirithlet here) is a function from probability to probability. The PDF I saw most so far was from Normal Distribution and was a function from a random variable to probability. The take-way here (actually from subsubsection \ref{sss:the-beta-binomal-model}) is that the expected probability (\ref{eq:beta_expected_probability} and \ref{eq:dirithlet_expected_probability}) is the posterior probability, i.e. with the new evidences.
 
 \subsubsection{Mapping Between Multinomial Opinion and Dirichlet PDF}
 
+\begin{definition}
+    \emph{(Mapping: Multinomial Opinion $\leftrightarrow$ Dirichlet PDF)} Let $\omega_X = (\mathbf{b}_X, u_X, \mathbf{a}_X)$ be a multinomial opinion and let $\mathrm{Dir}^\mathrm{e}_X(\mathbf{p}_X, \mathbf{r}_X, \mathbf{a}_X)$ be a Dirichlet PDF, both over the same variable $X \in \mathbb{X}$. These are equivalent through the following mapping,
+    \begin{equation}
+        \begin{split}
+            & \forall x \in \mathbb{X} \\
+            & \begin{cases}
+                \mathbf{b}_X(x) & = \dfrac{\mathbf{r}_X(x)}{W + \sum\limits_{x_i \in \mathbb{X}} \mathbf{r}_X(x_i)} \\
+                u_X & = \dfrac{W}{W + \sum\limits_{x_i \in \mathbb{X} \mathbf{r}_X(x_i)}}
+            \end{cases} \Leftrightarrow
+            \begin{cases}
+                \begin{cases}
+                    \mathbf{r}_X(x) = \dfrac{W \mathbf{b}_X(x)}{u_X} \\
+                    1 = u_X = \sum\limits_{x_i \in \mathbb{X}} \mathbf{b}_X(x_i)
+                \end{cases} & \text{if } u_X \neq 0 \\
+                \begin{cases}
+                    \mathbf{r}_X(x) = \mathbf{b}_X(x) \cdot \infty \\
+                    1 = \sum\limits_{x_i \in \mathbb{X}} \mathbf{b}_X(x_i)
+                \end{cases} & \text{if } u_X \neq 0
+            \end{cases}
+        \end{split}
+    \end{equation}
+\end{definition}
 
+Statistics tools and methods, such as collecting statistical observation evidence, can no be applied to opinions.
