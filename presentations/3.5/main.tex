@@ -1,0 +1,84 @@
+\documentclass[11pt, envcountsect]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usetheme{default}
+
+\newenvironment<>{proposition}[1][\undefined]{%
+\begin{actionenv}#2%
+\ifx#1\undefined%
+   \def\insertblocktitle{Theorem}%
+\else%
+   \def\insertblocktitle{Theorem ({\em#1})}%
+\fi%
+\par%
+\usebeamertemplate{block begin}\em}
+{\par\usebeamertemplate{block end}\end{actionenv}}
+
+\begin{document}
+
+\author{José C. Oliveira}
+\title{3.5 Multinomial Opinions}
+%\subtitle{}
+%\logo{}
+%\institute{}
+%\date{}
+%\subject{}
+%\setbeamercovered{transparent}
+%\setbeamertemplate{navigation symbols}{}
+\begin{frame}[plain]
+	\maketitle
+\end{frame}
+
+\section*{Outline}
+\begin{frame}{Summary}
+    \tableofcontents
+\end{frame}
+
+\section{3.5.1 The Multinomial Option Representation}
+
+\begin{frame}[allowframebreaks]{3.5.1 The Multinomial Opinion Representation}
+    \begin{block}{Definition 3.4 (Multinomial Opinion)}
+        Let $\mathbb{X}$ be a domain larger than binary, i.e. so that $k = |X| > 2$. Let $X$ be a random variable in $\mathbb{X}$. A multinomial opinion over the random variable $X$ is the ordered triplet $\omega_X = (\mathbf{b}_X, u_X , \mathbf{a}_X)$ where
+        \begin{itemize}
+            \item $\mathbf{b}_X$ is a belief mass distribution over $X$,
+            \item $u_X$ is the uncertainty mass which represents the vacuity of evidence,
+            \item $\mathbf{a}_X$ is a base rate distribution over $\mathbb{X}$,
+        \end{itemize}
+        and the multinomial additivity requirement of Eq.(2.6) is satisfied.
+    \end{block} ~\\
+
+    A multinomial opinion has $(2k - 1)$ degrees of freedom.
+
+    \break
+
+    The projected probability distribution of multinomial opinions is defined by:
+    \begin{equation}\label{eq:multinomial_projected_probability}\tag{3.12}
+       	\mathbf{P}_X(x) = \mathbf{b}_X(x) + \mathbf{a}_X(x) u_X,\ \forall x \in \mathbb{X}\text{.}
+    \end{equation}
+
+    The variance of multinomial opinions is expressed as
+    \begin{equation}\tag{3.13}
+       	\mathrm{Var}_X = \dfrac{\mathbf{P}_X(x)(1 - \mathbf{P}_X(x)u_X)}{W + u_X},
+    \end{equation}
+    where $W$ denotes non-informative prior weight, which must be set to $W = 2$.
+  	\end{frame}
+
+\section{3.5.2 The Dirichlet Multinomial Model}
+
+\begin{frame}{3.5.2 The Dirichlet Multinomial Model}
+
+\end{frame}
+
+\section{3.5.3 Visualising Dirichlet Probability Density Functions}
+\section{3.5.4 Coarsening Example: From Ternary to Binary}
+\section{3.5.5 Mapping Between Multinomial Opinion and Dirichlet PDF}
+\section{3.5.6 Uncertainty-Maximisation}
+
+\end{document}
+

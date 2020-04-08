@@ -158,9 +158,7 @@ x
 \subsubsection{The Multinomial Opinion Representation}
 
 \begin{definition}
-	\emph{(Multinomial Opinion)} Let $\mathbb{X}$ be a domain larger than binary, i.e.
-so that $k = |X| > 2$. Let $X$ be a random variable in $\mathbb{X}$. A multinomial opinion over
-the random variable $X$ is the ordered triplet $\omega_X = (\mathbf{b}_X, u_X , \mathbf{a}_X)$ where
+	\emph{(Multinomial Opinion)} Let $\mathbb{X}$ be a domain larger than binary, i.e. so that $k = |X| > 2$. Let $X$ be a random variable in $\mathbb{X}$. A multinomial opinion over the random variable $X$ is the ordered triplet $\omega_X = (\mathbf{b}_X, u_X , \mathbf{a}_X)$ where
 	\begin{itemize}
 		\item $\mathbf{b}_X$ is a belief mass distribution over $X$,
 		\item $u_X$ is the uncertainty mass which represents the vacuity of evidence,
@@ -189,9 +187,7 @@ where $W$ denotes non-informative prior weight, which must be set to $W = 2$.
 \subsubsection{The Dirichlet Multinomial Model}
 
 \begin{definition}
-	\emph{(Dirichlet Probability Density Function)} Let $\mathbb{X}$ be a domain consisting of $k$ mutually disjoint values. Let $\alpha_X$ represent the strength vector over the
-values of $\mathbb{X}$, and let $\mathbf{p}_X$ denote the probability distribution over $\mathbb{X}$. With $\mathbf{p}_X$ as a
-$k$-dimensional variable, the Dirichlet PDF denoted $\mathrm{Dir}(\mathbf{p}_X, \alpha_{X})$ is expressed as:
+	\emph{(Dirichlet Probability Density Function)} Let $\mathbb{X}$ be a domain consisting of $k$ mutually disjoint values. Let $\alpha_X$ represent the strength vector over the values of $\mathbb{X}$, and let $\mathbf{p}_X$ denote the probability distribution over $\mathbb{X}$. With $\mathbf{p}_X$ as a $k$-dimensional variable, the Dirichlet PDF denoted $\mathrm{Dir}(\mathbf{p}_X, \alpha_{X})$ is expressed as:
 	\begin{equation}
 		\mathrm{Dir}(\mathbf{p}_X, \alpha_X) = \dfrac{\Gamma\left(\sum\limits_{x \in \mathbb{X}} \alpha_X(x)\right)}{\prod\limits_{x \in \mathbb{X}} \Gamma(\alpha_X(x))} \prod\limits_{x \in \mathbb{X}} \mathbf{p}_X(x)^{(\alpha_X(x)-1)} \text{, where } \alpha_X(x) \geq 0\text{,}
 	\end{equation}
