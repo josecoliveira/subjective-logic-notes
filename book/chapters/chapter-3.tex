@@ -176,7 +176,7 @@ A multinomial opinion contains $(2k + 1)$ parameters. However, given the belief 
 \end{question}
 
 The projected probability distribution of multinomial opinions is defined by:
-\begin{equation}
+\begin{equation}\label{eq:multinomial_projected_probability}
 	\mathbf{P}_X(x) = \mathbf{b}_X(x) + \mathbf{a}_X(x) u_X,\ \forall x \in \mathbb{X}\text{.}
 \end{equation}
 
@@ -251,3 +251,22 @@ This subsubsection shows a ternary domain $\{x_1, x_2, x_3\}$ and it reduces to 
 \end{definition}
 
 Statistics tools and methods, such as collecting statistical observation evidence, can no be applied to opinions.
+
+\subsubsection{Uncertainty-Maximisation of Multinomial Opinions}
+
+Given a multinomial opiniion $\omega_X$, with its projected probability distribution $\mathbf{P}_X$, the corresponding uncertainty-maximised opinion is denoted $\ddot{\omega}_X = (\ddot{\mathbf{b}}_X, \ddot{u}_X, \mathbf{a}_X)$. The theoretical maximum uncertainty mass $\ddot{u}_X$ is determined by converting as much belief as possible into uncertainty mass, while preserving consistent projected probabilities. On the simplex, the opinion $\ddot{\omega}_X$ will be on one of the planes, closer to $u_X$ vertex.
+
+The components of the uncertainty-maximised opinion $\ddot{\omega}_X$ should satisfy the following requeriments:
+\begin{equation}
+    \ddot{u} = \dfrac{\mathbf{P}_X(x_{i_0})}{\mathbf{a}_X(x_{i_0})}\text{, for some }i_0 \in \{1, \ldots, k\}\text{, and}
+\end{equation}
+\begin{equation}\label{eq:uncertainty_maximisation_2_requirement}
+    \mathbf{P}_X(x_i) \geq \mathbf{a}_X(x_i)u_X\text{, for every }i \in \{1, \dots, k\}\text{.}
+\end{equation}
+
+The requirement of Eq.(\ref{eq:uncertainty_maximisation_2_requirement}) ensures that all the belief masses determined according to Eq.(\ref{eq:multinomial_projected_probability}) are non-negative. These requirements lead to the theoretical uncertainty maximum:
+\begin{equation}
+    \ddot{u}_X = \min\limits_i \left[\dfrac{\mathbf{P}_X(x_i)}{\mathbf{a}_X(x_i)}\right]
+\end{equation}
+
+Non uncertainty-maximised only can be aleatory opinion. Uncertainty-maximised can be and an aleatory opinion or an epistemic opinion.
