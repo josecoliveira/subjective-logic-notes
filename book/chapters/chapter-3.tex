@@ -230,7 +230,7 @@ This subsubsection shows a ternary domain $\{x_1, x_2, x_3\}$ and it reduces to 
             & \forall x \in \mathbb{X} \\
             & \begin{cases}
                 \mathbf{b}_X(x) & = \dfrac{\mathbf{r}_X(x)}{W + \sum\limits_{x_i \in \mathbb{X}} \mathbf{r}_X(x_i)} \\
-                u_X & = \dfrac{W}{W + \sum\limits_{x_i \in \mathbb{X} \mathbf{r}_X(x_i)}}
+                u_X & = \dfrac{W}{W + \sum\limits_{x_i \in \mathbb{X}} \mathbf{r}_X(x_i)}
             \end{cases} \Leftrightarrow
             \begin{cases}
                 \begin{cases}
@@ -266,3 +266,88 @@ The requirement of Eq.(\ref{eq:uncertainty_maximisation_2_requirement}) ensures 
 \end{equation}
 
 Non uncertainty-maximised only can be aleatory opinion. Uncertainty-maximised can be and an aleatory opinion or an epistemic opinion.
+
+\subsection{Hyper-opinions}
+
+\subsubsection{The Hyper-opinion Representation}
+
+\begin{definition}
+    \emph{(Hyper-opinion)} Let $\mathbb{X}$ be a domain of cardinality $k > 2$, with corresponding hyperdomain $\mathcal{R}(\mathbb{X})$. Let $X$ be a hypervariable in $\mathcal{R}(\mathbb{X})$. A hyper-opinion on the hypervariable $X$ is the ordered triplet $\omega_X =(\mathbf{b}_X, u_X , \mathbf{a}_X)$ where
+    \begin{itemize}
+        \item $\mathbf{b}_X$ is a belief mass distribution over $\mathcal{R}(\mathbb{X})$,
+        \item $u_X$ is the uncertainty mass which represents the vacuity of evidence,
+        \item $\mathbf{a}_X$ is a base rate distribution over $\mathbb{X}$,
+    \end{itemize}
+    and the hypernomial additivity of Eq.(\ref{eq:hypernomal_belief_mass_distribution}) is satisfied.
+\end{definition}
+
+The projected probability distribution $\mathbf{P}_X$ of hyper-opinions can be expressed as
+\begin{equation}
+    \mathbf{P}_X(x) = \sum\limits_{x_i \in \mathcal{R}(\mathbb{X})} \mathbf{a}_X(x|x_i) \mathbf{b}_X(x_i) + \mathbf{a}_X(x) u_X \text{, } \forall x \in \mathbb{X}.
+\end{equation}
+
+The super-additivity of projected probability of hyper-opinions results from the fact that projected probabilities of partially overlapping composite values $x_j \in \mathcal{R}(\mathbb{X})$ are partially based on
+the same projected probability on their constituent singleton values $x_i \in \mathbb{X}$, so that
+probabilities are counted multiple times.
+
+\subsubsection{Projecting Hyper-opinions to Multinomial Opinions}
+
+Every
+hyper-opinion can be approximated with a multinomial opinion which has the same
+projected probability distribution as the initial hyper-opinion.
+
+The belief mass distribution $\mathbf{b}'_X$ of the corresponding multinomial opinion is defined by
+\begin{equation}
+    \mathbf{b}'_X(x) = \sum\limits_{x' \in \mathcal{R}(\mathbb{X})} \mathbf{a}_X(x|x') \mathbf{b}(x')\text{.}
+\end{equation}
+
+
+\subsubsection{The Dirichlet Model Applied to Hyperdomains}
+
+\subsubsection{Mapping Between a Hyper-opinion and a Dirichlet HPDF}
+
+\subsubsection{Hyper-Dirichlet PDF}
+
+\begin{equation}
+B(\mathrm{r}_X, \mathbf{a}_X) = \int\limits_{\substack{\mathbf{p}_X(x) \geq 0 \\ \sum\limits_{j = (k + 1)}^{\kappa} \mathbf{p}_X(x_j) \geq 1}} \left( \prod\limits_{i = 1}^{k} \mathbf{p}_X(x_i)^{(\mathbf{r}_X(xi) + \mathbf{a}_X(x_i) W - 1)} \prod\limits_{j = (k + 1)}^{\kappa} \mathbf{p}_X(x_j)^{\mathbf{r}_X(x_j)} \right) \mathrm{d}(\mathbf{p}_X(x_1),\dots,\mathbf{p}_X(k_\kappa))\text{.}
+\end{equation}
+
+\subsection{Alternative Opinion Representations}
+
+\subsubsection{Probabilistic Notation of Opinions}
+
+\begin{definition}
+    \emph{(Probabilistic Opinion Notation)} Assume domain $\mathbb{X}$ with random variable $X$, and let $\omega_X = (\mathbf{b}_X, u_X, \mathbf{a}_X)$ be a binomial or multinomial opinion on $X$. Let $\mathbf{P}_X$ be the corresponding projected probability distribution over $X$ defined according to Eq.(\ref{eq:multinomial_projected_probability}). The probabilistic notation for multinomial opinions is givenbelow.
+    \begin{equation}
+        \begin{array}{l}
+        \text{Probabilistic opinion: } \pi_X = (\mathbf{P}_X, u_X, \mathbf{a}_X) \\
+        \text{Constraints: } \begin{cases}
+        \mathbf{a}_X(x) u_X \leq \mathbf{P}_X(x) \leq (\mathbf{a}_X(x) u_X + 1 - u_X)\text{, } \forall x \in \mathbb{X}.\\
+        \sum\limits_{x \in \mathbb{X}} \mathbf{P}_X(x) = 1\text{, } \forall x \in \mathbb{X}.
+        \end{cases}
+        \end{array}
+    \end{equation}
+\end{definition}
+
+\begin{question}
+    Why $\mathbf{P}_X(x) \leq (\mathbf{a}_X(x) u_X + 1 - u_X)$?
+\end{question}
+
+\begin{definition}
+    Let $\omega_X = (\mathbf{b}_X, u_X, \mathbf{a}_X)$ be a multinomial belief opinion, and let $\pi_X = (\mathbf{P}_X, u_X, \mathbf{a}_X)$ be a multinomial probabilistic opinion, both over the same variable $X in \mathbb{X}$. Themultinomial opinions $\omega_X$ and $\pi_X$ are equivalent because the belief mass distribution$\mathbf{b}_X$ is uniquely determined through Eq.(\ref{eq:multinomial_projected_probability}) which is rearranged in Eq.(\ref{eq:map_belief_mass_to_projected_probabiltity}):
+    \begin{equation}\label{eq:map_belief_mass_to_projected_probabiltity}
+        \mathbf{b}_X(x) = \mathbf{P}_X(x) - \mathbf{a}_X(x) u_X\text{.}
+    \end{equation}
+\end{definition}
+
+\subsubsection{Qualitative Opinion Representation}
+
+Table 3.4 from the book shows qualitative levels os likelihood and confidence. Figure 3.8 shows 2 possibles mappings between binomial opinion and qualitative representation of opinion. These mapping differ from each other by the base rate. Table 3.4 shows also the difference between likelihood and confidence.
+
+Let $\omega_X$ be a binomial or multinomial opinions with uncertainty mass $u_X$, then we define:
+\begin{equation}
+    \mathrm{Confidence}(\omega_X) = c_X = 1 - u_X\text{.}
+\end{equation}
+For hyper-opinions, low uncertainty mass does not necessarily indicate high confidence because belief mass can express vagueness.
+
+Naturally, some mappings willalways be impossible for a given base rate (see Figure 3.8), but these are logicallyinconsistent and should be excluded from selection.

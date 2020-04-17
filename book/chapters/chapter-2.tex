@@ -47,7 +47,7 @@ There can be multiple equivalent formal representations of subjective opinions.
 			\text{with the additivity requirement:}\ u_X + \sum_{x \in \mathbb{X}} \mathbf{b}_X(x) = 1\text{.}
 		\end{matrix*}
 	\end{equation}
-	\begin{equation}
+	\begin{equation}\label{eq:hypernomal_belief_mass_distribution}
 		\begin{matrix*}[l]
 			\text{Hypernominal belief mass distribution:}\ \mathbf{b}_X : \mathcal{R}(\mathbb{X}) \rightarrow [0,\ 1], \\
 			\text{with the additivity requirement:}\ u_X + \sum_{x \in \mathcal{R}(\mathbb{X})} \mathbf{b}_X(x) = 1\text{.}
@@ -72,7 +72,7 @@ The sub-additivity of belief mass distributions is complemented by \emph{uncerta
 \begin{definition}\label{def:base_rate_distribution_over_values_in_a_hyperdomain}
 	\emph{(Base Rate Distribution over Values in a Hyperdomain)} Let $\mathbb{X}$ be a domain with corresponding hyperdomain $\mathcal{R}(\mathbb{X})$, and let $X$ be a variable over those domains. Assume the base rate distribution $\mathbf{a}_X$ over the domain $\mathbb{X}$ according to Definition~\ref{def:base_rate_distribution}. The base rate $\mathbf{a}_X$ for a composite value $x \in \mathcal{R}(\mathbb{X})$ can be computed as follows:
 	\begin{equation}
-		\text{Base rate over composite values:}\ \mathbf{a}_X(x_i) = \sum_{\substack{x_j \in \mathbb{X} \\ x_j \subseteq x_i}} \mathbf{a}_X(x_j),\ \forall x_i \in \mathcal{R}(\mathbb{X})\text{.}
+		\text{Base rate over composite values:}\ \mathbf{a}_X(x_i) = \sum\limits_{\substack{x_j \in \mathbb{X} \\ x_j \subseteq x_i}} \mathbf{a}_X(x_j),\ \forall x_i \in \mathcal{R}(\mathbb{X})\text{.}
 	\end{equation}
 \end{definition}
 
