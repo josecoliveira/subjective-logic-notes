@@ -1,0 +1,152 @@
+% !TeX root = ../main.tex
+
+\section{Decision Making Under Vagueness and
+Uncertainty}
+
+\subsection{Aspects of Belief and Uncertainty in Opinions}
+
+\subsubsection{Sharp Belief Mass}
+
+\begin{definition}
+    \emph{(Sharp Belief Mass)} Let $\mathbb{X}$ be a domain with hyperdomain $\mathcal{R}(\mathbb{X})$
+and variable $X$. Given an opinion $\omega_X$, the sharp belief mass of value $x \in \mathcal{R}(\mathbb{X})$ is the function $\mathbf{b}^{\mathrm{S}}_X : \mathcal{R}(\mathbb{X}) \rightarrow [0, 1]$ expressed as
+    \begin{equation}
+        \text{Sharp belief mass: } \mathbf{b}^{\mathrm{S}}_X = \sum\limits_{x_i \subseteq x} \mathbf{b}_X(x_i)\text{, }\forall x \in \mathcal{R}(\mathbb{X})\text{.}
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    \emph{(Total Sharp Belief Mass)} Let $\mathbb{X}$ be a domain with variable $X$, and let $\omega_X$ be an opinions on $\mathbb{X}$. The total sharp belief mass contained in the opinion $\omega_X$ is the function $\mathbf{b}^{\mathrm{TS}}_X : \mathbb{X} \rightarrow [0, 1]$ expressed as
+    \begin{equation}
+        \text{Total Sharp belief mass: } b^{\mathrm{TS}}_X = \sum\limits_{x_i \subseteq \mathbb{X}} \mathbf{b}_X(x_i)\text{.}
+    \end{equation}
+\end{definition}
+
+\subsubsection{Vague Belief Mass}
+
+The vague belief mass on a value $\mathbf{x} \in \mathcal{R}(\mathbb{X})$ is defined asthe weighted sum of belief masses on the composite values of which $x$ is a member,where the weights are determined by the base rate distribution.
+
+\begin{definition}
+    \emph{(Vague Belief Mass)} Let $\mathbb{X}$ be a domain with hyperdomain $\mathcal{R}(\mathbb{X})$ and composite set $\mathcal{C}(\mathbb{X})$. Given anopinion $\omega_X$, the vague belief mass on $x \in \mathcal{R}(\mathbb{X})$ is the function $\mathbf{b}^\mathrm{V}_X : \mathcal{R}(\mathbb{X}) \rightarrow [0, 1]$:
+    \begin{equation}
+        \text{Vague belief mass: } \mathbf{b}^{\mathrm{V}}_X(x) = \sum\limits_{\substack{x_i \in \mathcal{C}(\mathbb{X}) \\ x_i \nsubseteq x}} \mathbf{a}_X(x | x_i) \mathbf{b}_X(x_i) \text{, } \forall x \in \mathcal{R}(\mathbb{X}) \text{.}
+    \end{equation}
+\end{definition}
+
+\begin{definition}
+    \emph{(Total Vague Belief Mass)} Let $\mathbb{X}$ be a domain with variable $X$, andlet $\omega_X$ be an opinions on $\mathbb{X}$. The total vagueness contained in the opinion $\omega_X$ is thefunction $\mathbb{b}^{\mathrm{TV}}_X : \mathcal{C}(\mathbb{X}) \rightarrow [0, 1]$ expressed as:
+    \begin{equation}
+        \text{Total vague belief mass: } b^{\mathrm{TV}}_X = \sum\limits_{x \in \mathcal{C}(\mathbb{X})} \mathrm{b}_X(x) \text{.}
+    \end{equation}
+\end{definition}
+
+\subsubsection{Dirichlet Visualization of Opinion Vagueness}
+
+Example: The singletons and composite values of R(X) are listed below.
+
+\begin{equation}
+    \left\{\begin{array}{lll}
+        \text{Domain:}        & \mathbb{X}              & = \{x_1, x_2, x_3\} \text{, } \\
+        \text{Hyperdomain:}   & \mathcal{R}(\mathbb{X}) & = \{x_1, x_2, x_3, x_4, x_5, x_6\} \text{,} \\
+        \text{Composite set:} & \mathcal{R}(\mathbb{X}) & = \{x_4, x_5, x_6\} \text{,}
+    \end{array}\right. \text{where }
+    \left\{\begin{array}{l}
+        x_4 = \{x_1, x_2\} \text{,} \\
+        x_5 = \{x_1, x_3\} \text{,} \\
+        x_6 = \{x_2, x_3\} \text{.} \\
+    \end{array}\right.
+\end{equation}
+
+\begin{equation}
+    \begin{array}{l}
+        \text{Belief mass distribution} \\
+        \left\{\begin{array}{ll}
+            \mathbf{b}_X(x_6) & = 0.8 \text{,} \\
+            u_X               & = 0.2 \text{.}
+        \end{array}\right.
+    \end{array} \quad
+    \begin{array}{l}
+        \text{Base rate distribution} \\
+        \left\{\begin{array}{l}
+            \mathbf{a}_X(x_1) = 0.33 \text{,} \\
+            \mathbf{a}_X(x_2) = 0.33 \text{,} \\
+            \mathbf{a}_X(x_3) = 0.33 \text{.} \\
+        \end{array}\right.
+    \end{array}
+\end{equation}
+
+\def\arraystretch{1.5}
+\begin{equation*}
+    \begin{array}{rl}
+         \mathbf{P}_X(x_1) = & \sum\limits_{x_i \in \mathcal{R}(\mathbb{X})} \mathbf{a}_X(x_1 | x_i) \mathbf{b}_X(x_i) + \mathbf{a}_X(x_1) u_X \\
+                           = & \dfrac{\mathbf{a}_X(\{x_1\} \cup \{x_2, x_3\})}{\mathbf{a}_X(\{x_2, x_3\})} \mathbf{b}_X(x_6) + \mathbf{a}_X(x_1) u_X \\
+                           = & 0 + 0.33 \cdot 0.2 \\
+                           = & 0.066
+    \end{array}
+\end{equation*}
+
+\begin{equation*}
+    \begin{array}{rl}
+        \mathbf{P}_X(x_2) = & \sum\limits_{x_i \in \mathcal{R}(\mathbb{X})} \mathbf{a}_X(x_2 | x_i) \mathbf{b}_X(x_i) + \mathbf{a}_X(x_1) u_X \\
+                          = & \dfrac{\mathbf{a}_X(\{x_2\} \cap \{x_2, x_3\})}{\mathbf{a}_X(\{x_2, x_3\})} \mathbf{b}_X(x_6) + \mathbf{a}_X(x_1) u_X \\
+                          = & \dfrac{0.33}{0.66} \cdot 0.8 + 0.33 \cdot 0.2 \\
+                          = & 0.467
+    \end{array}
+\end{equation*}
+
+\begin{equation*}
+    \mathbf{P}_X(x_3) = 0.467
+\end{equation*}
+
+\begin{equation*}
+    \begin{array}{rl}
+        \mathbf{b}^{\mathrm{V}}_X(x_1) = & \sum\limits_{\substack{x_i \in \mathcal{C}(\mathbb{X}) \\ x_i \nsubseteq x}} \mathbf{a}_X(x_1 | x_i) \mathbf{b}_X(x_i) \\
+                                       = & \dfrac{\mathbf{a}_X(\{x_1\} \cap \{x_2, x_3\})}{\mathbf{a}_X(\{x_2, x_3\})} \mathbf{b}_X(x_6) \\
+                                       = & 0 \cdot 0.8 \\
+                                       = & 0
+    \end{array}
+\end{equation*}
+
+\begin{equation*}
+    \begin{array}{rl}
+        \mathbf{b}^{\mathrm{V}}_X(x_2) = & \sum\limits_{\substack{x_i \in \mathcal{C}(\mathbb{X}) \\ x_i \nsubseteq x}} \mathbf{a}_X(x_2 | x_i) \mathbf{b}_X(x_i) \\
+                                       = & \dfrac{\mathbf{a}_X(\{x_2\} \cap \{x_2, x_3\})}{\mathbf{a}_X(\{x_2, x_3\})} \mathbf{b}_X(x_6) \\
+                                       = & \dfrac{0.33}{0.66} \cdot 0.8 \\
+                                       = & 0.4
+    \end{array}
+\end{equation*}
+
+\begin{equation*}
+    \mathbf{b}^{\mathrm{V}_X}(x_3) = 0.4
+\end{equation*}
+
+\def\arraystretch{1}
+\begin{equation}
+    \begin{array}{l}
+        \text{Projected probability distribution} \\
+        \left\{\begin{array}{l}
+            \mathbf{P}_X(x_1) = 0.066 \text{,} \\
+            \mathbf{P}_X(x_2) = 0.467 \text{,} \\
+            \mathbf{P}_X(x_3) = 0.467 \text{.}
+        \end{array}\right.
+    \end{array} \quad
+    \begin{array}{l}
+        \text{Vague belief mass} \\
+        \left\{\begin{array}{l}
+            \mathbf{b}^{\mathrm{V}}_X(x_1) = 0.0 \text{,} \\
+            \mathbf{b}^{\mathrm{V}}_X(x_2) = 0.4 \text{,} \\
+            \mathbf{b}^{\mathrm{V}}_X(x_3) = 0.4 \text{.}
+        \end{array}\right.
+    \end{array}
+\end{equation}
+
+Figure 4.2 from the book shows the hyper-Dirichlet PDF for this vague opinion.
+
+\subsubsection{Focal Uncertainty Mass}
+
+\begin{definition}
+    \emph{(Focal Uncertainty Mass)} Let $\mathbb{X}$ be a domain and $\mathcal{R}(\mathbb{X})$ denote itshyperdomain. Given an opinion $\omega_X$, the focal uncertainty mass of an value $x \in \mathcal{R}(\mathbb{X})$is computed with the function $\mathbf{u}^{\mathrm{F}}_X : \mathcal{R}(\mathbb{X}) \rightarrow [0, 1]$ defined as
+    \begin{equation}
+        \text{Focal uncertainty mass: } \mathbf{u}^{\mathrm{F}}_X(x) = \mathbf{a}_X(x) u_X \text{.}
+    \end{equation}
+\end{definition}
