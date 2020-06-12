@@ -1,0 +1,20 @@
+# Latex building
+*.aux
+*.bbl
+*.blg
+*.brf
+*.lof
+*.log
+*.lot
+*.pdf
+*.synctex.gz
+*.toc
+*.glo
+*.glsdefs
+*.ist
+*.out
+Makefile
+compile
+*.nav
+*.snm
+
