@@ -35,7 +35,7 @@
 
 \input{../subjectivelogic.tex}
 
-\newcommand{\qm}[1]{``#1''}
+\newcommand{\qm}[1]{`#1'}
 
 \usepackage{xcolor}
 \definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
@@ -60,11 +60,11 @@ One of the major goals of our research is to develop a quantitative logic for re
 
 Subjective logic is an extension of probabilistic logic. In probabilistic logic, we can express the truth value of a proposition by a probability distribution over a domain with disjoint events or states and reason by the axioms of probability. When we have two states of a domain $\dom{X}$ and the probability of a state $x \in \dom{X}$ can be $P(x) = 0$ or $P(x) = 1$, we have binary logic. The expression $x \land y$ is expressed in probabilistic logic as $P(x \land y) = P(x)P(y)$. Probabilistic logic is an extension of binary logic.
 
-Subjective logic extends probabilistic logic by adding \emph{uncertainty} and \emph{subjectivity}. We can't express \emph{\qm{we don't know}} with probabilistic logic by a uniform distribution because it says that we know that the distribution over the domain is uniform. Subjective logic can express that \emph{uncertainty} about the distribution. The \emph{subjectivity} comes from the fact that we can assign an opinion about a proposition to an agent.
+Subjective logic extends probabilistic logic by adding \emph{uncertainty} and \emph{subjectivity}. We can't express \emph{\qm{we don't know}} with probabilistic logic by an uniform distribution because it says that we know that the distribution over the domain is uniform. Subjective logic can express that \emph{uncertainty} about the distribution. The \emph{subjectivity} comes from the fact that we can assign an opinion about a proposition to an agent.
 
-By the investigation that we are doing about subjective logic, our main question is: Can we use subjective logic to improve our model of social networks? If yes, how?
+By the investigation we are doing about subjective logic, our main question is: Can we use subjective logic to improve our model of social networks? If yes, how?
 
-This document is an introduction about subjective logic and it will present elementary definition, types of opinions and an overview about computational trust. The main reference of this documents if the book \emph{Subjective Logic: A Formalism for Reasoning Under Uncertainty} by Audun Jøsang.
+This document is an introduction about subjective logic and it will present elementary definitions, types of opinions and an overview about computational trust. The main reference of this documents if the book \emph{Subjective Logic: A Formalism for Reasoning Under Uncertainty} by Audun Jøsang.
 
 
 %\begin{itemize}
@@ -79,13 +79,13 @@ This document is an introduction about subjective logic and it will present elem
 
 \section{Opinion representation}
 
-The main object of subjective logic is the \emph{opinion}. There are many equivalent ways for opinion representation. Here I'm going to present the most used. We represent a opinion by $\opia{A}{X}$, where $A$ is the an agent e $X$ is a random variable or \emph{hypervariable}. This section presents the elementary definitions that form an opinion.
+The main object of subjective logic is the \emph{opinion}. There are many equivalent ways for opinion representation. Here I'm going to present the most used. We represent an opinion by $\opia{A}{X}$, where $A$ is the an agent and $X$ is a random variable or \emph{hypervariable}. This section presents the elementary definitions that compose an opinion.
 
 \subsection{Elementary definitions}
 
-In subjective logic, a domain is a state space consisting of a set of values which can also be called states, events, outcomes, hypotheses or propositions. Those values are assumed to be exclusive and exhaustive. Let $k = |\dom{X}|$.
+In subjective logic, a domain is a state space consisting of a set of values which can also be called states, events, outcomes, hypotheses or propositions. Those values are assumed to be exclusive and exhaustive. Let $k = |\dom{X}|$ be the cardinality of $\dom{X}$.
 
-Suppose a box have balls that can \red, \green, or \blue. Then, the domain is
+Suppose we have a box have balls that can \red, \green, or \blue. Then, the domain that represents all possible outcomes is
 \begin{equation}
 	\dom{X} = \{\red, \green, \blue\}\text{.}
 \end{equation}
@@ -106,9 +106,14 @@ The hyperdomain of the box is
     \end{array}
 \end{equation}
 
-Let $\kappa = |\hdom{X}| = 2^k -2\text{.}$
+Let $\kappa = |\hdom{X}| = 2^k -2\text{.}$ be the cardinality of $\hdom{R}$.
 
-Every value of the hyperdomain with one value is called \emph{singleton}. Every value with more the one value is called \emph{composite value}. The interpretation of a composite value being TRUE, is that one and only one of the constituent singletons is TRUE. 
+Every value of the hyperdomain with one value is called \emph{singleton}. Every value with more the one value is called \emph{composite value}. The interpretation of a composite value being TRUE, is that one and only one of the constituent singletons is TRUE. The set of all composite values is called \emph{composite set}.
+
+A \emph{hypervariable} $X$ is an random variable that its values from $\hdom{X}$. For example, if a hypervariable takes value from the composite value $\{\blue, \red\} \in \hdom{X}$, it means that we either draw a ball \blue\ or \red.
+
+
+
 
 \subsection{Binomial opinions}
 
