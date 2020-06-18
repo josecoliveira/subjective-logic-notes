@@ -83,6 +83,8 @@ The main object of subjective logic is the \emph{opinion}. There are many equiva
 
 \subsection{Elementary definitions}
 
+\subsubsection{Domain and hyperdomain}
+
 In subjective logic, a domain is a state space consisting of a set of values which can also be called states, events, outcomes, hypotheses or propositions. Those values are assumed to be exclusive and exhaustive. Let $k = |\dom{X}|$ be the cardinality of $\dom{X}$.
 
 Suppose we have a box have balls that can \red, \green, or \blue. Then, the domain that represents all possible outcomes is
@@ -108,9 +110,30 @@ The hyperdomain of the box is
 
 Let $\kappa = |\hdom{X}| = 2^k -2\text{.}$ be the cardinality of $\hdom{R}$.
 
-Every value of the hyperdomain with one value is called \emph{singleton}. Every value with more the one value is called \emph{composite value}. The interpretation of a composite value being TRUE, is that one and only one of the constituent singletons is TRUE. The set of all composite values is called \emph{composite set}.
+Every value of the hyperdomain with one value is called \emph{singleton}. Every value with more the one value is called \emph{composite value}. The interpretation of a composite value being TRUE, is that one and only one of the constituent singletons is TRUE. The set of all composite values $\compset{X}$ is called \emph{composite set}.
 
 A \emph{hypervariable} $X$ is an random variable that its values from $\hdom{X}$. For example, if a hypervariable takes value from the composite value $\{\blue, \red\} \in \hdom{X}$, it means that we either draw a ball \blue\ or \red.
+
+\subsubsection{Belief mass distribution and uncertainty mass}
+
+\emph{Belief mass} can be distributed over a (hyper)domain. Assign belief mass to a singleton value $x \in \dom{X}$ expresses support for $x$ being TRUE. Assign belief mass to a composite value $x \in \compset{X}$ express support for one of the singleton values contained in $x$ being TRUE. Belief mass is sub-additive and is complemented by \emph{uncertainty mass} $\ux{X}$ and it represents
+vacuity of evidence, i.e. the lack of support for the variable $X$ to have any specific value.
+
+\begin{definition}
+	\emph{(Belief Mass Distribution)} Let $\mathbb{X}$ be a domain with corresponding hyperdomain $\mathcal{R}(\mathbb{X})$, and let $X$ be a variable over those domains. A belief mass distribution denote $\mathbf{b}_X$ assigns belief mass to possible values of the variable $X$. In the case of a random variable $X \in \mathbb{X}$, the belief mass distribution applies to domain $\mathbb{X}$, and in the case of a hypervariable $X \in \mathcal{R}(\mathbb{X})$ the belief mass distribution applies to hyperdomain $\mathcal{R}(\mathbb{X})$. This is formally defined as follows.
+	\begin{equation}\label{eq:multinomial-belief-mass-dristribution}
+		\begin{matrix*}[l]
+			\text{Multinomial belief mass distribution:}\ \mathbf{b}_X : \mathbb{X} \rightarrow [0,\ 1], \\
+			\text{with the additivity requirement:}\ u_X + \sum\limits_{x \in \mathbb{X}} \mathbf{b}_X(x) = 1\text{.}
+		\end{matrix*}
+	\end{equation}
+	\begin{equation}\label{eq:hypernomal_belief_mass_distribution}
+		\begin{matrix*}[l]
+			\text{Hypernominal belief mass distribution:}\ \mathbf{b}_X : \mathcal{R}(\mathbb{X}) \rightarrow [0,\ 1], \\
+			\text{with the additivity requirement:}\ u_X + \sum\limits_{x \in \mathcal{R}(\mathbb{X})} \mathbf{b}_X(x) = 1\text{.}
+		\end{matrix*}
+	\end{equation}
+\end{definition}
 
 
 
