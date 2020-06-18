@@ -12,6 +12,7 @@
 \usepackage{grffile}
 \usepackage{float}
 \usepackage{bm}
+\usepackage{cite}
 
 \theoremstyle{definition}
 \newtheorem{question}{Question}[section]
@@ -32,6 +33,19 @@
 
 \allowbreak
 
+\input{../subjectivelogic.tex}
+
+\newcommand{\qm}[1]{``#1''}
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{forestgreen(web)}{rgb}{0.13, 0.55, 0.13}
+\definecolor{green(html/cssgreen)}{rgb}{0.0, 0.5, 0.0}
+
+\newcommand{\red}{\textcolor{red}{red}}
+\newcommand{\green}{\textcolor{green(html/cssgreen)}{green}}
+\newcommand{\blue}{\textcolor{blue}{blue}}
+
 %opening
 \title{Subjective Logic}
 \author{José C. Oliveira}
@@ -42,17 +56,68 @@
 
 \section{Introduction}
 
-\begin{itemize}
-	\item Probabilistic logic.
-	
-	\item Subjective logic as probabilistic logic with uncertainty and subjectivity.
-	
-	\item Main question of this investigation: Can we use Subjective Logic to improve the model?
-	
-	\item Summary.
-\end{itemize}
+One of the major goals of our research is to develop a quantitative logic for reasoning about belief in social networks. Subjective logic is a logic that may has the expressiveness that we look for improve our influence graph and the belief state of an agent.
+
+Subjective logic is an extension of probabilistic logic. In probabilistic logic, we can express the truth value of a proposition by a probability distribution over a domain with disjoint events or states and reason by the axioms of probability. When we have two states of a domain $\dom{X}$ and the probability of a state $x \in \dom{X}$ can be $P(x) = 0$ or $P(x) = 1$, we have binary logic. The expression $x \land y$ is expressed in probabilistic logic as $P(x \land y) = P(x)P(y)$. Probabilistic logic is an extension of binary logic.
+
+Subjective logic extends probabilistic logic by adding \emph{uncertainty} and \emph{subjectivity}. We can't express \emph{\qm{we don't know}} with probabilistic logic by a uniform distribution because it says that we know that the distribution over the domain is uniform. Subjective logic can express that \emph{uncertainty} about the distribution. The \emph{subjectivity} comes from the fact that we can assign an opinion about a proposition to an agent.
+
+By the investigation that we are doing about subjective logic, our main question is: Can we use subjective logic to improve our model of social networks? If yes, how?
+
+This document is an introduction about subjective logic and it will present elementary definition, types of opinions and an overview about computational trust. The main reference of this documents if the book \emph{Subjective Logic: A Formalism for Reasoning Under Uncertainty} by Audun Jøsang.
+
+
+%\begin{itemize}
+%	\item Probabilistic logic.
+%	
+%	\item Subjective logic as probabilistic logic with uncertainty and subjectivity.
+%	
+%	\item Main question of this investigation: Can we use Subjective Logic to improve the model?
+%	
+%	\item Summary.
+%\end{itemize}
 
 \section{Opinion representation}
+
+The main object of subjective logic is the \emph{opinion}. There are many equivalent ways for opinion representation. Here I'm going to present the most used. We represent a opinion by $\opia{A}{X}$, where $A$ is the an agent e $X$ is a random variable or \emph{hypervariable}. This section presents the elementary definitions that form an opinion.
+
+\subsection{Elementary definitions}
+
+In subjective logic, a domain is a state space consisting of a set of values which can also be called states, events, outcomes, hypotheses or propositions. Those values are assumed to be exclusive and exhaustive. Let $k = |\dom{X}|$.
+
+Suppose a box have balls that can \red, \green, or \blue. Then, the domain is
+\begin{equation}
+	\dom{X} = \{\red, \green, \blue\}\text{.}
+\end{equation}
+
+
+\begin{definition}
+	 \emph{(Hyperdomain)} Let $\dom{X}$ be a domain, and let $\powset{X}$ denote the powerset of $\dom{X}$. The powerset contains all subsets of $\dom{X}$, including the empty set $\emptyset$, and the domain $\dom{X}$ itself. The \emph{hyperdomain} denoted $\hdom{X}$ is the reduced powerset of $\dom{X}$, i.e. the powerset excluding the empty-set $\varnothing$ and the domain value $\dom{X}$. The hyperdomain is expressed as
+	\begin{equation}
+		\text{Hyperdomain:}\ \mathcal{R}(\mathbb{X}) = \mathcal{P} \setminus \{\mathbb{X}, \emptyset\}
+	\end{equation}
+\end{definition}
+
+The hyperdomain of the box is
+\begin{equation}
+    \begin{array}{rll}
+        \hdom{\dom{X}} = \{ & \{\red\}, \{\green\}, \{\blue\}, \\
+        & \{\red, \green\}, \{\red, \blue\}, \{\green, \blue\} & \}\text{.}
+    \end{array}
+\end{equation}
+
+Let $\kappa = |\hdom{X}| = 2^k -2\text{.}$
+
+Every value of the hyperdomain with one value is called \emph{singleton}. Every value with more the one value is called \emph{composite value}. The interpretation of a composite value being TRUE, is that one and only one of the constituent singletons is TRUE. 
+
+\subsection{Binomial opinions}
+
+\subsection{Multinomial opinions}
+
+\subsection{Hypernomial opinions}
+
+
+
 
 \begin{itemize}
 	\item Elementary definitions
@@ -102,5 +167,10 @@ When I was reviewing the book, I found something that I may have got wrong about
 		\item If not, can we create an operator that has the same properties as the rational belief update?
 	\end{itemize}
 \end{itemize}
+
+
+\bibliographystyle{plain}
+\bibliography{bibliography.bib}
+
 
 \end{document}
