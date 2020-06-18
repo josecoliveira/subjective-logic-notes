@@ -135,6 +135,37 @@ vacuity of evidence, i.e. the lack of support for the variable $X$ to have any s
 	\end{equation}
 \end{definition}
 
+\subsubsection{Base rate distribution}
+
+Base rate distribution represents a \emph{prior} probability distribution over a domain, i.e., when we are not considering any evidence and we are completely uncertain.
+
+\begin{definition}\label{def:base_rate_distribution}
+	\emph{(Base Rate Distribution)} Let $\mathbb{X}$ be a domain, and let $X$ be a random variable in $\mathbb{X}$. The base rate distribution $\mathbf{a}_X$ assigns base rate probability to possible values of $X \in \mathbb{X}$, and is an additive probability distribution, formally expressed as:
+	\begin{equation}\label{eq:base_rate_distribution}
+		\begin{matrix*}[l]
+			\text{Base rate distribution:}\ \mathbf{a}_X : \mathbb{X} \rightarrow [0,\ 1], \\
+			\text{with the additivity requirement:}\ \sum\limits_{x \in \mathbb{X}} \mathbf{a}_X(x) = 1\text{.}
+		\end{matrix*}
+	\end{equation}
+\end{definition}
+
+\begin{definition}\label{def:base_rate_distribution_over_values_in_a_hyperdomain}
+	\emph{(Base Rate Distribution over Values in a Hyperdomain)} Let $\mathbb{X}$ be a domain with corresponding hyperdomain $\mathcal{R}(\mathbb{X})$, and let $X$ be a variable over those domains. Assume the base rate distribution $\mathbf{a}_X$ over the domain $\mathbb{X}$ according to Definition~\ref{def:base_rate_distribution}. The base rate $\mathbf{a}_X$ for a composite value $x \in \mathcal{R}(\mathbb{X})$ can be computed as follows:
+	\begin{equation}
+		\text{Base rate over composite values:}\ \mathbf{a}_X(x_i) = \sum\limits_{\substack{x_j \in \mathbb{X} \\ x_j \subseteq x_i}} \mathbf{a}_X(x_j),\ \forall x_i \in \mathcal{R}(\mathbb{X})\text{.}
+	\end{equation}
+\end{definition}
+
+\begin{definition}
+	\emph{(Relative Base Rate)} Assume a domain $\mathbb{X}$ of cardinality $k$, and the corresponding hyperdomain $\mathcal{R}(\mathbb{X})$. Let $X$ be a hypervariable over $\mathcal{R}(\mathbb{X})$. Assume that a base rate distribution $\mathbf{a}_X$ is defined over $\mathbb{X}$ according to Definition~\ref{def:base_rate_distribution_over_values_in_a_hyperdomain}. Then the base rate of a value $x$ relative to a value $v_i$ is expressed as the relative base rate $\mathbf{a}_X(x|x_i)$ defined below.
+	\begin{equation}
+		\mathbf{a}_X(x|x_i) = \dfrac{\mathbf{a}_X(x \cap x_i)}{\mathbf{a}_X(x_i)}\text{, } \forall x, x_i \in \mathcal{R}(\mathbb{X}) \text{, where}\ \mathbf{a}_X(x_i) \neq 0\text{.}
+	\end{equation}
+
+	In the case when $\mathbf{a}_X(x_i) = 0$, then $\mathbf{a}_X(x|x_i) = 0$. Alternatively it can simply be assumed that $a_X(x_i) > 0$, for every $x_i \in \mathbb{X}$, meaning that everything we include in the domain has a non-zero base rate of occurrence in general.
+\end{definition}
+
+Defining base rate distribution over a domain depends of the background of the given situation. For our box, the base rate distribution is uniform. Now suppose that we have a disease that happens in $10\%$ of the population. Let $\dom{Y} = \{y, \overline{y}\}$ be the domain representing the occurrence or not of the disease on a person, respectively. Let $Y$ a random variable over $\dom{Y}$. The base rate distribution for a untested person for the disease is $\ad{Y} = (0.9, 0.1)$.
 
 
 
@@ -145,28 +176,26 @@ vacuity of evidence, i.e. the lack of support for the variable $X$ to have any s
 \subsection{Hypernomial opinions}
 
 
-
-
-\begin{itemize}
-	\item Elementary definitions
-	
-	\begin{itemize}
-		\item Domain and Hyperdomain
-		
-		\item Base-rate distribution (prior)
-		
-		\item Belief mass distribution and uncertainty
-		
-		\item Projected probability distribution (posterior)
-	\end{itemize}
-	
-	\item Binomial opinion and example
-	
-	\item Multinomial option and example
-	
-	\item Hypernomial opinion and example
-	
-\end{itemize}
+%\begin{itemize}
+%	\item Elementary definitions
+%	
+%	\begin{itemize}
+%		\item Domain and Hyperdomain
+%		
+%		\item Base-rate distribution (prior)
+%		
+%		\item Belief mass distribution and uncertainty
+%		
+%		\item Projected probability distribution (posterior)
+%	\end{itemize}
+%	
+%	\item Binomial opinion and example
+%	
+%	\item Multinomial option and example
+%	
+%	\item Hypernomial opinion and example
+%	
+%\end{itemize}
 
 \section{Computational trust}
 
