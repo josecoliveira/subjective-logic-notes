@@ -60,11 +60,11 @@ One of the major goals of our research is to develop a quantitative logic for re
 
 Subjective logic is an extension of probabilistic logic. In probabilistic logic, we can express the truth value of a proposition by a probability distribution over a domain with disjoint events or states and reason by the axioms of probability. When we have two states of a domain $\dom{X}$ and the probability of a state $x \in \dom{X}$ can be $P(x) = 0$ or $P(x) = 1$, we have binary logic. The expression $x \land y$ is expressed in probabilistic logic as $P(x \land y) = P(x)P(y)$. Probabilistic logic is an extension of binary logic.
 
-Subjective logic extends probabilistic logic by adding \emph{uncertainty} and \emph{subjectivity}. We can't express \emph{\qm{we don't know}} with probabilistic logic by an uniform distribution because it says that we know that the distribution over the domain is uniform. Subjective logic can express that \emph{uncertainty} about the distribution. The \emph{subjectivity} comes from the fact that we can assign an opinion about a proposition to an agent.
+Subjective logic extends probabilistic logic by adding \emph{uncertainty} and \emph{subjectivity}. We can't express \emph{\qm{we don't know}} with probabilistic logic by a uniform distribution because it says that we know that the distribution over the domain is uniform. Subjective logic can express that \emph{uncertainty} about the distribution. The \emph{subjectivity} comes from the fact that we can assign an opinion about a proposition to an agent.
 
 By the investigation we are doing about subjective logic, our main question is: Can we use subjective logic to improve our model of social networks? If yes, how?
 
-This document is an introduction about subjective logic and it will present elementary definitions, types of opinions and an overview about computational trust. The main reference of this documents if the book \emph{Subjective Logic: A Formalism for Reasoning Under Uncertainty} by Audun Jøsang.
+This document is an introduction about subjective logic and it will present elementary definitions, types of opinions and an overview about computational trust. The main reference of this document is the book \emph{Subjective Logic: A Formalism for Reasoning Under Uncertainty} by Audun Jøsang.
 
 
 %\begin{itemize}
@@ -79,7 +79,7 @@ This document is an introduction about subjective logic and it will present elem
 
 \section{Opinion representation}
 
-The main object of subjective logic is the \emph{opinion}. There are many equivalent ways for opinion representation. Here I'm going to present the most used. We represent an opinion by $\opia{A}{X}$, where $A$ is the an agent and $X$ is a random variable or \emph{hypervariable}. This section presents the elementary definitions that compose an opinion.
+The main object of subjective logic is the \emph{opinion}, and there are many equivalent ways for opinion representation. Here I'm going to present the most used one. We represent an opinion by $\opia{A}{X}$, where $A$ is the an agent and $X$ is a random variable or a \emph{hypervariable}. This section presents the elementary definitions that compose an opinion.
 
 \subsection{Elementary definitions}
 
@@ -165,11 +165,44 @@ Base rate distribution represents a \emph{prior} probability distribution over a
 	In the case when $\mathbf{a}_X(x_i) = 0$, then $\mathbf{a}_X(x|x_i) = 0$. Alternatively it can simply be assumed that $a_X(x_i) > 0$, for every $x_i \in \mathbb{X}$, meaning that everything we include in the domain has a non-zero base rate of occurrence in general.
 \end{definition}
 
-Defining base rate distribution over a domain depends of the background of the given situation. For our box, the base rate distribution is uniform. Now suppose that we have a disease that happens in $10\%$ of the population. Let $\dom{Y} = \{y, \overline{y}\}$ be the domain representing the occurrence or not of the disease on a person, respectively. Let $Y$ a random variable over $\dom{Y}$. The base rate distribution for a untested person for the disease is $\ad{Y} = (0.9, 0.1)$.
-
-
+Defining base rate distribution over a domain depends of the background of the given situation. For our box, the base rate distribution is uniform. Now suppose that we have a disease that happens in $10\%$ of the population. Let $\dom{Y} = \{y, \overline{y}\}$ be the domain representing the occurrence or not of the disease on a person. Let $Y$ be a random variable over $\dom{Y}$. The base rate distribution for a untested person for the disease is $\ad{Y} = (0.05, 0.95)$.
 
 \subsection{Binomial opinions}
+
+A binary opinion states about a domain with $k = 2$, and any multinomial opinion, with $k > 2$, can be considered binary when seen as a binary partition consisting of a proper subset $x \subset \dom{X}$ and its complement $\overline{x}$.
+
+\begin{definition}
+	\emph{Binomial Opinion} Let $\mathbb{X} = \{x, \overline{x}\}$ be a binary domain with binomial random variable $X \in \mathbb{X}$. A binomial opinion about the truth/presence of value $x$ is the ordered quadruplet $\omega_x = \left(b_x, d_x, u_x, a_x\right)$, where the additivity requirement
+	\begin{equation}
+		b_x + d_x + u_x = 1
+	\end{equation}
+	is satisfied, and where the respective parameters are defined as
+	\begin{itemize}
+		\item $b_x$: \emph{belief mass} in support of $x$ being TRUE (i.e. $X = x$),
+		\item $d_x$: \emph{disbelief mass} in support of $x$ being FALSE (i.e. $X = \overline{x}$)
+		\item $u_x$: \emph{uncertainty mass} representing the vacuity of evidence,
+		\item $a_x$: \emph{base rate}, i.e. prior probability of $x$ without any evidence.
+	\end{itemize}
+\end{definition}
+
+%Let $\dom{Y} = \{y, \overline{y}\}$ be the domain representing the occurrence or not of the disease on a person, like our previous example. Let $Y$ be a random variable over $\dom{Y}$. Let the base rate for a untested person have the disease be $0.9$. Now, suppose the a test indicated
+
+Let $\dom{Z} = \{\red, \green\}$ be a domain the represents the outcomes of drawing a ball from a box. Let $Z$ be a random variable over $\dom{Y}$. Let the base rate be uniform. Then, the opinion for drawing a \red\ ball (and \green\ ball too) is:
+\begin{equation}
+	\opi{Z} = (0, 0, 1, 0.5)
+\end{equation}
+
+Now, I told you that there is 10 balls in the box, 4 of then is \red\ and non is know about the other 6. The opinion for drawing a \red\ ball is:
+\begin{equation}
+	\opi{Z} = (0.4, 0, 0.6, 0.5)
+\end{equation}
+
+The \emph{projected probability} is a (\emph{posterior}) probability distribution over the domain that considers the base rate distribution (\emph{prior}), the belief mass distribution (evidence) and the uncertainty mass (lack of evidence). The projected probability of a binomial opinion is:
+\begin{equation}
+	P(x) = b_x + a_x u_x
+\end{equation}
+
+Note that the more the opinion relies on uncertainty, the more weight the base rate will have on the projected probability.
 
 \subsection{Multinomial opinions}
 
@@ -226,8 +259,8 @@ When I was reviewing the book, I found something that I may have got wrong about
 \end{itemize}
 
 
-\bibliographystyle{plain}
-\bibliography{bibliography.bib}
+%\bibliographystyle{plain}
+%\bibliography{bibliography.bib}
 
 
 \end{document}
