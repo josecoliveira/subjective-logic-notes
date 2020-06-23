@@ -187,6 +187,13 @@ A binary opinion states about a domain with $k = 2$, and any multinomial opinion
 
 %Let $\dom{Y} = \{y, \overline{y}\}$ be the domain representing the occurrence or not of the disease on a person, like our previous example. Let $Y$ be a random variable over $\dom{Y}$. Let the base rate for a untested person have the disease be $0.9$. Now, suppose the a test indicated
 
+The \emph{projected probability} is a (\emph{posterior}) probability distribution over the domain that considers the base rate distribution (\emph{prior}), the belief mass distribution (evidence) and the uncertainty mass (lack of evidence). The projected probability of a binomial opinion is:
+\begin{equation}
+	P(x) = b_x + a_x u_x
+\end{equation}
+
+Note that the more the opinion relies on uncertainty, the more weight the base rate will have on the projected probability.
+
 Let $\dom{Z} = \{\red, \green\}$ be a domain the represents the outcomes of drawing a ball from a box. Let $Z$ be a random variable over $\dom{Y}$. Let the base rate be uniform. Then, the opinion for drawing a \red\ ball (and \green\ ball too) is:
 \begin{equation}
 	\opi{Z} = (0, 0, 1, 0.5)
@@ -197,9 +204,12 @@ Now, I told you that there is 10 balls in the box, 4 of then is \red\ and non is
 	\opi{Z} = (0.4, 0, 0.6, 0.5)
 \end{equation}
 
-The \emph{projected probability} is a (\emph{posterior}) probability distribution over the domain that considers the base rate distribution (\emph{prior}), the belief mass distribution (evidence) and the uncertainty mass (lack of evidence). The projected probability of a binomial opinion is:
+The projected probability distribution is:
 \begin{equation}
-	P(x) = b_x + a_x u_x
+	\begin{array}{rrrl}
+		P(\red) & = & 0.4 + 0.5 \cdot 0.6 & = 0.7 \\
+		P(\green) & = & 0 + 0.6 \cdot 0.5 & = 0.3
+	\end{array}
 \end{equation}
 
 Note that the more the opinion relies on uncertainty, the more weight the base rate will have on the projected probability.
