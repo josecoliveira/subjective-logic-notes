@@ -316,12 +316,6 @@ The projected probability distribution is:
 %	\end{array}
 %\end{equation}
 
-
-
-
-
-
-
 %\begin{itemize}
 %	\item Elementary definitions
 %	
@@ -343,17 +337,47 @@ The projected probability distribution is:
 %	
 %\end{itemize}
 
-\section{Computational trust}
+\section{Trust opinion}
 
-This is an overview. Nothing formal. (Maybe it will be if I have time.)
+\subsection{Notion of Trust}
 
-\begin{itemize}
-	\item Definition of trust. (Influence?)
-	
-	\item Trust transitivity. (Update function?)
-	
-	\item Belief fusion. (Overall update function?)
-\end{itemize}
+Trust is a directional relationship between two parties that can be called \emph{trustor} and \emph{trustee}. A trust relationship has a \emph{scope}, meaning that it applies to a specific purpose
+or domain of action, such as \qm{being authentic} in the case of an agent’s trust in a \emph{cryptographic} key or \qm{providing reliable information} in the case of a person’s trust
+in the correctness of an entry in Wikipedia.
+
+There are two main different interpretations of trust. The one we are using were is the reliability trust defined below.
+
+\begin{definition}
+	\emph{(Reliability trust)} Reliability trust is the subjective belief with which an entity, A, expects that another entity, B, performs a given action on which A’s welfare depends
+\end{definition}
+
+For the purposes of the research about group polarization in social networks, we are working in \emph{reliability trust} because we are focusing in the only in the influence of an agent over another. The other main interpretation is \emph{decision trust} and it considers with utility, trustor's risk attitude and environmental factors.
+
+This model of trust is said to be \emph{computational} because we are reasoning about trust with a formal model. Subjective logic's trust model is not the only one in the literature. Also, there is no single correct formalism about trust because is not possible to validate with real people. In his book, Audun Jøsang states that his model about computational trust in subjective logic is specifically addressed to build systems.
+
+\subsection{Definition}
+
+Trust is a binomial opinion that an agent has about another. Let $\dom{T} = \{t, \overline{t}\}$ be a domain and let $T$ be a random variable over $T$. Let $B$ be an agent. A general interpretation for $\dom{T}$ about the action of the agent $B$ can be:
+\begin{equation}
+	\text{Trust domain } \dom{T}: \left\{
+	\begin{array}{l}
+	t: \text{\qm{\qm{Agent $B$ does perform the action as expected}}}\\
+	\overline{t}: \text{\qm{\qm{Agent $B$ does not perform the action as expected}}}
+	\end{array}
+	\right.
+\end{equation}
+
+Let $A$ be an agent. The opinion that $A$ have about $B$ is denoted by $\opia{A}{t_B}$. For a more directed notation, we assume that $\opia{A}{t_B} \equiv \opia{A}{B}$. If agent $A$ has absolute trust in $B$, then $\opia{A}{B} = (1, 0, 0, a_B)$, for some base rate $a_B$.
+
+%This is an overview. Nothing formal. (Maybe it will be if I have time.)
+%
+%\begin{itemize}
+%	\item Definition of trust. (Influence?)
+%	
+%	\item Trust transitivity. (Update function?)
+%	
+%	\item Belief fusion. (Overall update function?)
+%\end{itemize}
 
 \section{Next questions}
 
