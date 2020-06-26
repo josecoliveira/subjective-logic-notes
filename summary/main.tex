@@ -384,7 +384,10 @@ Lets illustrate trust transitivity with an example. Suppose that Alice's car is 
 
 The trust that Alice has about Bob is called \emph{referral trust} and is denoted as $[A; B]$. The trust that Bob has about Erik is called \emph{functional trust} and is denoted as $[B, C]$. The trust that Alice as about Erik through Bob is called \emph{derived functional trust} as is denoted as:
 \begin{equation}
-	[A, E] = [A; B] : [B, E] = [A; B, E] \text{.}
+	\begin{array}{rll}
+		[A, E] & = [A; B] : [B, E] \\
+		& = [A; B, E] \text{.} & \text{(Compact notation)}
+	\end{array}
 \end{equation}
 
 Let $\opia{A}{B}$ be the trust opinion that Alice has about Bob, $\opia{B}{E}$ be the trust opinion that Bob has about Erik, and $\opia{[A;B]}{E}$ be the trust opinion that Alice has about Erik through Bob. We obtain the opinion $\opia{[A;B]}{E}$ by the operator trust discount and is defined below.
@@ -395,7 +398,7 @@ Let $\opia{A}{B}$ be the trust opinion that Alice has about Bob, $\opia{B}{E}$ b
 	\opia{[A;B]}{X} = \opia{A}{B} \otimes \opia{B}{X} \text{.}
 \end{equation}
 
-The trust-discounting operator combines agent $A$’s referral trust opinion about agent $B$, denoted $\opia{A}{B}$, to discount $B$’s opinion about variable $X$, denoted $\opia{B}{X}$, to produce $A$’s derived opinion about $X$, denoted $\opia{[A;B]}{[X]}$. The parameters of the derived opinion $\opia{[A;B]}{X}$ are defined in the following way:
+The trust-discounting operator combines agent $A$’s referral trust opinion about agent $B$, denoted $\opia{A}{B}$, to discount $B$’s opinion about variable $X$, denoted $\opia{B}{X}$, to produce $A$’s derived opinion about $X$, denoted $\opia{[A;B]}{X}$. The parameters of the derived opinion $\opia{[A;B]}{X}$ are defined in the following way:
 \begin{equation}
 	\opia{[A;B]}{X} = \left\{
 	\begin{array}{ll}
@@ -419,6 +422,28 @@ Let $\dom{X}$ be the domain of all restaurants in town. Let $X$ be the variable 
 	\caption{Trust discounting of opinions}
 \end{figure}
 
+\subsection{Belief fusion}
+
+Suppose that Alice now wants the opinion of Clarie about the restaurants in town. She has different trust opinions about Bob and Clarie and she want to consider both. Belief fusion $\oplus$ is the operator that solves that issue. I do not know the details about the operator yet, because there is a whole chapter for it. Here, I explain how it works with trust opinions.
+
+We use the symbol $\diamond$ to denote a fusion between two relations:
+\begin{equation}
+	\begin{array}{rll}
+		[A,E] & = ([A; B] : [B, X]) \diamond([A; C] : [C, X]) \\
+		& = [A; B, C] \diamond [A; C, X] \text{.} & \text{(Compact notation)} 
+	\end{array}
+\end{equation}
+
+The opinion that Alice has about X through the Bob and Clarie is:
+\begin{equation}
+	\opia{[A; B] \diamond [A; C]}{X} = (\opia{A}{B} \otimes \opia{B}{X}) \oplus (\opia{A}{C} \otimes \opia{C}{X})
+\end{equation}
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.32]{images/fusion-of-trust-discounted-opinions.png}
+	\caption{Fusion of trust-discounted opinions}
+\end{figure}
 
 %This is an overview. Nothing formal. (Maybe it will be if I have time.)
 %
