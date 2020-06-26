@@ -60,15 +60,15 @@
 
 \section{Introduction}
 
-One of the major goals of our research is to develop a quantitative logic for reasoning about belief in social networks. Subjective logic is a logic that may has the expressiveness that we look for improve our influence graph and the belief state of an agent.
+One of the major goals of our research is to develop a quantitative logic for reasoning about belief in social networks. Subjective logic is a logic that may have the expressiveness that we look for improve our influence graph and the belief state of an agent.
 
-Subjective logic is an extension of probabilistic logic. In probabilistic logic, we can express the truth value of a proposition by a probability distribution over a domain with disjoint events or states and reason by the axioms of probability. When we have two states of a domain $\dom{X}$ and the probability of a state $x \in \dom{X}$ can be $P(x) = 0$ or $P(x) = 1$, we have binary logic. The expression $x \land y$ is expressed in probabilistic logic as $P(x \land y) = P(x)P(y)$. Probabilistic logic is an extension of binary logic.
+Subjective logic extends probabilistic logic. In probabilistic logic, we can express the truth value of a proposition by a probability distribution over a domain with disjoint events or states and reason by the axioms of probability. When we have two states of a domain $\dom{X}$ and the probability of a state $x \in \dom{X}$ can be $P(x) = 0$ or $P(x) = 1$, we have binary logic. The expression $x \land y$ is expressed in probabilistic logic as $P(x \land y) = P(x)P(y)$. Probabilistic logic extends binary logic.
 
 Subjective logic extends probabilistic logic by adding \emph{uncertainty} and \emph{subjectivity}. We can't express \emph{\qm{we don't know}} with probabilistic logic by a uniform distribution because it says that we know that the distribution over the domain is uniform. Subjective logic can express that \emph{uncertainty} about the distribution. The \emph{subjectivity} comes from the fact that we can assign an opinion about a proposition to an agent.
 
 By the investigation we are doing about subjective logic, our main question is: Can we use subjective logic to improve our model of social networks? If yes, how?
 
-This document is an introduction about subjective logic and it will present elementary definitions, types of opinions and an overview about computational trust. The main reference of this document is the book \emph{Subjective Logic: A Formalism for Reasoning Under Uncertainty} by Audun Jøsang.
+This document is an introduction about subjective logic and it will present elementary definitions, the definition of opinion, and trust opinions. The main reference of this document is the book \emph{Subjective Logic: A Formalism for Reasoning Under Uncertainty} by Audun Jøsang.
 
 
 %\begin{itemize}
@@ -83,7 +83,7 @@ This document is an introduction about subjective logic and it will present elem
 
 \section{Opinion representation}
 
-The main object of subjective logic is the \emph{opinion}, and there are many equivalent ways for opinion representation. Here I'm going to present the most used one. We represent an opinion by $\opia{A}{X}$, where $A$ is the an agent and $X$ is a random variable or a \emph{hypervariable}. This section presents the elementary definitions that compose an opinion.
+The main object of subjective logic is the \emph{opinion}, and there are many equivalent ways for opinion representation. Here I will present the most used one. We represent an opinion by $\opia{A}{X}$, where $A$ is an agent and $X$ is a random variable or a \emph{hypervariable}. This section presents the elementary definitions that compose an opinion.
 
 \subsection{Elementary definitions}
 
@@ -91,7 +91,7 @@ The main object of subjective logic is the \emph{opinion}, and there are many eq
 
 In subjective logic, a domain is a state space consisting of a set of values which can also be called states, events, outcomes, hypotheses or propositions. Those values are assumed to be exclusive and exhaustive. Let $k = |\dom{X}|$ be the cardinality of $\dom{X}$.
 
-Suppose we have a box have balls that can \red, \green, or \blue. Then, the domain that represents all possible outcomes is
+Suppose we have a box that has balls that can \red, \green, or \blue. Then the domain that represents all the outcomes is
 \begin{equation}
 	\dom{X} = \{\red, \green, \blue\}\text{.}
 \end{equation}
@@ -114,14 +114,13 @@ The hyperdomain of the box is
 
 Let $\kappa = |\hdom{X}| = 2^k -2\text{.}$ be the cardinality of $\hdom{R}$.
 
-Every value of the hyperdomain with one value is called \emph{singleton}. Every value with more the one value is called \emph{composite value}. The interpretation of a composite value being TRUE, is that one and only one of the constituent singletons is TRUE. The set of all composite values $\compset{X}$ is called \emph{composite set}.
+Every value of the hyperdomain with one value is called \emph{singleton}. Every value with more than one value is called \emph{composite value}. The interpretation of a composite value being TRUE, is that one and only one of the constituent singletons is TRUE. The set of all composite values $\compset{X}$ is called \emph{composite set}.
 
-A \emph{hypervariable} $X$ is an random variable that its values from $\hdom{X}$. For example, if a hypervariable takes value from the composite value $\{\blue, \red\} \in \hdom{X}$, it means that we either draw a ball \blue\ or \red.
+A \emph{hypervariable} $X$ is an random variable that takes its values from $\hdom{X}$. For example, if a hypervariable takes its values from the composite value $\{\blue, \red\} \in \hdom{X}$, it means that we either draw a ball \blue\ or \red.
 
 \subsubsection{Belief mass distribution and uncertainty mass}
 
-\emph{Belief mass} can be distributed over a (hyper)domain. Assign belief mass to a singleton value $x \in \dom{X}$ expresses support for $x$ being TRUE. Assign belief mass to a composite value $x \in \compset{X}$ express support for one of the singleton values contained in $x$ being TRUE. Belief mass is sub-additive and is complemented by \emph{uncertainty mass} $\ux{X}$ and it represents
-vacuity of evidence, i.e. the lack of support for the variable $X$ to have any specific value.
+\emph{Belief mass} is distributed over a (hyper)domain. Assign belief mass to a singleton value $x \in \dom{X}$ expresses support for $x$ being TRUE. Assign belief mass to a composite value $x \in \compset{X}$ express support for one of the singleton values in $x$ being TRUE. Belief mass is sub-additive and is complemented by \emph{uncertainty mass} $\ux{X}$ and it represents vacuity of evidence, i.e. the lack of support for the variable $X$ to have any specific value.
 
 \begin{definition}
 	\emph{(Belief Mass Distribution)} Let $\mathbb{X}$ be a domain with corresponding hyperdomain $\mathcal{R}(\mathbb{X})$, and let $X$ be a variable over those domains. A belief mass distribution denote $\mathbf{b}_X$ assigns belief mass to possible values of the variable $X$. In the case of a random variable $X \in \mathbb{X}$, the belief mass distribution applies to domain $\mathbb{X}$, and in the case of a hypervariable $X \in \mathcal{R}(\mathbb{X})$ the belief mass distribution applies to hyperdomain $\mathcal{R}(\mathbb{X})$. This is formally defined as follows.
@@ -169,7 +168,7 @@ Base rate distribution represents a \emph{prior} probability distribution over a
 	In the case when $\mathbf{a}_X(x_i) = 0$, then $\mathbf{a}_X(x|x_i) = 0$. Alternatively it can simply be assumed that $a_X(x_i) > 0$, for every $x_i \in \mathbb{X}$, meaning that everything we include in the domain has a non-zero base rate of occurrence in general.
 \end{definition}
 
-Defining base rate distribution over a domain depends of the background of the given situation. For our box, the base rate distribution is uniform. Now suppose that we have a disease that happens in $10\%$ of the population. Let $\dom{Y} = \{y, \overline{y}\}$ be the domain representing the occurrence or not of the disease on a person. Let $Y$ be a random variable over $\dom{Y}$. The base rate distribution for a untested person for the disease is $\ad{Y} = (0.05, 0.95)$.
+Defining base rate distribution over a domain depends on the background of the given situation. For our box, the base rate distribution is uniform. Now suppose that we have a disease that happens in $5\%$ of the population. Let $\dom{Y} = \{y, \overline{y}\}$ be the domain representing the occurrence or not of the disease on a person. Let $Y$ be a random variable over $\dom{Y}$. The base rate distribution for an untested person for the disease is $\ad{Y} = (0.05, 0.95)$.
 
 \subsubsection{Projected probability}
 
@@ -202,12 +201,12 @@ The projected probability distribution of binomial opinions is defined by:
 
 Note that the more the opinion relies on uncertainty, the more weight the base rate will have on the projected probability.
 
-Let $\dom{Z} = \{\red, \green\}$ be a domain the represents the outcomes of drawing a ball from a box. Let $Z$ be a random variable over $\dom{Y}$. Let the base rate be uniform. Then, the opinion for drawing a \red\ ball (and \green\ ball too) is:
+Let $\dom{Z} = \{\red, \green\}$ be a domain the represents the outcomes of drawing a ball from a box. Let $Z$ be a random variable over $\dom{Y}$. Let the base rate be uniform. Then the opinion for drawing a \red\ ball (and \green\ ball too) is:
 \begin{equation}
 	\opi{Z} = (0, 0, 1, 0.5) \text{.}
 \end{equation}
 
-Now, I told you that there is 10 balls in the box, 4 of then is \red\ and non is know about the other 6. The opinion for drawing a \red\ ball is:
+Now, I told you that there are 10 balls in the box, 4 of them is \red\, and none is known about the other 6. The opinion for drawing a \red\ ball is:
 \begin{equation}
 	\opi{Z} = (0.4, 0, 0.6, 0.5) \text{.}
 \end{equation}
@@ -222,7 +221,7 @@ The projected probability distribution is:
 
 \subsection{Multinomial opinions}
 
-Multinomial opinions represent the generalisation of binomial opinions. Multinomial opinions apply to situations where a random variable $X$ over $\dom{X}$ can take one of multiple different values.
+Multinomial opinions represent the generalization of binomial opinions. Multinomial opinions apply to situations where a random variable $X$ over $\dom{X}$ can take one of the multiple different values.
 
 \begin{definition}
 	\emph{(Multinomial Opinion)} Let $\mathbb{X}$ be a domain larger than binary, i.e. so that $k = |X| > 2$. Let $X$ be a random variable in $\mathbb{X}$. A multinomial opinion over the random variable $X$ is the ordered triplet $\omega_X = (\mathbf{b}_X, u_X , \mathbf{a}_X)$ where
@@ -239,7 +238,7 @@ The projected probability distribution of multinomial opinions is defined by:
 	\mathbf{P}_X(x) = \mathbf{b}_X(x) + \mathbf{a}_X(x) u_X,\ \forall x \in \mathbb{X}\text{.}
 \end{equation}
 
-Let $\dom{X} = \{\red, \green, \blue\}$ be the domain representing the outcomes of drawing a ball from a box. Let $X$ be a random variable over $\dom{X}$. Let the base rate distribution be uniform. Now, suppose that we know that there is $3$ \red\ balls, $2$ \blue\ balls and we know nothing about the other 5 balls. Then, the opinion is:
+Let $\dom{X} = \{\red, \green, \blue\}$ be the domain representing the outcomes of drawing a ball from a box. Let $X$ be a random variable over $\dom{X}$. Let the base rate distribution be uniform. Now, suppose that we know that there is $3$ \red\ balls, $2$ \blue\ balls and we know nothing about the other 5 balls. Then the opinion is:
 \begin{equation}
 	\opi{X} =
 	\left(\begin{array}{lllll}
@@ -262,7 +261,7 @@ The projected probability distribution is:
 
 \subsection{Hypernomial opinions}
 
-Hyper-opinions represents the generalisation of multinomial opinions. In the case of a domain $\dom{X}$ with hyperdomain $\hdom{X}$, it is possible to obtain evidence for a composite value $x \in \hdom{X}$, which translates into assigning belief mass to that composite value.
+Hyper-opinions represent the generalization of multinomial opinions. In the case of a domain $\dom{X}$ with hyperdomain $\hdom{X}$, it is possible to get evidence for a composite value $x \in \hdom{X}$, which translates into assigning belief mass to that composite value.
 
 \begin{definition}
     \emph{(Hyper-opinion)} Let $\mathbb{X}$ be a domain of cardinality $k > 2$, with corresponding hyperdomain $\mathcal{R}(\mathbb{X})$. Let $X$ be a hypervariable in $\mathcal{R}(\mathbb{X})$. A hyper-opinion on the hypervariable $X$ is the ordered triplet $\omega_X =(\mathbf{b}_X, u_X , \mathbf{a}_X)$ where
@@ -287,7 +286,7 @@ Let $\dom{X} = \{\red, \green, \blue\}$ be the domain representing the outcomes 
     \end{array}
 \end{equation}
 
-Let $X$ be a hypervariable over $\hdom{X}$. Let the base rate distribution be uniform. Now, suppose that we know that the box have one \red\ ball, $2$ \blue\ balls, and $3$ balls \green\ or \blue. We know nothing about $4$ balls. Then, the hyperopinion is:
+Let $X$ be a hypervariable over $\hdom{X}$. Let the base rate distribution be uniform. Now, suppose that we know that the box has one \red\ ball, $2$ \blue\ balls, and $3$ balls \green\ or \blue. We know nothing about $4$ balls. Then the hyperopinion is:
 \begin{equation}
     \opi{X} = \left(
         \begin{array}{lllll}
@@ -344,17 +343,15 @@ The projected probability distribution is:
 
 \subsection{Notion of Trust}
 
-Trust is a directional relationship between two parties that can be called \emph{trustor} and \emph{trustee}. A trust relationship has a \emph{scope}, meaning that it applies to a specific purpose
-or domain of action, such as \qm{being authentic} in the case of an agent’s trust in a \emph{cryptographic} key or \qm{providing reliable information} in the case of a person’s trust
-in the correctness of an entry in Wikipedia.
+Trust is a directional relationship between two parties that can be called \emph{trustor} and \emph{trustee}. A trust relationship has a \emph{scope}, meaning that it applies to a specific purpose or domain of action, such as \qm{being authentic} in the case of an agent’s trust in a cryptographic key or \qm{providing reliable information} in the case of a person’s trust in the correctness of an entry in Wikipedia.
 
-There are two main different interpretations of trust. The one we are using were is the reliability trust defined below.
+There are two main different interpretations of trust. The one we are using were is the reliability trust, and it's defined below.
 
 \begin{definition}
 	\emph{(Reliability trust)} Reliability trust is the subjective belief with which an entity, A, expects that another entity, B, performs a given action on which A’s welfare depends
 \end{definition}
 
-For the purposes of the research about group polarization in social networks, we are working in \emph{reliability trust} because we are focusing in the only in the influence of an agent over another. The other main interpretation is \emph{decision trust} and it considers with utility, trustor's risk attitude and environmental factors.
+For the research about group polarization in social networks, we are working in \emph{reliability trust} because we are focusing in the only in the influence of an agent over another. The other main interpretation is \emph{decision trust}, and it considers with utility, trustor's risk attitude and environmental factors.
 
 This model of trust is said to be \emph{computational} because we are reasoning about trust with a formal model. Subjective logic's trust model is not the only one in the literature. Also, there is no single correct formalism about trust because is not possible to validate with real people. In his book, Audun Jøsang states that his model about computational trust in subjective logic is specifically addressed to build systems.
 
@@ -374,7 +371,7 @@ Let $A$ be an agent. The opinion that $A$ have about $B$ is denoted by $\opia{A}
 
 \subsection{Trust transitivity}
 
-Lets illustrate trust transitivity with an example. Suppose that Alice's car is broken and she doesn't know any car mechanic. Alice borrow Bob's car for one day a she realizes that his car is well maintained. Then, she trusts in Bob in matters of car maintenance. In order to have a well maintained car, Bob trusts the car mechanic Erik and asks his services. Then, Alice has a \emph{indirect} trust in Erik in matters of car maintenance.
+Let's illustrate trust transitivity with an example. Suppose that Alice's car is broken, and she doesn't know any car mechanic. Alice borrows Bob's car for one day and she realizes that his car is well maintained. Then she trusts in Bob in matters of car maintenance. To have a well-maintained car, Bob trusts the car mechanic Erik and asks for his services. Then Alice has an \emph{indirect} trust in Erik in matters of car maintenance.
 
 \begin{figure}[htb]
 	\centering
@@ -382,7 +379,7 @@ Lets illustrate trust transitivity with an example. Suppose that Alice's car is 
 	\caption{Transitive trust principle}
 \end{figure}
 
-The trust that Alice has about Bob is called \emph{referral trust} and is denoted as $[A; B]$. The trust that Bob has about Erik is called \emph{functional trust} and is denoted as $[B, C]$. The trust that Alice as about Erik through Bob is called \emph{derived functional trust} as is denoted as:
+The trust that Alice has about Bob is called \emph{referral trust} and is denoted as $[A; B]$. The trust that Bob has about Erik is called \emph{functional trust} and is denoted as $[B, C]$. The trust that Alice has about Erik through Bob is called \emph{derived functional trust} as is denoted as:
 \begin{equation}
 	\begin{array}{rll}
 		[A, E] & = [A; B] : [B, E] \\
@@ -410,11 +407,11 @@ The trust-discounting operator combines agent $A$’s referral trust opinion abo
 \end{equation}
 \end{definition}
 
-In particular, when A fully trusts B, the opinion that A has about X will be completely accepted for A. Also, when A fully distrusts B, then opinion that A has about X will be completely rejected for A and A will have an opinion completely uncertain.
+In particular, when $A$ fully trusts $B$, the opinion that $A$ has about $X$ will be completely accepted for $A$. Also, when $A$ fully distrusts $B$, then the opinion that $A$ has about $X$ will be completely rejected for $A$ and $A$ will have an opinion completely uncertain.
 
-The previous example considers the relationship $[A, E]$ as a functional trust relationship. We also can consider as a belief relationship. Suppose now that Alice need to go to a restaurant, but she doesn't know any restaurant at the town. Alice knows that Bob has good taste for restaurants and as him an advice. Bob tells Alice some restaurants to go and his favorites.
+The previous example considers the relationship $[A, E]$ as a functional trust relationship. We also can consider as a belief relationship. Suppose now that Alice needs to go to a restaurant, but she doesn't know any restaurant in the town. Alice knows that Bob has good taste for restaurants and she asks him advice. Bob tells Alice about some restaurants to go to and his favorites.
 
-Let $\dom{X}$ be the domain of all restaurants in town. Let $X$ be the variable over $\dom{X}$ that describes the best restaurant. The relationship $[A, X]$ is not about trust but about belief. Bob acts as a \emph{source information} for Alice about $X$. Trust discounting also applies here.
+Let $\dom{X}$ be the domain of all restaurants in town. Let $X$ be the variable over $\dom{X}$ that describes the best restaurant. The relationship $[A, X]$ is not about trust but belief. Bob acts as a \emph{source information} for Alice about $X$. Trust discounting also applies here.
 
 \begin{figure}[htb]
 	\centering
@@ -424,7 +421,7 @@ Let $\dom{X}$ be the domain of all restaurants in town. Let $X$ be the variable 
 
 \subsection{Trust fusion}
 
-Suppose that Alice now wants the opinion of Clarie about the restaurants in town. She has different trust opinions about Bob and Clarie and she want to consider both. Belief fusion $\oplus$ is the operator that solves that issue. I don't know the details about the operator yet, because there is a whole chapter for it. Here, I explain how it works with trust opinions.
+Suppose that Alice now wants the opinion of Clarie about the restaurants in town. She has different trust opinions about Bob and Clarie and she wants to consider both. Belief fusion $\oplus$ is the operator that solves that issue. I don't know the details about the operator yet, because there is a whole chapter for it. Here, I explain how it works with trust opinions.
 
 We use the symbol $\diamond$ to denote a fusion between two relations:
 \begin{equation}
@@ -466,11 +463,11 @@ We have a goal to improve or model with subjective logic. At first, I was thinki
 	\item When an agent has a trust opinion for each of the other agents of the society, trust fusion can be used to obtain the overall belief update.
 \end{itemize}
 
-The first problem is: \textbf{Trust discounting does not consider the case that the trustor already has an opinion}. Because of it, we don't have \emph{update}. To solve it, I plan to look if someone has the same problem before at the literature and search for some operator in subjective logic that has the same properties that we expect. If I don't find any operator, may be the case of creating one, but I don't if this is \emph{allowed} in subjective logic.
+The first problem is: \textbf{Trust discounting does not consider the case that the trustor already has an opinion}. Because of it, we don't have \emph{update}. To solve it, I plan to search if someone had the same problem before in the literature and search for some operator in subjective logic that has the same properties that we expect. If I don't find any operator, it may be the case of creating one, but I don't if this is \emph{allowed} in subjective logic.
 
-The second problem is: \textbf{How to represent influence by a trust opinion?}. Suppose that an agent B has no influence on A ($I(A, B) = 0$). I thought of two ways to represent by a opinion: a) $\opia{A}{B} = (0, 0, 1, a^A_X)$), agent A is completely uncertain about trusting in B, or b) $\opia{A}{B} = (0, 1, 0, a^A_X)$, agent A completely distrusts B. I have to understand the difference between this representations when used with trust discounting and trust fusion.
+The second problem is: \textbf{How to represent influence by a trust opinion?}. Suppose that an agent B has no influence on A ($I(A, B) = 0$). I thought of two ways to represent by an opinion: a) $\opia{A}{B} = (0, 0, 1, a^A_B)$), agent A is completely uncertain about trusting in B, or b) $\opia{A}{B} = (0, 1, 0, a^A_B)$, agent A completely distrusts B. I have to understand the difference between this representations when trust discounting and trust fusion are applied.
 
-In this document, I presented what I find most useful for the research about group polarization in social networks. I studied some other topics that I didn't presented here like the difference between aleatory and epistemic opinions, decision theory in subjective logic and how opinions can be represented with Beta PDFs and Dirichlet PDFs.
+In this document, I presented what I find most useful for the research about group polarization in social networks. I studied some other topics that I didn't present here like the difference between aleatory and epistemic opinions, decision theory in subjective logic, and how opinions can be represented with Beta PDFs and Dirichlet PDFs.
 
 
 
