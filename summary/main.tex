@@ -14,6 +14,9 @@
 \usepackage{bm}
 \usepackage{cite}
 \usepackage{nicefrac}
+\usepackage{chngcntr}
+
+\counterwithin{figure}{section}
 
 \theoremstyle{definition}
 \newtheorem{question}{Question}[section]
@@ -194,26 +197,26 @@ A binary opinion states about a domain with $k = 2$, and any multinomial opinion
 
 The projected probability distribution of binomial opinions is defined by:
 \begin{equation}
-	P(x) = b_x + a_x u_x
+	P(x) = b_x + a_x u_x \text{.}
 \end{equation}
 
 Note that the more the opinion relies on uncertainty, the more weight the base rate will have on the projected probability.
 
 Let $\dom{Z} = \{\red, \green\}$ be a domain the represents the outcomes of drawing a ball from a box. Let $Z$ be a random variable over $\dom{Y}$. Let the base rate be uniform. Then, the opinion for drawing a \red\ ball (and \green\ ball too) is:
 \begin{equation}
-	\opi{Z} = (0, 0, 1, 0.5)
+	\opi{Z} = (0, 0, 1, 0.5) \text{.}
 \end{equation}
 
 Now, I told you that there is 10 balls in the box, 4 of then is \red\ and non is know about the other 6. The opinion for drawing a \red\ ball is:
 \begin{equation}
-	\opi{Z} = (0.4, 0, 0.6, 0.5)
+	\opi{Z} = (0.4, 0, 0.6, 0.5) \text{.}
 \end{equation}
 
 The projected probability distribution is:
 \begin{equation}
 	\begin{array}{lll}
-		P(\red) & = 0.4 + 0.5 \cdot 0.6 & = 0.7 \\
-		P(\green) & = 0 + 0.6 \cdot 0.5 & = 0.3
+		P(\red) & = 0.4 + 0.5 \cdot 0.6 & = 0.7 \text{,} \\
+		P(\green) & = 0 + 0.6 \cdot 0.5 & = 0.3 \text{.}
 	\end{array}
 \end{equation}
 
@@ -250,9 +253,9 @@ Let $\dom{X} = \{\red, \green, \blue\}$ be the domain representing the outcomes 
 The projected probability distribution is:
 \begin{equation}
 	\begin{array}{lll}
-		\mathbf{P}(\red) & =  0.3 + \nicefrac{1}{3} \cdot 0.5 & \approx 0.466 \\
-		\mathbf{P}(\green) & = 0 + \nicefrac{1}{3} \cdot 0.5 & \approx 0.166 \\
-		\mathbf{P}(\blue) & = 0.2 + \nicefrac{1}{3} \cdot 0.5 & \approx 0.366  
+		\mathbf{P}(\red) & =  0.3 + \nicefrac{1}{3} \cdot 0.5 & \approx 0.466 \text{,} \\
+		\mathbf{P}(\green) & = 0 + \nicefrac{1}{3} \cdot 0.5 & \approx 0.166 \text{,} \\
+		\mathbf{P}(\blue) & = 0.2 + \nicefrac{1}{3} \cdot 0.5 & \approx 0.366 \text{.}
 	\end{array}
 \end{equation}
 
@@ -302,9 +305,9 @@ Let $X$ be a hypervariable over $\hdom{X}$. Let the base rate distribution be un
 The projected probability distribution is:
 \begin{equation}
 	\begin{array}{llllll}
-		\mathbf{P}(\{\red\}) & \approx 0.2333 & \ & \mathbf{P}(\{\red, \green\}) & \approx 0.5166\\
-		\mathbf{P}(\{\green\}) & \approx 0.2833 & \ & \mathbf{P}(\{\red, \blue\}) & \approx 0.7166 \\
-		\mathbf{P}(\{\blue\}) & \approx 0.4833 & \ & \mathbf{P}(\{\green, \blue\}) & \approx 0.7666
+		\mathbf{P}(\{\red\}) & \approx 0.2333 \text{,} & \ & \mathbf{P}(\{\red, \green\}) & \approx 0.5166 \text{,} \\
+		\mathbf{P}(\{\green\}) & \approx 0.2833  \text{,} & \ & \mathbf{P}(\{\red, \blue\}) & \approx 0.7166 \text{,} \\
+		\mathbf{P}(\{\blue\}) & \approx 0.4833 \text{,} & \ & \mathbf{P}(\{\green, \blue\}) & \approx 0.7666 \text{.}
 	\end{array}
 \end{equation}
 
@@ -357,7 +360,7 @@ This model of trust is said to be \emph{computational} because we are reasoning 
 
 \subsection{Definition}
 
-Trust is a binomial opinion that an agent has about another. Let $\dom{T} = \{t, \overline{t}\}$ be a domain and let $T$ be a random variable over $T$. Let $B$ be an agent. A general interpretation for $\dom{T}$ about the action of the agent $B$ can be:
+Trust is a binomial opinion that an agent has about another. Let $\dom{T} = \{t, \overline{t}\}$ be a domain and let $T$ be a variable over $\dom{T}$. Let $B$ be an agent. A general interpretation for $\dom{T}$ about the action of the agent $B$ can be:
 \begin{equation}
 	\text{Trust domain } \dom{T}: \left\{
 	\begin{array}{l}
@@ -368,6 +371,54 @@ Trust is a binomial opinion that an agent has about another. Let $\dom{T} = \{t,
 \end{equation}
 
 Let $A$ be an agent. The opinion that $A$ have about $B$ is denoted by $\opia{A}{t_B}$. For a more directed notation, we assume that $\opia{A}{t_B} \equiv \opia{A}{B}$. If agent $A$ has absolute trust in $B$, then $\opia{A}{B} = (1, 0, 0, a_B)$, for some base rate $a_B$.
+
+\subsection{Trust transitivity}
+
+Lets illustrate trust transitivity with an example. Suppose that Alice's car is broken and she doesn't know any car mechanic. Alice borrow Bob's car for one day a she realizes that his car is well maintained. Then, she trusts in Bob in matters of car maintenance. In order to have a well maintained car, Bob trusts the car mechanic Erik and asks his services. Then, Alice has a \emph{indirect} trust in Erik in matters of car maintenance.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.4]{images/transitive-trust-principle.png}
+	\caption{Transitive trust principle}
+\end{figure}
+
+The trust that Alice has about Bob is called \emph{referral trust} and is denoted as $[A; B]$. The trust that Bob has about Erik is called \emph{functional trust} and is denoted as $[B, C]$. The trust that Alice as about Erik through Bob is called \emph{derived functional trust} as is denoted as:
+\begin{equation}
+	[A, E] = [A; B] : [B, E] = [A; B, E] \text{.}
+\end{equation}
+
+Let $\opia{A}{B}$ be the trust opinion that Alice has about Bob, $\opia{B}{E}$ be the trust opinion that Bob has about Erik, and $\opia{[A;B]}{E}$ be the trust opinion that Alice has about Erik through Bob. We obtain the opinion $\opia{[A;B]}{E}$ by the operator trust discount and is defined below.
+
+\begin{definition}
+(\emph{Trust Discounting for Two-Edge Path}) Assume agents $A$ and $B$, where $A$ has referral trust in $B$ for a trust scope represented by domain $\dom{X}$. Let $X$ denote a variable on domain $X$, and let $\opia{B}{X} = (\bmda{B}{X}, \uax{B}{X}, \ada{B}{X}))$ be agent $B$’s general opinion on $X$ as advised by $B$ to $A$. Assume further that agent $A$’s referral trust in $B$, with respect to advising belief about $X$, is expressed as $\opia{A}{B}$. The notation for trust discount is given by
+\begin{equation}
+	\opia{[A;B]}{X} = \opia{A}{B} \otimes \opia{B}{X} \text{.}
+\end{equation}
+
+The trust-discounting operator combines agent $A$’s referral trust opinion about agent $B$, denoted $\opia{A}{B}$, to discount $B$’s opinion about variable $X$, denoted $\opia{B}{X}$, to produce $A$’s derived opinion about $X$, denoted $\opia{[A;B]}{[X]}$. The parameters of the derived opinion $\opia{[A;B]}{X}$ are defined in the following way:
+\begin{equation}
+	\opia{[A;B]}{X} = \left\{
+	\begin{array}{ll}
+		\bmdax{[A;B]}{X}{x} & = \ppa{A}{B} \bmdax{B}{X}{x} \text{,}\\
+		\uax{[A;B]}{X} & = 1 - \ppa{A}{B} \sum\limits_{x \in \hdom{X}} \bmdax{B}{X}{x} \text{,} \\
+		\adax{[A;B]}{X}{x} & = \adax{B}{X}{x} \text{.}
+	\end{array}
+	\right.
+\end{equation}
+\end{definition}
+
+In particular, when A fully trusts B, the opinion that A has about X will be completely accepted for A. Also, when A fully distrusts B, then opinion that A has about X will be completely rejected for A and A will have an opinion completely uncertain.
+
+The previous example considers the relationship $[A, E]$ as a functional trust relationship. We also can consider as a belief relationship. Suppose now that Alice need to go to a restaurant, but she doesn't know any restaurant at the town. Alice knows that Bob has good taste for restaurants and as him an advice. Bob tells Alice some restaurants to go and his favorites.
+
+Let $\dom{X}$ be the domain of all restaurants in town. Let $X$ be the variable over $\dom{X}$ that describes the best restaurant. The relationship $[A, X]$ is not about trust but about belief. Bob acts as a \emph{source information} for Alice about $X$. Trust discounting also applies here.
+
+\begin{figure}[htb]
+	\centering
+	\includegraphics[scale=0.3]{images/trust-discounting-of-opinions.png}
+	\caption{Trust discounting of opinions}
+\end{figure}
+
 
 %This is an overview. Nothing formal. (Maybe it will be if I have time.)
 %
