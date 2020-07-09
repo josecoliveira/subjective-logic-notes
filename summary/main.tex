@@ -68,7 +68,7 @@ Subjective logic extends probabilistic logic by adding \emph{uncertainty} and \e
 
 By the investigation we are doing about subjective logic, our main question is: Can we use subjective logic to improve our model of social networks? If yes, how?
 
-This document is an introduction about subjective logic and it will present elementary definitions, the definition of opinion, and trust opinions. The main reference of this document is the book \emph{Subjective Logic: A Formalism for Reasoning Under Uncertainty} by Audun Jøsang.
+This document is an introduction about subjective logic and it will present elementary definitions, the definition of opinion, and trust opinions. The main reference of this document is the book \emph{Subjective Logic: A Formalism for Reasoning Under Uncertainty} by Audun Jøsang \cite{josang2016subjective}.
 
 
 %\begin{itemize}
@@ -427,7 +427,7 @@ We use the symbol $\diamond$ to denote a fusion between two relations:
 \begin{equation}
 	\begin{array}{rll}
 		[A,E] & = ([A; B] : [B, X]) \diamond([A; C] : [C, X]) \\
-		& = [A; B, C] \diamond [A; C, X] \text{.} & \text{(Compact notation)} 
+		& = [A; B, X] \diamond [A; C, X] \text{.} & \text{(Compact notation)}
 	\end{array}
 \end{equation}
 
@@ -463,9 +463,9 @@ We have a goal to improve or model with subjective logic. At first, I was thinki
 	\item When an agent has a trust opinion for each of the other agents of the society, trust fusion can be used to obtain the overall belief update.
 \end{itemize}
 
-The first problem is: \textbf{Trust discounting does not consider the case that the trustor already has an opinion}. Because of it, we don't have \emph{update}. To solve it, I plan to search if someone had the same problem before in the literature and search for some operator in subjective logic that has the same properties that we expect. If I don't find any operator, it may be the case of creating one, but I don't if this is \emph{allowed} in subjective logic.
+The first problem is: \textbf{Trust discounting does not consider the case that the trustor already has an opinion}. Because of it, we don't have \emph{update}. To solve it, I plan to search if someone had the same problem before in the literature and search for some operator in subjective logic that has the same properties that we expect. If I don't find any operator, it may be the case of creating one, but I don't know if this is \emph{allowed} in subjective logic.
 
-The second problem is: \textbf{How to represent influence by a trust opinion?}. Suppose that an agent B has no influence on A ($I(A, B) = 0$). I thought of two ways to represent by an opinion: a) $\opia{A}{B} = (0, 0, 1, a^A_B)$), agent A is completely uncertain about trusting in B, or b) $\opia{A}{B} = (0, 1, 0, a^A_B)$, agent A completely distrusts B. I have to understand the difference between this representations when trust discounting and trust fusion are applied.
+The second problem is: \textbf{How to represent influence by a trust opinion?}. Suppose that an agent B has no influence on A ($I(B, A) = 0$). I thought of two ways to represent by an opinion: a) $\opia{A}{B} = (0, 0, 1, a^A_B)$), agent A is completely uncertain about trusting in B, or b) $\opia{A}{B} = (0, 1, 0, a^A_B)$, agent A completely distrusts B. I have to understand the difference between this representations when trust discounting and trust fusion are applied.
 
 In this document, I presented what I find most useful for the research about group polarization in social networks. I studied some other topics that I didn't present here like the difference between aleatory and epistemic opinions, decision theory in subjective logic, and how opinions can be represented with Beta PDFs and Dirichlet PDFs.
 
@@ -487,8 +487,8 @@ In this document, I presented what I find most useful for the research about gro
 %\end{itemize}
 
 
-%\bibliographystyle{plain}
-%\bibliography{bibliography.bib}
+\bibliographystyle{plain}
+\bibliography{bibliography.bib}
 
 
 \end{document}
