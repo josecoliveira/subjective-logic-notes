@@ -1,0 +1,258 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, margin=2cm]{geometry}
+
+\usepackage[backend=biber,citestyle=numeric,bibstyle=numeric]{biblatex}
+
+
+\usepackage{hyperref}
+\usepackage{calrsfs}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{nicefrac}
+\usepackage{chngcntr}
+
+\counterwithin{figure}{section}
+
+\theoremstyle{definition}
+\newtheorem{question}{Question}[section]
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+}
+
+\numberwithin{equation}{section}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.15}
+
+\allowbreak
+
+\input{../subjectivelogic.tex}
+
+\newcommand{\qm}[1]{`#1'}
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{forestgreen(web)}{rgb}{0.13, 0.55, 0.13}
+\definecolor{green(html/cssgreen)}{rgb}{0.0, 0.5, 0.0}
+
+\newcommand{\red}{\textcolor{red}{red}}
+\newcommand{\green}{\textcolor{green(html/cssgreen)}{green}}
+\newcommand{\blue}{\textcolor{blue}{blue}}
+
+%opening
+\title{Subjective Logic\\
+\large{Belief Fusion}}
+\author{José C. Oliveira}
+
+\addbibresource{bibliography.bib}
+
+\begin{document}
+
+\maketitle
+
+\section{Writing an opinion as a Dirichlet PDF}
+
+In the book, \citeauthor{josang2016subjective} shows that a binomial opinion can be written a Beta PDF, and a multinomial opinion and a hyperopinion can be written as a Dirichlet PDF. See chapter 3 \cite{josang2016subjective}. This is important because subjective-logic operators (SL operators) can then be applied to Beta PDFs, and statistics operations for Beta PDFs can be applied to opinions.
+
+A Dirichlet PDF $\mathrm{Dir}(\mathbf{p}_X, \alpha_X)$ for a random variable $X$ over the domain $\dom{X}$ (or the hyperdomain $\hdom{X}$) says the probability density of $\mathbf{p}_X$ assume a probability distribution. The vector $\alpha_X$ represents the strength supporting a value of the domain. When we have no information about the \emph{true} probability, the all values of $\alpha_X$ will be one.
+
+Lets represent $\alpha_X$ in function of a amount of evidence collected and a base rate distribution for a value. Let $\mathbf{r}_X(x)$ be the amount of evidence collect for the value $x \in \dom{X}$. Let $\mathbf{a}_X$ be a base rate distribution. The strength for $\alpha_X(x)$ for each value $x \in \dom{X}$ can be expressed as
+\begin{equation}\label{eq:alpha_as_evidence_and_base_rate}
+    \alpha_X(x) = \mathbf{r}_X(x) + \mathbf{a}_X(x)W\text{, where }\mathbf{r}_X(x) \geq 0\ \forall x \in \mathbb{X}\text{.}
+\end{equation}
+Here, $W$ denotes a non-informative prior weight, which must be set to $W = 2$. \citeauthor{josang2016subjective} explains it by the end of the section 3.5.2.
+
+Then, the evidence representation of the Dirichlet PDF, or evidence-Dirichlet PDF, is denoted by $\mathrm{Dir}^{\mathrm{e}}_X(\mathbf{p}_X, \mathbf{r}_X, \mathbf{a}_X)$. A mapping between an opinion and a evidence-Dirichlet PDF making $\mathbf{P}_X(x) = \mathbf{E}_X(x)$, i.e. the projected probability of a opinion must be equal to the expected probability of a Dirichlet PDF. There is a diferent mapping for each type of opinion.
+
+This is important here because is easier to understand belief fusion operators by their representations in operating evidence-Dirichlet PDF.
+
+
+\section{Belief fusion}
+
+A belief fusion is an operation that combine different opinions in order to produce a new opinion that reflects the collection of opinions, or that is closer to the truth. There are several types of belief fusion operators and they have different applications and restrictions. The chapter 12 of the book is dedicated to belief fusion. The section 12.1.2 shows a summary of the belief fusion operators, and the section 12.1.3 shows a criteria for choosing one depending how the analyst evalues the case of use.
+
+
+\subsection{Belief constraint fusion (BCF)}
+
+In belief constraint fusion, 1) each belief argument can dictate which state values are the most corrected, and 2) there is no room for compromise in case of totally conflicting arguments,hence the fusion result is not defined in that case. An example is when two persons try to agree on seeing a movie at the cinema. If they disagree completely, then they will not watch any movie together.
+
+\begin{definition}
+\emph{(The Constraint Fusion Operator)} Assume the domain $\dom{X}$ and its hyperdomain $\hdom{X}$, and assume the hypervariable X which takes its values from $\hdom{X}$. Let agent $A$ hold opinion $\opia{A}{X}$ and agent B hold opinion $\opia{B}{X}$. These two opinions can be mathematically merged using the belief constraint fusion operator denoted `$\bcf$' which can be expressed as
+\begin{equation}
+\text{Belief Constraint Fusion: } \opia{(A\&B)}{X} = \opia{A}{X} \bcf \opia{B}{X}\text{.}
+\end{equation}
+
+Source combination denoted `$\bcfs$' thus corresponds to belief fusion with `$\bcf$'.
+
+[Details of the definition goes here.]
+\end{definition}
+
+
+\subsection{Cumulative belief fusion (CBF)}
+
+We use cumulative fusion the fusion of totally conflicting opinions arguments are defined, and \emph{the effect of fusing equal opinions are the increase of confidence}.
+
+
+\subsubsection{Aleatory cumulative fusion (A-CBF)}
+\label{sec:acbf}
+
+Assume a domain $\dom{X}$ and its domain $\hdom{X}$. Assume a process where variable $X$ takes values from $\dom{X}$ resulting from the process. Consider two agents $A$ and $B$ who observe the outcomes of the process over two separate time periods. They will generate \emph{aleatory} opinions $\opia{A}{X}$ and $\opia{B}{X}$ by the their observations.
+
+An \emph{aleatory opinion} (as defined at the section 3.3 of the book) applies to a variable governed by a frequentist process, and that represents the (uncertain) likelihood of values of the variable in any unknown past or future instance of the process. An aleatory opinion can naturally have an arbitrary uncertainty mass.
+
+The symbol `$\acfs$' denotes the fusion of two observers $A$ and $B$ into a single imaginary observer denoted $(A \acfs B)$.
+
+\begin{definition}
+\emph{(The Comulative Fusion Operator from the definition 12.5 of the book)} Let $\opia{A}{X}$ and $\opia{B}{X}$ be source $A$ and $B$'s respective opinions over the same (hyper)variable $X$ on domain $\dom{X}$. Let $\opia{(A \acfs B)}{X}$ be the opinion such that
+
+[Details of the definition goes here]
+
+Then $\opia{(A \acfs B)}{X}$ is called cumulative fused opinion of $\opia{A}{X}$ and $\opia{B}{X}$, representing the combination of the independent opinion sources $A$ and $B$. By using the symbol `$\acf$' to denote this operator, aleatory cumulative fusion can be expressed as
+\begin{equation}\label{eq:aleatory_cumulative_fusion}
+\opia{(A \acfs B)}{X} = \opia{A}{X} \acf \opia{B}{X}.
+\end{equation} 
+\end{definition}
+
+The cumulative fusion operator is equivalent to updating prior Dirichlet PDFs by adding new evidence to produce posterior Dirichlet PDFs.
+
+\begin{theorem}
+\emph{(Theorem 12.2 from the book)} The cumulative fusion operator of Definition 12.5 is equivalent to
+simple addition of the evidence parameters of evidence opinions.
+\end{theorem}
+
+The idea of the proof is to write the equation \ref{eq:aleatory_cumulative_fusion} as a fusion of \emph{evidence opinions}, i.e. evidence-Dirichlet PDFs, and adding up the evidence parameters.
+\begin{equation}\label{eq:acf_dirichlet_pdf}
+\begin{array}{rl}
+\mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^H_X, \mathbf{r}^{(A \acfs B)}_X, \mathbf{a}^{(A \acfs B)}_X) &  = \mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^H_X, \mathbf{r}^{A}_X, \mathbf{a}^A_X) \acf \mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^H_X, \mathbf{r}^{B}_X, \mathbf{a}^B_X) \\
+& = \mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^H_X, (\mathbf{r}^{A}_X + \mathbf{r}^{B}_X), \mathbf{a}^{(A \acfs B)}_X)
+\end{array}
+\end{equation}
+\begin{equation}
+\mathbf{r}^{(A \acf B)}_X(x) = \mathbf{r}^A_X(x) + \mathbf{r}^B_X(x),\ \forall x \in \hdom{X}\text{.}
+\end{equation}
+
+Then, by mapping back the two sides of the equation \ref{eq:acf_dirichlet_pdf} from evidence opinions to belief opinions, we show that both sides are $\opia{(A \acf B)}{X}$.
+
+
+\subsubsection{Epistemic cumulative fusion (E-CBF)}
+
+An \emph{epistemic opinion} (as defined at the section 3.3 of the book) applies to a variable that is assumed to be non-frequentist, and that represents the (uncertain) likelihood of values of the variable in a specific unknown past or future instance. An aleatory opinion is naturally con-
+strained to be uncertainty-maximized.
+
+\begin{definition}
+The method for epistemic cumulative fusion has two steps:
+\begin{itemize}
+\item[1.] Apply aleatory cumulative fusion, to fuse the epistemic opinion arguments.
+\item[2.] Apply uncertainty-maximization, as described in section 3.5.6 of the book, to the result of the fusion operation.
+\end{itemize}
+\end{definition}
+
+Uncertainty-maximization is a process that maximizes the uncertainty ($u_{X}$) of a opinion, but keeping the projected probability distribution ($\mathbf{P}_X$). An epistemic opinion is uncertainty-maximized because epistemic evidence can not be accumulated in a statistical manner, which would reduce the uncertainty mass. Instead, different pieces of epistemic evidence that support opposite/different values should cancel each other out.
+
+
+\subsection{Averaging belief fusion}
+
+When the effect of fusing equal opinion arguments must keep the confidence unchanged and the uncertainty must be visible, then we use averaging belief fusion.
+
+Averaging belief fusion is when dependence between sources is assumed. In other words, \emph{including more sources does not mean that more evidence is supporting the conclusion}. An example of this type of situation is when a jury tries to \emph{reach a verdict} after having observed the court proceedings.
+
+By \emph{dependence between sources}, it means that two agents $A$ and $B$ observe the outcomes of the described at the beginning of \ref{sec:acbf} at the same time.
+
+\begin{definition}
+\emph{(The Averaging Belief Fusion Operator from the definition 12.7 of the book)} Let $\opia{A}{X}$ and $\opia{B}{X}$ be source $A$ and $B$’s respective opinions over the same (hyper)variable $X$ on domain $\dom{X}$. Let $\opia{(A \abfs B)}{X}$ be the opinion such that
+
+[Details of the definition goes here]
+
+Then $\opia{(A \abfs B)}{X}$ is called the averaged opinion of $\opia{A}{X}$ and $\opia{B}{X}$ , representing the combination of the dependent opinions of $A$ and $B$. By using the symbol `$\abf$' to designate this belief operator, we define
+\begin{equation}
+\opia{(A \abfs B)}{X} = \opia{A}{X} \abf \opia{B}{X}
+\end{equation}
+\end{definition}
+
+\begin{theorem}
+\emph{(Theorem 12.3 from the book)} The averaging fusion operator is equivalent to
+simple averaging of the evidence parameters of the Dirichlet HPDF.
+\end{theorem}
+
+\begin{equation}
+\begin{array}{rl}
+\mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}^{(A \abfs B)}_X, \mathbf{a}^{(A \abfs B)}_X) & = \mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}^{A}_X, \mathbf{a}^{A}_X) + \mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}^{B}_X, \mathbf{a}^{B}_X) \\
+& = \mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, (\mathbf{r}^{A}_X + \mathbf{r}^{B }_X)/2, \mathbf{a}^{A}_X)
+\end{array}
+\end{equation}
+
+\begin{equation}
+\mathbf{r}^{(A \abfs B)}_X(x) = \dfrac{\mathbf{r}^A_X(x) + \mathbf{r}^B_X(x)}{2}
+\end{equation}
+
+\subsection{Weighted belief fusion (WBF)}
+
+We use weighted belief fusion when fusion with vacuous opinion argument has no effect (which means that we have a neutral element) and we handle conflicting opinion by the weighted average of the confidence ($c^A_X = 1 - u^A_X$) of the opinions. WBF is suitable for fusing (expert) agent opinions in
+situations where the source agent’s confidence should determine the opinion weight
+in the fusion process.
+
+\begin{theorem}
+\emph{(Theorem 12.4 from the book)}  The weighted belief fusion operator of is equivalent to confidence-weighted averaging of the evidence parameters of the Dirichlet HPDF.
+\end{theorem}
+
+\begin{equation}
+\begin{array}{rl}
+
+\end{array}
+\end{equation}
+
+
+\section{Recalling about trust and trust fusion (and new questions)}
+
+An agent $A$ trusts $B$ about $X$. A has no opinion.
+\begin{equation}
+\opia{[A; B]}{X} = \opia{A}{B} \otimes \opia{B}{X}
+\end{equation}
+
+Maybe we can fuse the opinion that $A$ previously had with the opinion that $A$ obtain by trusting $B$.
+\begin{equation}
+\opia{A \acfs [A;B]}{X} = \opia{A}{X} \acf (\opia{A}{B} \otimes \opia{B}{X})
+\end{equation}
+
+An agent $A$ trusts $B$ and $C$ about $X$. A has no opinion.
+\begin{equation}
+\opia{[A; B] \diamond [A; C]}{X} = (\opia{A}{B} \otimes \opia{B}{X}) \oplus (\opia{A}{C} \otimes \opia{C}{X})
+\end{equation}
+
+Which are the most \emph{correct}?
+\begin{itemize}
+\item Fusing all the opinions obtained by trust, and then fusing it with the opinion of the agent A?
+\begin{equation}
+\opia{A \acfs ([A; B] \acfs [A; C])}{X}
+\end{equation}
+
+\item Fusing each opinion obtained by trust with the opinion of the agent A, and then, fusing all those opinions?
+\begin{equation}
+\opia{(A \acfs [A; B]) \acfs (A \acfs [A; C])}{X}
+\end{equation}
+\end{itemize}
+
+
+
+
+
+\printbibliography
+
+\end{document}
