@@ -1,0 +1,264 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, margin=2cm]{geometry}
+
+\usepackage[backend=biber,citestyle=numeric,bibstyle=numeric]{biblatex}
+
+
+\usepackage{hyperref}
+\usepackage{calrsfs}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{nicefrac}
+\usepackage{chngcntr}
+
+\counterwithin{figure}{section}
+
+\theoremstyle{definition}
+\newtheorem{question}{Question}[section]
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+}
+
+\numberwithin{equation}{section}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.15}
+
+\allowbreak
+
+\input{../subjectivelogic.tex}
+
+\newcommand{\qm}[1]{`#1'}
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{forestgreen(web)}{rgb}{0.13, 0.55, 0.13}
+\definecolor{green(html/cssgreen)}{rgb}{0.0, 0.5, 0.0}
+
+\newcommand{\red}{\textcolor{red}{red}}
+\newcommand{\green}{\textcolor{green(html/cssgreen)}{green}}
+\newcommand{\blue}{\textcolor{blue}{blue}}
+
+%opening
+\title{Subjective Logic\\
+\large{Averaging Belief Fusion}}
+\author{José C. Oliveira}
+
+\addbibresource{../bibliography.bib}
+
+\begin{document}
+
+\maketitle
+
+\section{Writing an opinion as a Dirichlet PDF}
+
+In the book, \citeauthor{josang2016subjective} shows that a binomial opinion can be written a Beta PDF, and a multinomial opinion and a hyperopinion can be written as a Dirichlet PDF. See chapter 3, section 3.6.4 \cite{josang2016subjective}, . This is important because subjective-logic operators (SL operators) can then be applied to Beta PDFs, and statistics operations for Beta PDFs can be applied to opinions.
+
+A Dirichlet PDF $\mathrm{Dir}(\mathbf{p}_X, \alpha_X)$ for a random variable $X$ over the domain $\dom{X}$ (or the hyperdomain $\hdom{X}$) says the probability density of $\mathbf{p}_X$ assume a probability distribution. The vector $\alpha_X$ represents the strength supporting a value of the domain. When we have no information about the \emph{true} probability, the all values of $\alpha_X$ will be one.
+
+Lets represent $\alpha_X$ in function of a amount of evidence collected and a base rate distribution for a value. Let $\mathbf{r}_X(x)$ be the amount of evidence collect for the value $x \in \dom{X}$. Let $\mathbf{a}_X$ be a base rate distribution. The strength for $\alpha_X(x)$ for each value $x \in \dom{X}$ can be expressed as
+\begin{equation}\label{eq:alpha_as_evidence_and_base_rate}
+    \alpha_X(x) = \mathbf{r}_X(x) + \mathbf{a}_X(x)W\text{, where }\mathbf{r}_X(x) \geq 0\ \forall x \in \mathbb{X}\text{.}
+\end{equation}
+Here, $W$ denotes a non-informative prior weight, which must be set to $W = 2$. \citeauthor{josang2016subjective} explains it by the end of the section 3.5.2.
+
+Then, the evidence representation of the Dirichlet PDF, or evidence-Dirichlet PDF, is denoted by $\mathrm{Dir}^{\mathrm{e}}_X(\mathbf{p}_X, \mathbf{r}_X, \mathbf{a}_X)$. A mapping between an opinion and a evidence-Dirichlet PDF making $\mathbf{P}_X(x) = \mathbf{E}_X(x)$, i.e. the projected probability of a opinion must be equal to the expected probability of a Dirichlet PDF. There is a diferent mapping for each type of opinion.
+
+This is important here because is easier to understand belief fusion operators by their representations in operating evidence-Dirichlet PDF.
+
+\begin{definition}
+\emph{(Mapping: Hyper-opinion $\leftrightarrow$ Dirichlet HPDF from the definition 3.6 of the book)} Let $\dom{X}$ be a domain consisting of $k$ mutually disjoint values, where the corresponding hyperdomain $\hdom{X}$ has cardinality $\kappa = (2^{k} - 2)$, and let $X$ be a hypervariable in $\hdom{X}$. Let $\opi{X}$ be a hyper-opinion os $X$, and let $\mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}_X, \mathbf{a}_X)$ be a Dirichlet HPDF over the hyper-probability distribution $\mathbf{p}^{\mathrm{H}}_X$. The hyper-opinion $\opi{X}$ an the Dirichlet PDF $\mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}_X, \mathbf{a}_X)$ are equivalent through the following mapping:
+\begin{equation}
+\begin{split}
+& \forall x \in \hdom{X} \\
+& \begin{cases}
+\bmdx{X}{x} & = \dfrac{\mathbf{r}_X(x)}{W + \sum\limits_{x_i \in \hdom{X}} \mathbf{r}_X(x_i)} \text{,} \\
+u_X & = \dfrac{W}{W + \sum\limits_{x_i \in \hdom{X}} \mathbf{r}_X(x_i)} \text{,}
+\end{cases} \Leftrightarrow
+\begin{cases}
+\begin{cases}
+\mathbf{r}_X(x) = \dfrac{W \bmdx{X}{x}}{u_X} \text{,} \\
+1 = u_X + \sum\limits_{x_i \in \hdom{X}} \bmdx{X}{x_i} \text{,}
+\end{cases} & \text{if } u_X \neq 0 \\
+\begin{cases}
+\mathbf{r}_X(x) = \bmdx{X}{x} \cdot \infty \text{,} \\
+1 = \dfrac{W}{W + \sum\limits_{x_i \in \hdom{X}} \mathbf{r}_X(x_i)} \text{.}
+\end{cases} & \text{if } u_X = 0
+\end{cases}
+\end{split}
+\end{equation}
+\end{definition}
+
+
+\section{Averaging belief fusion}
+
+When the effect of fusing equal opinion arguments must keep the confidence unchanged and the uncertainty must be visible, then we use averaging belief fusion.
+
+Averaging belief fusion is when dependence between sources is assumed. In other words, \emph{including more sources does not mean that more evidence is supporting the conclusion}. An example of this type of situation is when a jury tries to \emph{reach a verdict} after having observed the court proceedings.
+
+Assume a domain $\dom{X}$ and its domain $\hdom{X}$. Assume a process where variable $X$ takes values from $\dom{X}$ resulting from the process. Consider two agents $A$ and $B$ who observe the outcomes of the process. By \emph{dependence between sources}, it means that the two agents $A$ and $B$ observe the outcomes at the same time.
+
+\begin{definition}
+\emph{(The Averaging Belief Fusion Operator from the definition 12.7 of the book)} Let $\opia{A}{X}$ and $\opia{B}{X}$ be source $A$ and $B$’s respective opinions over the same (hyper)variable $X$ on domain $\dom{X}$. Let $\opia{(A \abfs B)}{X}$ be the opinion such that
+
+Case I: For $u^A_X \neq 0 \ \lor\ u^B_X \leq 0$.
+\begin{equation}
+\begin{cases}
+\bmdax{(A \abfs B)}{X}{x} & = \dfrac{\bmdax{A}{X}{x} u^B_X + \bmdax{B}{X}{x} u^A_X}{u^A_X + u^B_X} \text{,} \\
+u^{(A \abfs B)}_X & = \dfrac{2 u^A_X u^B_X}{u^A_X + u^B_X} \text{,} \\
+\adax{(A \abfs B)}{X}{x} & = \dfrac{\adax{A}{X}{x} + \adax{B}{X}{x}}{2} \text{,}
+\end{cases}
+\end{equation}
+
+Case II: For $u^A_X = 0\ \land\ u^B_X = 0$.
+\begin{equation}
+\begin{cases}
+\bmdax{(A \abfs B)}{X}{x} & = \dfrac{\bmdax{A}{X}{x} + \bmdax{B}{X}{x}}{2} \text{,} \\
+u^{(A \abfs B)}_X(x) & = 0 \text{,} \\
+\adax{(A \abfs B)}{X}{x} & = \dfrac{\adax{A}{X}{x} + \adax{B}{X}{x}}{2}.
+\end{cases}
+\end{equation}
+
+Then $\opia{(A \abfs B)}{X}$ is called the averaged opinion of $\opia{A}{X}$ and $\opia{B}{X}$ , representing the combination of the dependent opinions of $A$ and $B$. By using the symbol `$\abf$' to designate this belief operator, we define
+\begin{equation}
+\opia{(A \abfs B)}{X} = \opia{A}{X} \abf \opia{B}{X}
+\end{equation}
+\end{definition}
+
+It can be verified that the averaging belief fusion operator is commutative and idempotent, but not associative.
+
+The averaging belief fusion operator is equivalent to updating Dirichlet PDFs as the average of source agents’ evidence to produce posterior Dirichlet PDFs.
+
+\begin{theorem}
+\emph{(Theorem 12.3 from the book)} The averaging fusion operator is equivalent to
+simple averaging of the evidence parameters of the Dirichlet HPDF.
+\end{theorem}
+
+The averaging belief fusion operator is deriving by mapping the argument belief opinions to evidence opinions through the bijective mapping. Averaging fusion of evidence opinions simply consists of computing the average of the evidence parameters. The fused evidence opinion is then mapped back to a belief opinion through the bijective mapping.
+
+\begin{equation}
+\begin{array}{rl}
+\mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}^{(A \abfs B)}_X, \mathbf{a}^{(A \abfs B)}_X) & = \mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}^{A}_X, \mathbf{a}^{A}_X) + \mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}^{B}_X, \mathbf{a}^{B}_X) \\
+& = \mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, (\mathbf{r}^{A}_X + \mathbf{r}^{B }_X)/2, \mathbf{a}^{A}_X)
+\end{array}
+\end{equation}
+
+\begin{equation}
+\mathbf{r}^{(A \abfs B)}_X(x) = \dfrac{\mathbf{r}^A_X(x) + \mathbf{r}^B_X(x)}{2}
+\end{equation}
+
+
+\section{Comparing cumulative and averaging belief fusion}
+
+Averaging belief fusion is interesting because it is idempotent. Let $\dom{X} = \{x_1, x_2\}$ be a domain with $k = 2$. Let $X$ be a random variable over $\dom{X}$. Let $A$ and $B$ be agents that holds the same following opinion about $X$.
+\begin{equation}
+\opia{A}{X} = \opia{B}{X} =
+\left(
+\begin{array}{llll}
+\bmdx{X}{x_1} & = 0.5 & & \ada{X}{x_1} = 0.5 \\
+\bmdx{x}{x_2} & = 0 & & \ada{X}{x_2} = 0.5 \\
+u_X & = 0.5
+\end{array}
+\right)
+\end{equation}
+Suppose that $A$ completely trusts $B$.
+\begin{equation}
+\opia{A}{B} =
+\left(
+\begin{array}{llll}
+\bmdx{B}{x_1} & = 1 & & \ada{B}{x_1} = 0.5 \\
+\bmdx{B}{x_2} & = 0 & & \ada{B}{x_2} = 0.5 \\
+u_X & = 0
+\end{array}
+\right)
+\end{equation}
+Then, the opinion that $A$ has about $X$ by trusting $B$ is:
+\begin{equation}
+\opia{[A;B]}{X} = \opia{A}{B} \otimes \opia{B}{X} =
+\left(
+\begin{array}{llll}
+\bmdx{B}{x_1} & = 0.5 & & \ada{B}{x_1} = 0.5 \\
+\bmdx{B}{x_2} & = 0 & & \ada{B}{x_2} = 0.5 \\
+u_X & = 0.5
+\end{array}
+\right) \text{.}
+\end{equation}
+Note that, since $A$ completely trusts $B$, $A$ learns exactly $B$'s opinion.
+
+Now, lets fuse $\opia{A}{X}$ and $\opia{[A;B]}{X}$ using cumulative fusion:
+\begin{equation}
+\opia{(A \acfs [A; B])}{X} = \opia{A}{X} \acf \opia{[A;B]}{X} =\left(
+\begin{array}{llll}
+\bmdx{B}{x_1} & = 0.66 & & \ada{B}{x_1} = 0.5 \\
+\bmdx{B}{x_2} & = 0 & & \ada{B}{x_2} = 0.5 \\
+u_X & = 0.33
+\end{array}
+\right) \text{,}
+\end{equation}
+and averaging fusion:
+\begin{equation}
+\opia{(A \abfs [A; B])}{X} = \opia{A}{X} \abf \opia{[A;B]}{X} =\left(
+\begin{array}{llll}
+\bmdx{B}{x_1} & = 0.5 & & \ada{B}{x_1} = 0.5 \\
+\bmdx{B}{x_2} & = 0 & & \ada{B}{x_2} = 0.5 \\
+u_X & = 0.5
+\end{array}
+\right) \text{,}
+\end{equation}
+
+At both examples, $A$ interacts with $B$ and they have the same opinions. They agree with $x_1$ by $0.5$, but they are uncertain by $0.5$. With cumulative fusion, $A$ has now more believing about $x_1$. The idea behind cumulative fusion is to sum the evidence of both opinions:
+\begin{equation}
+\mathbf{r}^{(A \acfs [A; B])}_X(x) = \mathbf{r}^A_X(x) + \mathbf{r}^{[A; B]}_X(x) \text{,}
+\end{equation}
+
+With averaging fusion, $A$ has the same opinion as before. The second option seems more reasonable.
+
+
+
+
+
+\section{A $n$-ary averaging belief fusion operator}
+
+What I am trying to do is to create new operator for averaging belief fusion that is $n$-ary. That operator is interesting because averaging fusion supports an agent interacting with only one other agent. With, $n$-ary averaging fusion operator, we can simulate an agent interacting with any number of agents.
+
+The idea behind the $n$-ary averaging fusion is to take the average of an arbitrary amounts of evidence. Let $A_1, \cdots, A_i$ be $n$ agents that hold opinions $\opia{A_i}{X}$ about a random variable $X$ over $\dom{X}$. The amount of evidence that $A_i$ has about $x_i \in \hdom{X}$ is $\mathbf{r}^{A_i}_X(x_i)$.
+
+Let $\abfs(A_1, \cdots, A_i)$ be the source of the averaging fusion of $A_1, \cdots, A_i$. Let $\abf(\opia{A_1}{X}, \dots, \opia{A_i}{X})$ be the averaging fusion of $\opia{A_1}{X}, \cdots, \opia{A_i}{X}$. Then:
+\begin{equation}
+\opia{(\abfs(A_1, \cdots, A_i))}{X} = \abf(\opia{A_1}{X}, \dots, \opia{A_i}{X}) \text{.}
+\end{equation}
+
+The amount of evidence of $\opia{(\abfs(A_1, \cdots, A_i))}{X}$ is
+\begin{equation}
+\mathbf{r}^{(\abfs(A_1, \cdots, A_i))}_X = \dfrac{\mathbf{r}^{A_1}_X + \cdots + \mathbf{r}^{A_1}_X}{n} 
+\end{equation}
+
+What I need to do is to find the operator by writing
+\begin{equation}
+
+\end{equation}
+
+
+
+
+
+\printbibliography
+
+\end{document}
