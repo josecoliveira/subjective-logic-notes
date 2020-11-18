@@ -71,7 +71,7 @@
 
 In the book, \citeauthor{josang2016subjective} shows that a binomial opinion can be written a Beta PDF, and a multinomial opinion and a hyperopinion can be written as a Dirichlet PDF. See chapter 3, section 3.6.4 \cite{josang2016subjective}. This is important because subjective-logic operators can be applied to Beta PDFs, and statistics operations for Beta PDFs can be applied to opinions.
 
-A Dirichlet PDF $\mathrm{Dir}(\mathbf{p}_X, \alpha_X)$ for a random variable $X$ over the domain $\dom{X}$ (or the hyperdomain $\hdom{X}$)  says about the probability density of $\mathbf{p}_X$  a probability distribution. The vector $\alpha_X$ represents the strength supporting a value of the domain. When we have no information about the \emph{true} probability, the all values of $\alpha_X$ will be one.
+A Dirichlet PDF $\mathrm{Dir}(\mathbf{p}_X, \alpha_X)$ for a random variable $X$ over the domain $\dom{X}$ (or the hyperdomain $\hdom{X}$) is a probability density that tells the probability of a probability distribution be the real one for $\mathbf{p}_X$. The vector $\alpha_X$ represents the strength supporting a value of the domain. When we have no information about the \emph{true} probability, the all values of $\alpha_X$ will be one.
 
 Lets represent $\alpha_X$ in function of a amount of evidence collected and a base rate distribution for a value. Let $\mathbf{r}_X(x)$ be the amount of evidence collect for the value $x \in \dom{X}$. Let $\mathbf{a}_X$ be a base rate distribution. The strength for $\alpha_X(x)$ for each value $x \in \dom{X}$ can be expressed as
 \begin{equation}\label{eq:alpha_as_evidence_and_base_rate}
@@ -151,7 +151,7 @@ The averaging belief fusion operator is equivalent to updating Dirichlet PDFs as
 simple averaging of the evidence parameters of the Dirichlet HPDF.
 \end{theorem}
 
-The averaging belief fusion operator is deriving by mapping the argument belief opinions to evidence opinions through the bijective mapping. Averaging fusion of evidence opinions simply consists of computing the average of the evidence parameters. The fused evidence opinion is then mapped back to a belief opinion through the bijective mapping.
+The averaging belief fusion operator is obtained by mapping the argument belief opinions to evidence opinions through the bijective mapping. Averaging fusion of evidence opinions simply consists of computing the average of the evidence parameters. The fused evidence opinion is then mapped back to a belief opinion through the bijective mapping.
 
 \begin{equation}
 \begin{array}{rl}
@@ -233,16 +233,16 @@ With averaging fusion, $A$ has the same opinion as before. The second option see
 
 \section{A $n$-ary averaging belief fusion operator}
 
-What I am trying to do is to create new operator for averaging belief fusion that is $n$-ary. That operator is interesting because averaging fusion supports an agent interacting with only one other agent. With, $n$-ary averaging fusion operator, we can simulate an agent interacting with any number of agents.
+What I am trying to do is to create new operator for averaging belief fusion that is $n$-ary. That operator is interesting because averaging fusion supports an agent interacting with only one other agent. With $n$-ary averaging fusion operator, we can simulate an agent interacting with any number of agents.
 
-The idea behind the $n$-ary averaging fusion is to take the average of an arbitrary amounts of evidence. Let $A_1, \cdots, A_n$ be $n$ agents that hold opinions $\opia{A_i}{X}$ about a random variable $X$ over $\dom{X}$. The amount of evidence that $A_i$ has about $x_i \in \hdom{X}$ is $\mathbf{r}^{A_i}_X(x_i)$.
+The idea behind the $n$-ary averaging fusion is to take the average of $n$ amounts of evidence. Let $A_1, \cdots, A_n$ be $n$ agents that hold opinions $\opia{A_1}{X}, \cdots, \opia{A_n}{X}$ about a random variable $X$ over $\hdom{X}$. The amount of evidence that $A_i$ has about $x_i \in \hdom{X}$ is $\mathbf{r}^{A_i}_X(x_i)$.
 
 Let $\abfs(A_1, \cdots, A_n)$ be the source of the averaging fusion of $A_1, \cdots, A_n$. Let $\abf(\opia{A_1}{X}, \dots, \opia{A_n}{X})$ be the averaging fusion of $\opia{A_1}{X}, \cdots, \opia{A_n}{X}$. Then:
 \begin{equation}
 \opia{\abfs(A_1, \cdots, A_i)}{X} = \abf(\opia{A_1}{X}, \dots, \opia{A_n}{X}) \text{.}
 \end{equation}
 
-The amount of evidence of $\opia{(\abfs(A_1, \cdots, A_i))}{X}$ is
+The amount of evidence of $\opia{\abfs(A_1, \cdots, A_i)}{X}$ is
 \begin{equation}
 \mathbf{r}^{\abfs(A_1, \cdots, A_i)}_X = \dfrac{\mathbf{r}^{A_n}_X + \cdots + \mathbf{r}^{A_1}_X}{n} 
 \end{equation}
@@ -267,9 +267,9 @@ u^{\abfs(A_1, \cdots, A_n)}_X & = \dfrac{W}{W + \sum\limits_{x_i \in \hdom{X}} \
 \end{equation}
 
 Right now, I'm trying to write $\bmda{\abfs(A_1, \cdots, A_n)}{X}$ and 
-$u^{\abfs(A_1, \cdots, A_n)}_X$ in function of $\bmda{A_1}{X}, \cdots, \bmda{A_n}{X}$ and $u^{A_1}_X, \cdots, u^{A_n}_X$.
+$u^{\abfs(A_1, \cdots, A_n)}_X$ as a function of $\bmda{A_1}{X}, \cdots, \bmda{A_n}{X}$ and $u^{A_1}_X, \cdots, u^{A_n}_X$.
 
-And I just note that I don't need to do this, because I can write the opinions $A_1, \cdots, A_n$ as Dirichlet HPDF, do the operation above, and then write as an opinion. I need to write it in Python, write some examples e we need to plan the simulations.
+And I just note that I don't need to do this, because I can write the opinions $\opia{A_1}{X}, \cdots, \opia{A_n}{X}$ as Dirichlet HPDFs, do the operation above, and then write as an opinion. I need to write it in Python and write some examples. We also need to plan the simulations.
 
 
 \printbibliography
