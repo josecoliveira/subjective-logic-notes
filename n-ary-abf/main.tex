@@ -69,9 +69,9 @@
 
 \section{Writing an opinion as a Dirichlet PDF}
 
-In the book, \citeauthor{josang2016subjective} shows that a binomial opinion can be written a Beta PDF, and a multinomial opinion and a hyperopinion can be written as a Dirichlet PDF. See chapter 3, section 3.6.4 \cite{josang2016subjective}, . This is important because subjective-logic operators (SL operators) can then be applied to Beta PDFs, and statistics operations for Beta PDFs can be applied to opinions.
+In the book, \citeauthor{josang2016subjective} shows that a binomial opinion can be written a Beta PDF, and a multinomial opinion and a hyperopinion can be written as a Dirichlet PDF. See chapter 3, section 3.6.4 \cite{josang2016subjective}. This is important because subjective-logic operators can be applied to Beta PDFs, and statistics operations for Beta PDFs can be applied to opinions.
 
-A Dirichlet PDF $\mathrm{Dir}(\mathbf{p}_X, \alpha_X)$ for a random variable $X$ over the domain $\dom{X}$ (or the hyperdomain $\hdom{X}$) says the probability density of $\mathbf{p}_X$ assume a probability distribution. The vector $\alpha_X$ represents the strength supporting a value of the domain. When we have no information about the \emph{true} probability, the all values of $\alpha_X$ will be one.
+A Dirichlet PDF $\mathrm{Dir}(\mathbf{p}_X, \alpha_X)$ for a random variable $X$ over the domain $\dom{X}$ (or the hyperdomain $\hdom{X}$)  says about the probability density of $\mathbf{p}_X$  a probability distribution. The vector $\alpha_X$ represents the strength supporting a value of the domain. When we have no information about the \emph{true} probability, the all values of $\alpha_X$ will be one.
 
 Lets represent $\alpha_X$ in function of a amount of evidence collected and a base rate distribution for a value. Let $\mathbf{r}_X(x)$ be the amount of evidence collect for the value $x \in \dom{X}$. Let $\mathbf{a}_X$ be a base rate distribution. The strength for $\alpha_X(x)$ for each value $x \in \dom{X}$ can be expressed as
 \begin{equation}\label{eq:alpha_as_evidence_and_base_rate}
@@ -83,7 +83,7 @@ Then, the evidence representation of the Dirichlet PDF, or evidence-Dirichlet PD
 
 This is important here because is easier to understand belief fusion operators by their representations in operating evidence-Dirichlet PDF.
 
-\begin{definition}
+\begin{definition}\label{def:mapping}
 \emph{(Mapping: Hyper-opinion $\leftrightarrow$ Dirichlet HPDF from the definition 3.6 of the book)} Let $\dom{X}$ be a domain consisting of $k$ mutually disjoint values, where the corresponding hyperdomain $\hdom{X}$ has cardinality $\kappa = (2^{k} - 2)$, and let $X$ be a hypervariable in $\hdom{X}$. Let $\opi{X}$ be a hyper-opinion os $X$, and let $\mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}_X, \mathbf{a}_X)$ be a Dirichlet HPDF over the hyper-probability distribution $\mathbf{p}^{\mathrm{H}}_X$. The hyper-opinion $\opi{X}$ an the Dirichlet PDF $\mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}_X, \mathbf{a}_X)$ are equivalent through the following mapping:
 \begin{equation}
 \begin{split}
@@ -231,32 +231,45 @@ At both examples, $A$ interacts with $B$ and they have the same opinions. They a
 With averaging fusion, $A$ has the same opinion as before. The second option seems more reasonable.
 
 
-
-
-
 \section{A $n$-ary averaging belief fusion operator}
 
 What I am trying to do is to create new operator for averaging belief fusion that is $n$-ary. That operator is interesting because averaging fusion supports an agent interacting with only one other agent. With, $n$-ary averaging fusion operator, we can simulate an agent interacting with any number of agents.
 
-The idea behind the $n$-ary averaging fusion is to take the average of an arbitrary amounts of evidence. Let $A_1, \cdots, A_i$ be $n$ agents that hold opinions $\opia{A_i}{X}$ about a random variable $X$ over $\dom{X}$. The amount of evidence that $A_i$ has about $x_i \in \hdom{X}$ is $\mathbf{r}^{A_i}_X(x_i)$.
+The idea behind the $n$-ary averaging fusion is to take the average of an arbitrary amounts of evidence. Let $A_1, \cdots, A_n$ be $n$ agents that hold opinions $\opia{A_i}{X}$ about a random variable $X$ over $\dom{X}$. The amount of evidence that $A_i$ has about $x_i \in \hdom{X}$ is $\mathbf{r}^{A_i}_X(x_i)$.
 
-Let $\abfs(A_1, \cdots, A_i)$ be the source of the averaging fusion of $A_1, \cdots, A_i$. Let $\abf(\opia{A_1}{X}, \dots, \opia{A_i}{X})$ be the averaging fusion of $\opia{A_1}{X}, \cdots, \opia{A_i}{X}$. Then:
+Let $\abfs(A_1, \cdots, A_n)$ be the source of the averaging fusion of $A_1, \cdots, A_n$. Let $\abf(\opia{A_1}{X}, \dots, \opia{A_n}{X})$ be the averaging fusion of $\opia{A_1}{X}, \cdots, \opia{A_n}{X}$. Then:
 \begin{equation}
-\opia{(\abfs(A_1, \cdots, A_i))}{X} = \abf(\opia{A_1}{X}, \dots, \opia{A_i}{X}) \text{.}
+\opia{\abfs(A_1, \cdots, A_i)}{X} = \abf(\opia{A_1}{X}, \dots, \opia{A_n}{X}) \text{.}
 \end{equation}
 
 The amount of evidence of $\opia{(\abfs(A_1, \cdots, A_i))}{X}$ is
 \begin{equation}
-\mathbf{r}^{(\abfs(A_1, \cdots, A_i))}_X = \dfrac{\mathbf{r}^{A_1}_X + \cdots + \mathbf{r}^{A_1}_X}{n} 
+\mathbf{r}^{\abfs(A_1, \cdots, A_i)}_X = \dfrac{\mathbf{r}^{A_n}_X + \cdots + \mathbf{r}^{A_1}_X}{n} 
 \end{equation}
 
 What I need to do is to find the operator by writing
 \begin{equation}
+\mathrm{Dir}^{\mathrm{eH}}_X(\mathbf{p}^{\mathrm{H}}_X, \mathbf{r}^{\abfs(A_1, \cdots, A_i)}_X, \ada{\abfs(A_1, \cdots, A_i)}{X})
+\end{equation}
+as an opinion using Definition \ref{def:mapping}.
 
+This is the closest that I got:
+\begin{equation}
+\arraycolsep=1.4pt\def\arraystretch{2.2}
+\opia{\abfs(A_1, \cdots, A_n)}{x} =
+\left(
+\begin{array}{ll}
+\bmdax{\abfs(A_1, \cdots, A_n)}{X}{x} & = \dfrac{\dfrac{\mathbf{r}^{A_1}_X + \cdots + \mathbf{r}^{A_1}_X}{n}}{W + \sum\limits_{x_i \in \hdom{X}} \dfrac{\mathbf{r}^{A_i}_X(x_i) + \cdots \mathrm{r}^{A_n}_X(x_i)}{n}} \\
+u^{\abfs(A_1, \cdots, A_n)}_X & = \dfrac{W}{W + \sum\limits_{x_i \in \hdom{X}} \dfrac{\mathbf{r}^{A_i}_X(x_i) + \cdots \mathrm{r}^{A_n}_X(x_i)}{n}} \\
+\adax{\abfs(A_1, \cdots, A_n)}{X}{x} & = \dfrac{\adax{A_1}{X}{x} + \cdots + \adax{A_1}{X}{x}}{n}
+\end{array}
+\right)
 \end{equation}
 
+Right now, I'm trying to write $\bmda{\abfs(A_1, \cdots, A_n)}{X}$ and 
+$u^{\abfs(A_1, \cdots, A_n)}_X$ in function of $\bmda{A_1}{X}, \cdots, \bmda{A_n}{X}$ and $u^{A_1}_X, \cdots, u^{A_n}_X$.
 
-
+And I just note that I don't need to do this, because I can write the opinions $A_1, \cdots, A_n$ as Dirichlet HPDF, do the operation above, and then write as an opinion. I need to write it in Python, write some examples e we need to plan the simulations.
 
 
 \printbibliography
