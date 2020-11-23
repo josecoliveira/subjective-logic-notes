@@ -172,8 +172,8 @@ Averaging belief fusion is interesting because it is idempotent. Let $\dom{X} = 
 \opia{A}{X} = \opia{B}{X} =
 \left(
 \begin{array}{llll}
-\bmdx{X}{x_1} & = 0.5 & & \ada{X}{x_1} = 0.5 \\
-\bmdx{x}{x_2} & = 0 & & \ada{X}{x_2} = 0.5 \\
+\bmdx{X}{x_1} & = 0.5 & & \adx{X}{x_1} = 0.5 \\
+\bmdx{X}{x_2} & = 0 & & \adx{X}{x_2} = 0.5 \\
 u_X & = 0.5
 \end{array}
 \right)
@@ -183,9 +183,9 @@ Suppose that $A$ completely trusts $B$.
 \opia{A}{B} =
 \left(
 \begin{array}{llll}
-\bmdx{B}{x_1} & = 1 & & \ada{B}{x_1} = 0.5 \\
-\bmdx{B}{x_2} & = 0 & & \ada{B}{x_2} = 0.5 \\
-u_X & = 0
+\bmdax{A}{B}{x_1} & = 1 & & \adax{A}{B}{x_1} = 0.5 \\
+\bmdax{A}{B}{x_2} & = 0 & & \adax{A}{B}{x_2} = 0.5 \\
+u^A_X & = 0
 \end{array}
 \right)
 \end{equation}
@@ -194,8 +194,8 @@ Then, the opinion that $A$ has about $X$ by trusting $B$ is:
 \opia{[A;B]}{X} = \opia{A}{B} \otimes \opia{B}{X} =
 \left(
 \begin{array}{llll}
-\bmdx{B}{x_1} & = 0.5 & & \ada{B}{x_1} = 0.5 \\
-\bmdx{B}{x_2} & = 0 & & \ada{B}{x_2} = 0.5 \\
+\bmdx{X}{x_1} & = 0.5 & & \adx{X}{x_1} = 0.5 \\
+\bmdx{X}{x_2} & = 0 & & \adx{X}{x_2} = 0.5 \\
 u_X & = 0.5
 \end{array}
 \right) \text{.}
@@ -206,8 +206,8 @@ Now, lets fuse $\opia{A}{X}$ and $\opia{[A;B]}{X}$ using cumulative fusion:
 \begin{equation}
 \opia{(A \acfs [A; B])}{X} = \opia{A}{X} \acf \opia{[A;B]}{X} =\left(
 \begin{array}{llll}
-\bmdx{B}{x_1} & = 0.66 & & \ada{B}{x_1} = 0.5 \\
-\bmdx{B}{x_2} & = 0 & & \ada{B}{x_2} = 0.5 \\
+\bmdx{X}{x_1} & = 0.66 & & \adx{X}{x_1} = 0.5 \\
+\bmdx{X}{x_2} & = 0 & & \adx{X}{x_2} = 0.5 \\
 u_X & = 0.33
 \end{array}
 \right) \text{,}
@@ -216,8 +216,8 @@ and averaging fusion:
 \begin{equation}
 \opia{(A \abfs [A; B])}{X} = \opia{A}{X} \abf \opia{[A;B]}{X} =\left(
 \begin{array}{llll}
-\bmdx{B}{x_1} & = 0.5 & & \ada{B}{x_1} = 0.5 \\
-\bmdx{B}{x_2} & = 0 & & \ada{B}{x_2} = 0.5 \\
+\bmdx{X}{x_1} & = 0.5 & & \adx{X}{x_1} = 0.5 \\
+\bmdx{X}{x_2} & = 0 & & \adx{X}{x_2} = 0.5 \\
 u_X & = 0.5
 \end{array}
 \right) \text{,}
@@ -244,7 +244,7 @@ Let $\abfs(A_1, \cdots, A_n)$ be the source of the averaging fusion of $A_1, \cd
 
 The amount of evidence of $\opia{\abfs(A_1, \cdots, A_i)}{X}$ is
 \begin{equation}
-\mathbf{r}^{\abfs(A_1, \cdots, A_i)}_X = \dfrac{\mathbf{r}^{A_n}_X + \cdots + \mathbf{r}^{A_1}_X}{n} 
+\mathbf{r}^{\abfs(A_1, \cdots, A_i)}_X = \dfrac{\mathbf{r}^{A_1}_X + \cdots + \mathbf{r}^{A_n}_X}{n} 
 \end{equation}
 
 What I need to do is to find the operator by writing
@@ -269,7 +269,7 @@ u^{\abfs(A_1, \cdots, A_n)}_X & = \dfrac{W}{W + \sum\limits_{x_i \in \hdom{X}} \
 Right now, I'm trying to write $\bmda{\abfs(A_1, \cdots, A_n)}{X}$ and 
 $u^{\abfs(A_1, \cdots, A_n)}_X$ as a function of $\bmda{A_1}{X}, \cdots, \bmda{A_n}{X}$ and $u^{A_1}_X, \cdots, u^{A_n}_X$.
 
-And I just note that I don't need to do this, because I can write the opinions $\opia{A_1}{X}, \cdots, \opia{A_n}{X}$ as Dirichlet HPDFs, do the operation above, and then write as an opinion. I need to write it in Python and write some examples. We also need to plan the simulations.
+And I just note that I don't need to do this, because I can write the opinions $\opia{A_1}{X}, \cdots, \opia{A_n}{X}$ as Dirichlet HPDFs, do the operation above, and then write back as an opinion. I need to write it in Python and write some examples. We also need to plan the simulations.
 
 
 \printbibliography
