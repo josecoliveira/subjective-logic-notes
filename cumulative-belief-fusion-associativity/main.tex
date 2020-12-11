@@ -1,0 +1,146 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, margin=2cm]{geometry}
+
+\usepackage[backend=biber,citestyle=numeric,bibstyle=numeric]{biblatex}
+
+
+\usepackage{hyperref}
+\usepackage{calrsfs}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{nicefrac}
+\usepackage{chngcntr}
+
+\counterwithin{figure}{section}
+
+\theoremstyle{definition}
+\newtheorem{question}{Question}[section]
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+}
+
+\numberwithin{equation}{section}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.15}
+
+\allowbreak
+
+\input{../subjectivelogic.tex}
+
+\newcommand{\qm}[1]{`#1'}
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{forestgreen(web)}{rgb}{0.13, 0.55, 0.13}
+\definecolor{green(html/cssgreen)}{rgb}{0.0, 0.5, 0.0}
+
+\newcommand{\red}{\textcolor{red}{red}}
+\newcommand{\green}{\textcolor{green(html/cssgreen)}{green}}
+\newcommand{\blue}{\textcolor{blue}{blue}}
+
+%opening
+\title{Subjective Logic\\
+\large{Associativity of Cumulative Belief Fusion}}
+\author{José C. Oliveira}
+
+\addbibresource{../bibliography.bib}
+
+\begin{document}
+
+\maketitle
+
+At the page 227 of the book \cite{josang2016subjective}, section 12.3.1, the author says the cumulative belief fusion operator is associative.
+
+Let $\dom{X} = \{b, d\}$ be a domain and $X$ be a random variable over $\dom{X}$. Let $A$ and $B$ be sources which have the following opinions about $X$.
+\begin{equation}
+\opia{A}{X} = \left(
+\begin{array}{lllll}
+\bmdax{A}{X}{b} & = 1 & & \adax{A}{X}{b} & = 0.5 \\
+\bmdax{A}{X}{d} & = 0 & & \adax{A}{X}{d} & = 0.5 \\
+u^A_X & = 0
+\end{array}
+\right)
+\end{equation}
+\begin{equation}
+\opia{B}{X} = \left(
+\begin{array}{lllll}
+\bmdax{B}{X}{b} & = 0 & & \adax{B}{X}{b} & = 0.5 \\
+\bmdax{B}{X}{d} & = 1 & & \adax{B}{X}{d} & = 0.5 \\
+u^B_X & = 0
+\end{array}
+\right)
+\end{equation}
+
+Lets make a test with
+\begin{equation}
+(\opia{A}{X} \acf \opia{A}{X}) \acf \opia{B}{X}\ \text{ and }\ \opia{A}{X} \acf (\opia{A}{X} \acf \opia{B}{X})
+\end{equation}
+
+\begin{equation}
+\begin{array} {rl}
+(\opia{A}{X} \acf \opia{A}{X}) \acf \opia{B}{X} & = \left(
+\begin{array}{llll}
+\bmdax{A}{X}{b} & = 1 & \adax{A}{X}{b} & = 0.5 \\
+\bmdax{A}{X}{d} & = 0 & \adax{A}{X}{d} & = 0.5 \\
+u^A_X & = 0
+\end{array} \right) \acf \left(
+\begin{array}{llll}
+\bmdax{B}{X}{b} & = 0 & \adax{B}{X}{b} & = 0.5 \\
+\bmdax{B}{X}{d} & = 1 & \adax{B}{X}{d} & = 0.5 \\
+u^B_X & = 0
+\end{array} \right) \\
+& = \left(
+\begin{array}{llll}
+\bmdax{B}{X}{b} & = 0.5 & \adax{B}{X}{b} & = 0.5 \\
+\bmdax{B}{X}{d} & = 0.5 & \adax{B}{X}{d} & = 0.5 \\
+u^B_X & = 0
+\end{array} \right)
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array} {rl}
+\opia{A}{X} \acf (\opia{A}{X} \acf \opia{B}{X}) & = \left(
+\begin{array}{llll}
+\bmdax{A}{X}{b} & = 1 & \adax{A}{X}{b} & = 0.5 \\
+\bmdax{A}{X}{d} & = 0 & \adax{A}{X}{d} & = 0.5 \\
+u^A_X & = 0
+\end{array} \right) \acf \left(
+\begin{array}{llll}
+\bmdax{B}{X}{b} & = 0.5 & \adax{B}{X}{b} & = 0.5 \\
+\bmdax{B}{X}{d} & = 0.5 & \adax{B}{X}{d} & = 0.5 \\
+u^B_X & = 0
+\end{array} \right) \\
+& = \left(
+\begin{array}{llll}
+\bmdax{B}{X}{b} & = 0.75 & \adax{B}{X}{b} & = 0.5 \\
+\bmdax{B}{X}{d} & = 0.25 & \adax{B}{X}{d} & = 0.5 \\
+u^B_X & = 0
+\end{array} \right)
+\end{array}
+\end{equation}
+
+We see that $(\opia{A}{X} \acf \opia{A}{X}) \acf \opia{B}{X}\ \neq \opia{A}{X} \acf (\opia{A}{X} \acf \opia{B}{X})$, therefore aleatory cumulative belief fusion is not associative.
+
+
+\printbibliography
+
+\end{document}
