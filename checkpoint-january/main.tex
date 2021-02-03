@@ -1,0 +1,139 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, margin=2cm]{geometry}
+
+\usepackage[backend=biber,citestyle=numeric,bibstyle=numeric]{biblatex}
+
+
+\usepackage{hyperref}
+\usepackage{calrsfs}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{nicefrac}
+\usepackage{chngcntr}
+
+\counterwithin{figure}{section}
+
+\theoremstyle{definition}
+\newtheorem{question}{Question}[section]
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Theorem}[section]
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+}
+
+\numberwithin{equation}{section}
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{1.15}
+
+\allowbreak
+
+\input{../subjectivelogic.tex}
+
+\newcommand{\qm}[1]{`#1'}
+
+\usepackage{xcolor}
+\definecolor{darkgreen}{rgb}{0.0, 0.2, 0.13}
+\definecolor{forestgreen(web)}{rgb}{0.13, 0.55, 0.13}
+\definecolor{green(html/cssgreen)}{rgb}{0.0, 0.5, 0.0}
+
+\newcommand{\red}{\textcolor{red}{red}}
+\newcommand{\green}{\textcolor{green(html/cssgreen)}{green}}
+\newcommand{\blue}{\textcolor{blue}{blue}}
+
+%opening
+\title{A Model for Social Networks with Subjective Logic\\
+\large{What we have until now}}
+\author{José C. Oliveira}
+
+\addbibresource{../bibliography.bib}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+At \cite{DBLP:conf/birthday/AlvimKV19}, \citeauthor{DBLP:conf/birthday/AlvimKV19} developed a formal model for group polarization in social networks, and show possible future directions. Here, we are trying to develop a quantitative logic for reasoning about beliefs in social networks. With a logic, we can provide a formal way of making statements about knowledge.
+
+
+\section{Subjective logic}
+
+Subjective logic \cite{DBLP:books/sp/Josang16} is a extension of probabilistic logic expressed by opinions with \emph{uncertainty} about the probability distribution and \emph{subjectivity} by assigning an agent or source for the opinion. The following topics about subjective logic are important for this research.
+
+\begin{itemize}
+\item Elements of subjective logic
+	\begin{itemize}
+	\item Domains and hyperdomains
+	\item Random variables and hypervariables
+	\item Belief mass distribution and uncertainty mass
+	\item Base rate distribution
+	\item Probability distribution
+	\end{itemize}
+\item Opinion Representation
+	\begin{itemize}
+	\item Opinion classes
+	\item Aleatory and epistemic opinions
+	\item Binomial opinions
+	\item Multinomial opinions
+	\item Hyper-opinions
+	\item Mapping between opinions and Dirichlet PDF
+	\end{itemize}
+\item Principles of subjective logic
+	\begin{itemize}
+	\item Comparison with related frameworks for uncertain reasoning
+	\item Subjective logic as a generalization of probabilistic logic
+	\end{itemize}
+\item Belief fusion
+	\begin{itemize}
+	\item Interpretation and criteria for fusion operator selection
+	\item Cumulative belief fusion
+	\item Averaging belief fusion
+	\item Weighted belief fusion
+	\end{itemize}
+\item Computational trust
+	\begin{itemize}
+	\item Notion of trust
+	\item The trust-discounting operator
+	\item Trust fusion
+	\end{itemize}
+\end{itemize}
+
+
+\section{The model so far}
+
+This is a very short summary. Let $\hdom{X}$ be a hyperdomain and $X$ be a hypervariable over $\hdom{X}$. Let $A_1, \cdots, A_n$ be agents. All agents have a hyperopinion $\opia{A_i}{X}$. Also, for every $i \in {1, \cdots, n}$ and for every $j \in {1, \cdots, n} \setminus {i}$, the agent $A_i$ has a trust opinion about $A_j$, $\opia{A_i}{A_j}$.
+
+The idea is that an agent $A_i$ learns a new opinion by interaction with everyone else considering trust-discount and trust fusion. Then, we should merge $A_i$ previous opinion with the new learned opinion. Since there are several belief fusion operators, \textbf{we need to choose which suits best for our case}. Some of the question are the following:
+\begin{itemize}
+\item If an agent learns from two equal opinions, should the new opinion have more confidence? That is, should our belief fusion operator be idempotent or non-idempotent. If it should be non-idempotent, we choose cumulative belief fusion. It means that we are taking the sum of the amount of evidence from the two opinions. Otherwise, we move to the next question.
+\item If an agent learns from two opinions with uncertainty, should the uncertainty of the new opinion increase? That is, should our belief fusion operator not have a neutral opinion. If so, then we choose averaging belief fusion. It means that we are taking the average of the amount of evidence from the two opinions.
+\item Otherwise, by having a neutral opinion, we choose weighted belief fusion. It means that we are taking average of the two opinions weighted by confidence.
+\end{itemize}
+
+The operator that we will choose has to be $n$-ary, because it allows us multiple interactions in a single iteration. The book \cite{DBLP:books/sp/Josang16} shows only binary fusion operators. The paper \cite{josang2018categories} defines $n$-ary belief fusion operators.
+
+
+\section{Next steps}
+
+We need to choose with belief fusion operator suits better for our model. It is possible that the operator for fusing all trust-discounted opinions and the operator for fusing the new opinion with the old opinion are different. Simulations with different operators could hep the decision. The repository on GitHub at \cite{oliveira2021subjective} implements some of the operators and it will be used for simulations.
+
+
+\printbibliography
+
+\end{document}
